@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-09-01T04:26:01.074114+00:00",
+  "generated_at": "2026-09-01T04:34:26.739028+00:00",
   "evidence_status": "LIVE DATA · PAPER PREVIEW · NOT SUBMITTED",
   "ai_status": "FALLBACK / NOT LIVE AI",
   "source": "Alpaca Trading + Market Data APIs",
@@ -22,7 +22,7 @@
     "underlying_price": 766.87,
     "underlying_timestamp": "2026-08-31T19:59:59.846573384Z",
     "market_open": false,
-    "clock_timestamp": "2026-09-01T00:25:54.021290247-04:00",
+    "clock_timestamp": "2026-09-01T00:34:19.685807643-04:00",
     "expiration": "2026-09-04"
   },
   "terrain": [
@@ -45,9 +45,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.945217301Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00505000",
@@ -68,7 +68,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.873773286Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -91,7 +91,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.956681393Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -114,7 +114,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.820134126Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30866.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -137,9 +137,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.426126095Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00525000",
@@ -160,7 +160,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.050201949Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -183,7 +183,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.317599043Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -206,7 +206,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.956816401Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -229,7 +229,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.31865321Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -252,7 +252,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.936506892Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -275,9 +275,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.417706122Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00555000",
@@ -298,9 +298,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.609863544Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00560000",
@@ -321,9 +321,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.989531641Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00565000",
@@ -344,7 +344,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.014702807Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -367,9 +367,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.29401792Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00575000",
@@ -390,7 +390,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.935034253Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -413,9 +413,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.293971667Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00585000",
@@ -436,7 +436,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.683639339Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -459,7 +459,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.82094112Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30866.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -482,7 +482,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.683624154Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -505,9 +505,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.460991068Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00605000",
@@ -528,7 +528,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.032065413Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -551,9 +551,9 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.264748788Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00615000",
@@ -574,7 +574,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.344015608Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -597,9 +597,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.23184852Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00625000",
@@ -620,7 +620,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.014727534Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -643,7 +643,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.68351944Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -666,9 +666,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.472381202Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00640000",
@@ -689,7 +689,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.609878579Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -712,7 +712,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.548252035Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -735,7 +735,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.22170538Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -758,7 +758,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.821086437Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30866.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -781,9 +781,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.212988906Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00665000",
@@ -804,9 +804,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.21359141Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00670000",
@@ -827,9 +827,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.476571279Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00675000",
@@ -850,9 +850,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.075561407Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00680000",
@@ -873,9 +873,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.609863544Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00685000",
@@ -896,9 +896,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.212969354Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00690000",
@@ -919,9 +919,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.398776334Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00691000",
@@ -942,7 +942,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.478471239Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -965,9 +965,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.61030665Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00693000",
@@ -988,7 +988,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.95703164Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1011,7 +1011,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.932146517Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1034,9 +1034,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.610390432Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00696000",
@@ -1057,7 +1057,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.951877845Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1080,7 +1080,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.785576557Z",
-      "quote_age_seconds": 30362.3,
+      "quote_age_seconds": 30868.0,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1103,7 +1103,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.344297077Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1126,7 +1126,7 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.933995358Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1149,9 +1149,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.213344926Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00701000",
@@ -1172,9 +1172,9 @@
       "ask_size": 2,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.881178618Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00702000",
@@ -1195,7 +1195,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.727766327Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1218,9 +1218,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.610301271Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00704000",
@@ -1241,7 +1241,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.565357763Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1264,9 +1264,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.368213243Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00706000",
@@ -1287,9 +1287,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.961796419Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00707000",
@@ -1310,9 +1310,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.683639339Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00708000",
@@ -1333,9 +1333,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.567397889Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00709000",
@@ -1356,9 +1356,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.362223962Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00710000",
@@ -1379,9 +1379,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.461695815Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00711000",
@@ -1402,9 +1402,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.93421095Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00712000",
@@ -1425,9 +1425,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.512462432Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00713000",
@@ -1448,9 +1448,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.075671869Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00714000",
@@ -1471,9 +1471,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.610390432Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00715000",
@@ -1494,9 +1494,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.566811719Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00716000",
@@ -1517,7 +1517,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.075671869Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1540,9 +1540,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.075737646Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00718000",
@@ -1563,9 +1563,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.566821585Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00719000",
@@ -1586,7 +1586,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.821780497Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30866.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1609,9 +1609,9 @@
       "ask_size": 33,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.414448574Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00721000",
@@ -1632,9 +1632,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.075726884Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00722000",
@@ -1655,9 +1655,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.738740351Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00723000",
@@ -1678,9 +1678,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.739712741Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00724000",
@@ -1701,9 +1701,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.576355856Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00725000",
@@ -1724,9 +1724,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.857306933Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00726000",
@@ -1747,9 +1747,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.683449006Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00727000",
@@ -1770,7 +1770,7 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.343434163Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -1793,9 +1793,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.964538307Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00729000",
@@ -1816,9 +1816,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.467941521Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00730000",
@@ -1839,9 +1839,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.381760443Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00731000",
@@ -1862,9 +1862,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.683488821Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00732000",
@@ -1885,9 +1885,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.781848235Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00733000",
@@ -1908,9 +1908,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.956809213Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00734000",
@@ -1931,9 +1931,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.734360014Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00735000",
@@ -1954,9 +1954,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.545055654Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00736000",
@@ -1977,9 +1977,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.635905567Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00737000",
@@ -2000,9 +2000,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.986074581Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00738000",
@@ -2023,9 +2023,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.782860384Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00739000",
@@ -2046,9 +2046,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.380743028Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00740000",
@@ -2069,9 +2069,9 @@
       "ask_size": 33,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.785997462Z",
-      "quote_age_seconds": 30362.3,
+      "quote_age_seconds": 30868.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00741000",
@@ -2092,9 +2092,9 @@
       "ask_size": 31,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.053338695Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00742000",
@@ -2115,9 +2115,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.543951615Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00743000",
@@ -2138,9 +2138,9 @@
       "ask_size": 30,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.382243522Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00744000",
@@ -2161,9 +2161,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.461695815Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00745000",
@@ -2184,9 +2184,9 @@
       "ask_size": 4,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.544934016Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00746000",
@@ -2207,9 +2207,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.670367738Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00747000",
@@ -2230,9 +2230,9 @@
       "ask_size": 31,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.458583609Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00748000",
@@ -2253,9 +2253,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.468216421Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00749000",
@@ -2276,9 +2276,9 @@
       "ask_size": 17,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.473579861Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00750000",
@@ -2299,9 +2299,9 @@
       "ask_size": 18,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.561418205Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00751000",
@@ -2322,9 +2322,9 @@
       "ask_size": 1,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.613096979Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00752000",
@@ -2345,9 +2345,9 @@
       "ask_size": 32,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.467410873Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00753000",
@@ -2368,9 +2368,9 @@
       "ask_size": 32,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.086026396Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00754000",
@@ -2391,9 +2391,9 @@
       "ask_size": 50,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.309293055Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00755000",
@@ -2414,9 +2414,9 @@
       "ask_size": 4,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.486896751Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00756000",
@@ -2437,9 +2437,9 @@
       "ask_size": 13,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.211033969Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00757000",
@@ -2460,9 +2460,9 @@
       "ask_size": 41,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.626378216Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00758000",
@@ -2483,9 +2483,9 @@
       "ask_size": 39,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.188520511Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.6,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00759000",
@@ -2506,9 +2506,9 @@
       "ask_size": 27,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.772084986Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00760000",
@@ -2529,9 +2529,9 @@
       "ask_size": 171,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.463887232Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00761000",
@@ -2552,9 +2552,9 @@
       "ask_size": 44,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.986325469Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00762000",
@@ -2575,9 +2575,9 @@
       "ask_size": 19,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.772777442Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00763000",
@@ -2598,9 +2598,9 @@
       "ask_size": 11,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.772436337Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00764000",
@@ -2621,9 +2621,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.785904601Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00765000",
@@ -2644,9 +2644,9 @@
       "ask_size": 13,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.849753884Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": "long",
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00766000",
@@ -2667,9 +2667,9 @@
       "ask_size": 8,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.96466351Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00767000",
@@ -2690,9 +2690,9 @@
       "ask_size": 5,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.356461232Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00768000",
@@ -2713,9 +2713,9 @@
       "ask_size": 11,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.075989128Z",
-      "quote_age_seconds": 30362.0,
+      "quote_age_seconds": 30867.7,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00769000",
@@ -2736,9 +2736,9 @@
       "ask_size": 8,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.757004434Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00770000",
@@ -2759,9 +2759,9 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.340843118Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": "short",
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00771000",
@@ -2782,9 +2782,9 @@
       "ask_size": 57,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.404209964Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00772000",
@@ -2805,9 +2805,9 @@
       "ask_size": 57,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.505079327Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00773000",
@@ -2828,9 +2828,9 @@
       "ask_size": 8,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.848573146Z",
-      "quote_age_seconds": 30361.2,
+      "quote_age_seconds": 30866.9,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00774000",
@@ -2851,9 +2851,9 @@
       "ask_size": 59,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.973455542Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00775000",
@@ -2874,9 +2874,9 @@
       "ask_size": 70,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.450565758Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00776000",
@@ -2897,9 +2897,9 @@
       "ask_size": 106,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.37863336Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00777000",
@@ -2920,9 +2920,9 @@
       "ask_size": 163,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.454694132Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00778000",
@@ -2943,9 +2943,9 @@
       "ask_size": 64,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.460272636Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     {
       "symbol": "SPY260904C00779000",
@@ -2966,9 +2966,9 @@
       "ask_size": 109,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.127686461Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.6,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00780000",
@@ -2989,9 +2989,9 @@
       "ask_size": 166,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.243506515Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00781000",
@@ -3012,9 +3012,9 @@
       "ask_size": 97,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.136436374Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.6,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00782000",
@@ -3035,9 +3035,9 @@
       "ask_size": 261,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.592853795Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00783000",
@@ -3058,9 +3058,9 @@
       "ask_size": 252,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.955036514Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00784000",
@@ -3081,9 +3081,9 @@
       "ask_size": 359,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.931915739Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00785000",
@@ -3104,9 +3104,9 @@
       "ask_size": 626,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.666899484Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
-      "classification": "RISK BLOCKED"
+      "classification": "UNCERTAIN"
     },
     {
       "symbol": "SPY260904C00786000",
@@ -3127,7 +3127,7 @@
       "ask_size": 587,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.193141649Z",
-      "quote_age_seconds": 30361.9,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3150,7 +3150,7 @@
       "ask_size": 299,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.806648164Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30866.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3173,7 +3173,7 @@
       "ask_size": 562,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.897944187Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3196,7 +3196,7 @@
       "ask_size": 747,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:57.728394748Z",
-      "quote_age_seconds": 30363.3,
+      "quote_age_seconds": 30869.0,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3219,7 +3219,7 @@
       "ask_size": 971,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.666899484Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3242,7 +3242,7 @@
       "ask_size": 1079,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.8523815Z",
-      "quote_age_seconds": 30361.2,
+      "quote_age_seconds": 30866.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3265,7 +3265,7 @@
       "ask_size": 1159,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.972968255Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3288,7 +3288,7 @@
       "ask_size": 777,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.439564333Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.3,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3311,7 +3311,7 @@
       "ask_size": 808,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.746538998Z",
-      "quote_age_seconds": 30361.3,
+      "quote_age_seconds": 30867.0,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3334,7 +3334,7 @@
       "ask_size": 1130,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.580686311Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3357,7 +3357,7 @@
       "ask_size": 1287,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.609116138Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3380,7 +3380,7 @@
       "ask_size": 1421,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.788122959Z",
-      "quote_age_seconds": 30362.3,
+      "quote_age_seconds": 30867.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3403,7 +3403,7 @@
       "ask_size": 2095,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.580714141Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3426,7 +3426,7 @@
       "ask_size": 1503,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.666925776Z",
-      "quote_age_seconds": 30361.4,
+      "quote_age_seconds": 30867.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3449,7 +3449,7 @@
       "ask_size": 869,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.022828214Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3472,7 +3472,7 @@
       "ask_size": 1489,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.580720937Z",
-      "quote_age_seconds": 30361.5,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3495,7 +3495,7 @@
       "ask_size": 729,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:57.618773388Z",
-      "quote_age_seconds": 30363.5,
+      "quote_age_seconds": 30869.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3518,7 +3518,7 @@
       "ask_size": 1469,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:57.090430504Z",
-      "quote_age_seconds": 30364.0,
+      "quote_age_seconds": 30869.6,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3541,7 +3541,7 @@
       "ask_size": 774,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:56.327559689Z",
-      "quote_age_seconds": 30364.7,
+      "quote_age_seconds": 30870.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3564,7 +3564,7 @@
       "ask_size": 694,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.320424965Z",
-      "quote_age_seconds": 30362.8,
+      "quote_age_seconds": 30868.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3587,7 +3587,7 @@
       "ask_size": 1602,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.335961376Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3610,7 +3610,7 @@
       "ask_size": 702,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.278173897Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3633,7 +3633,7 @@
       "ask_size": 710,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:56.267932088Z",
-      "quote_age_seconds": 30364.8,
+      "quote_age_seconds": 30870.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3656,7 +3656,7 @@
       "ask_size": 855,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:45.264584904Z",
-      "quote_age_seconds": 30375.8,
+      "quote_age_seconds": 30881.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3679,7 +3679,7 @@
       "ask_size": 869,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:44.612280969Z",
-      "quote_age_seconds": 30376.5,
+      "quote_age_seconds": 30882.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3702,7 +3702,7 @@
       "ask_size": 537,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.24415208Z",
-      "quote_age_seconds": 30362.8,
+      "quote_age_seconds": 30868.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3725,7 +3725,7 @@
       "ask_size": 1790,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:47.850125469Z",
-      "quote_age_seconds": 30373.2,
+      "quote_age_seconds": 30878.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3748,7 +3748,7 @@
       "ask_size": 550,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.24415208Z",
-      "quote_age_seconds": 30362.8,
+      "quote_age_seconds": 30868.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3771,7 +3771,7 @@
       "ask_size": 912,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:44.576305144Z",
-      "quote_age_seconds": 30376.5,
+      "quote_age_seconds": 30882.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3794,7 +3794,7 @@
       "ask_size": 560,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.153087127Z",
-      "quote_age_seconds": 30362.9,
+      "quote_age_seconds": 30868.6,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3817,7 +3817,7 @@
       "ask_size": 565,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:56.987400824Z",
-      "quote_age_seconds": 30364.1,
+      "quote_age_seconds": 30869.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3840,7 +3840,7 @@
       "ask_size": 569,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.244148194Z",
-      "quote_age_seconds": 30362.8,
+      "quote_age_seconds": 30868.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3863,7 +3863,7 @@
       "ask_size": 573,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:57.595513437Z",
-      "quote_age_seconds": 30363.5,
+      "quote_age_seconds": 30869.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3886,7 +3886,7 @@
       "ask_size": 576,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.153087127Z",
-      "quote_age_seconds": 30362.9,
+      "quote_age_seconds": 30868.6,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3909,7 +3909,7 @@
       "ask_size": 579,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:56.987400824Z",
-      "quote_age_seconds": 30364.1,
+      "quote_age_seconds": 30869.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3932,7 +3932,7 @@
       "ask_size": 582,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.553037632Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3955,7 +3955,7 @@
       "ask_size": 585,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.55328337Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -3978,7 +3978,7 @@
       "ask_size": 588,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.55300807Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4001,7 +4001,7 @@
       "ask_size": 590,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.123204653Z",
-      "quote_age_seconds": 30363.0,
+      "quote_age_seconds": 30868.6,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4024,7 +4024,7 @@
       "ask_size": 592,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.553693997Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4047,7 +4047,7 @@
       "ask_size": 683,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498744511Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4070,7 +4070,7 @@
       "ask_size": 684,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498744511Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4093,7 +4093,7 @@
       "ask_size": 686,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.370142528Z",
-      "quote_age_seconds": 30362.7,
+      "quote_age_seconds": 30868.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4116,7 +4116,7 @@
       "ask_size": 688,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498744511Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4139,7 +4139,7 @@
       "ask_size": 601,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.641213711Z",
-      "quote_age_seconds": 30362.4,
+      "quote_age_seconds": 30868.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4162,7 +4162,7 @@
       "ask_size": 691,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498744511Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4185,7 +4185,7 @@
       "ask_size": 604,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.546613426Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4208,7 +4208,7 @@
       "ask_size": 695,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498744511Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4231,7 +4231,7 @@
       "ask_size": 608,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.546025853Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4254,7 +4254,7 @@
       "ask_size": 699,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.997547689Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4277,7 +4277,7 @@
       "ask_size": 702,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498744511Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4300,7 +4300,7 @@
       "ask_size": 705,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498750545Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4323,7 +4323,7 @@
       "ask_size": 708,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498750545Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4346,7 +4346,7 @@
       "ask_size": 711,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.498750545Z",
-      "quote_age_seconds": 30361.6,
+      "quote_age_seconds": 30867.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4369,7 +4369,7 @@
       "ask_size": 625,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.546302766Z",
-      "quote_age_seconds": 30362.5,
+      "quote_age_seconds": 30868.2,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4392,7 +4392,7 @@
       "ask_size": 717,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.912068065Z",
-      "quote_age_seconds": 30361.2,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4415,7 +4415,7 @@
       "ask_size": 721,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.912068065Z",
-      "quote_age_seconds": 30361.2,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4438,7 +4438,7 @@
       "ask_size": 636,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4461,7 +4461,7 @@
       "ask_size": 639,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4484,7 +4484,7 @@
       "ask_size": 731,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.997551641Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4507,7 +4507,7 @@
       "ask_size": 734,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.912078852Z",
-      "quote_age_seconds": 30361.2,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4530,7 +4530,7 @@
       "ask_size": 737,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.912083595Z",
-      "quote_age_seconds": 30361.2,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4553,7 +4553,7 @@
       "ask_size": 653,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.308140678Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.4,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4576,7 +4576,7 @@
       "ask_size": 656,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4599,7 +4599,7 @@
       "ask_size": 660,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.94060014Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4622,7 +4622,7 @@
       "ask_size": 663,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4645,7 +4645,7 @@
       "ask_size": 667,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4668,7 +4668,7 @@
       "ask_size": 671,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4691,7 +4691,7 @@
       "ask_size": 674,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4714,7 +4714,7 @@
       "ask_size": 767,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.997547689Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.7,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4737,7 +4737,7 @@
       "ask_size": 682,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4760,7 +4760,7 @@
       "ask_size": 686,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4783,7 +4783,7 @@
       "ask_size": 689,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.937497753Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4806,7 +4806,7 @@
       "ask_size": 692,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.918995778Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4829,7 +4829,7 @@
       "ask_size": 2001,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.865581477Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4852,7 +4852,7 @@
       "ask_size": 976,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.939337312Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4875,7 +4875,7 @@
       "ask_size": 704,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911756594Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4898,7 +4898,7 @@
       "ask_size": 1076,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.267109599Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4921,7 +4921,7 @@
       "ask_size": 993,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.8511083Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4944,7 +4944,7 @@
       "ask_size": 1183,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.947100596Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4967,7 +4967,7 @@
       "ask_size": 1279,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.267109599Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -4990,7 +4990,7 @@
       "ask_size": 1286,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.267109599Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5013,7 +5013,7 @@
       "ask_size": 1104,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.267109599Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5036,7 +5036,7 @@
       "ask_size": 1300,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.267109599Z",
-      "quote_age_seconds": 30361.8,
+      "quote_age_seconds": 30867.5,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5059,7 +5059,7 @@
       "ask_size": 1028,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.94081608Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5082,7 +5082,7 @@
       "ask_size": 1056,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.134877473Z",
-      "quote_age_seconds": 30362.9,
+      "quote_age_seconds": 30868.6,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5105,7 +5105,7 @@
       "ask_size": 1175,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.973605463Z",
-      "quote_age_seconds": 30361.1,
+      "quote_age_seconds": 30866.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5128,7 +5128,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.939874638Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5151,7 +5151,7 @@
       "ask_size": 1152,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:57.455063807Z",
-      "quote_age_seconds": 30363.6,
+      "quote_age_seconds": 30869.3,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5174,7 +5174,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.927679851Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5197,7 +5197,7 @@
       "ask_size": 1232,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.941046697Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5220,7 +5220,7 @@
       "ask_size": 1272,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:55.886804397Z",
-      "quote_age_seconds": 30365.2,
+      "quote_age_seconds": 30870.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5243,7 +5243,7 @@
       "ask_size": 934,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.13969963Z",
-      "quote_age_seconds": 30362.9,
+      "quote_age_seconds": 30868.6,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5266,7 +5266,7 @@
       "ask_size": 1340,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:55.881511924Z",
-      "quote_age_seconds": 30365.2,
+      "quote_age_seconds": 30870.9,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5289,7 +5289,7 @@
       "ask_size": 1370,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5312,7 +5312,7 @@
       "ask_size": 2012,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5335,7 +5335,7 @@
       "ask_size": 1428,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5358,7 +5358,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5381,7 +5381,7 @@
       "ask_size": 1484,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5404,7 +5404,7 @@
       "ask_size": 1075,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5427,7 +5427,7 @@
       "ask_size": 1628,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:57.671680567Z",
-      "quote_age_seconds": 30363.4,
+      "quote_age_seconds": 30869.1,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5450,7 +5450,7 @@
       "ask_size": 1566,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.984700226Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5473,7 +5473,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911155606Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5496,7 +5496,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911402023Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5519,7 +5519,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911402023Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5542,7 +5542,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911402023Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5565,7 +5565,7 @@
       "ask_size": 1204,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.911402023Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5588,7 +5588,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.939603498Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5611,7 +5611,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.939874638Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5634,7 +5634,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.939874638Z",
-      "quote_age_seconds": 30362.1,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     },
@@ -5657,7 +5657,7 @@
       "ask_size": 2002,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.910925099Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.8,
       "selected": null,
       "classification": "RISK BLOCKED"
     }
@@ -5683,9 +5683,9 @@
       "ask_size": 13,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:58.849753884Z",
-      "quote_age_seconds": 30362.2,
+      "quote_age_seconds": 30867.9,
       "selected": "long",
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     "short": {
       "symbol": "SPY260904C00770000",
@@ -5706,16 +5706,16 @@
       "ask_size": 10,
       "tradable": true,
       "observed_at": "2026-08-31T19:59:59.340843118Z",
-      "quote_age_seconds": 30361.7,
+      "quote_age_seconds": 30867.4,
       "selected": "short",
-      "classification": "RISK BLOCKED"
+      "classification": "OPPORTUNITY"
     },
     "net_debit": 2.74,
     "width": 5.0,
     "requested_contracts": 4,
     "max_loss": 1096.0,
     "max_profit": 904.0,
-    "quote_age_seconds": 30362.2,
+    "quote_age_seconds": 30867.9,
     "reason": "Target 765/770 defined-risk vertical; quote and liquidity are independently gated."
   },
   "ai": {

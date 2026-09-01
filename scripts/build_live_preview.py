@@ -120,7 +120,9 @@ def main() -> None:
             point["selected"] = "long" if point["symbol"] == long_leg["symbol"] else "short"
         else:
             point["selected"] = None
-        if point["quote_age_seconds"] is None or point["quote_age_seconds"] > 30 or not point["tradable"]:
+        # Candidate quality is visualized independently from the snapshot-wide
+        # freshness gate. A stale snapshot still blocks every live action below.
+        if not point["tradable"] or point["spread_pct"] > 0.20 or point["open_interest"] < 10:
             point["classification"] = "RISK BLOCKED"
         elif point["spread_pct"] <= 0.03 and point["open_interest"] >= 100:
             point["classification"] = "OPPORTUNITY"
