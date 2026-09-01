@@ -1,9 +1,9 @@
 'use client';
 
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import { Activity, Database, Play, ShieldCheck } from 'lucide-react';
-import { Color, InstancedMesh, Object3D } from 'three';
+import { Color, InstancedMesh, Object3D, Vector3 } from 'three';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type Classification = 'OPPORTUNITY' | 'UNCERTAIN' | 'RISK BLOCKED';
@@ -56,16 +56,16 @@ const ease = (value: number) => {
 };
 
 const PANEL_POSITIONS: [number, number, number][] = [
-  [-6.5, 3.1, -4],
-  [-3.7, 4.6, -6],
-  [0, 5.2, -7.2],
-  [3.7, 4.6, -6],
-  [6.5, 3.1, -4],
-  [-6.8, -1.8, -4.6],
-  [-3.6, -3.6, -6],
-  [0, -4.3, -7],
-  [3.6, -3.6, -6],
-  [6.8, -1.8, -4.6],
+  [-6.7, 3.2, -2.4],
+  [-3.8, 4.8, -6.8],
+  [0, 5.4, -9],
+  [3.8, 4.8, -6.2],
+  [6.7, 3.2, -2.8],
+  [-6.9, -2.1, -3.2],
+  [-3.8, -3.8, -7.4],
+  [0, -4.5, -9.4],
+  [3.8, -3.8, -6.8],
+  [6.9, -2.1, -3.5],
 ];
 
 function Panel({
@@ -102,13 +102,14 @@ function DataStreams({ time }: { time: number }) {
       const origin = PANEL_POSITIONS[i % PANEL_POSITIONS.length];
       const phase = ((time * 1.25 + i * 0.093) % 1 + 1) % 1;
       const travel = clamp(phase * progress);
+      const curve = Math.sin(travel * Math.PI) * (origin[0] > 0 ? 1 : -1);
       dummy.position.set(
-        origin[0] * (1 - travel),
-        origin[1] * (1 - travel),
+        origin[0] * (1 - travel) + curve * 0.75,
+        origin[1] * (1 - travel) + Math.sin(travel * Math.PI) * 0.7,
         origin[2] * (1 - travel) - 0.4,
       );
       dummy.lookAt(0, 0, 0);
-      dummy.scale.set(0.03, 0.03, 0.32 + progress * 0.45);
+      dummy.scale.set(0.055, 0.055, 0.55 + progress * 0.65);
       dummy.updateMatrix();
       mesh.current.setMatrixAt(i, dummy.matrix);
     }
@@ -120,6 +121,21 @@ function DataStreams({ time }: { time: number }) {
       <meshBasicMaterial color="#f3ffff" transparent opacity={0.88} />
     </instancedMesh>
   );
+}
+
+function CameraRig({ time }: { time: number }) {
+  const { camera } = useThree();
+  useFrame(() => {
+    const target =
+      time < 2.5
+        ? new Vector3(0, 0.7, 14)
+        : time < 13.5
+          ? new Vector3(Math.sin(time * 0.38) * 2.2, 1.1, 11.2)
+          : new Vector3(0, 5.8, 13.8);
+    camera.position.lerp(target, 0.045);
+    camera.lookAt(0, time >= 13.5 ? 0 : 0.4, -2.2);
+  });
+  return null;
 }
 
 function ContractFlow({ data, time }: { data: Preview; time: number }) {
@@ -196,21 +212,38 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
   const classify = time >= 13.5;
   return (
     <>
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[0, 8, 6]} intensity={2.4} color="#dfffff" />
-      <pointLight position={[0, 0, 2]} intensity={35} color="#55cfff" distance={18} />
-      <group rotation={[Math.PI / 2, 0, 0]}>
-        {[2.2, 2.8, 3.4].map((radius, index) => (
-          <mesh key={radius} scale={[radius, radius, 0.06]}>
-            <torusGeometry args={[1, 0.025 + index * 0.012, 12, 96]} />
-            <meshBasicMaterial color={index === 1 ? '#ffffff' : '#33cfff'} />
-          </mesh>
-        ))}
-      </group>
-      <mesh position={[0, 0, -0.3]}>
-        <cylinderGeometry args={[1.1, 1.6, 1.2, 48, 1, true]} />
-        <meshStandardMaterial color="#0b2740" metalness={0.82} roughness={0.25} />
+      <CameraRig time={time} />
+      <ambientLight intensity={1.25} />
+      <directionalLight position={[0, 9, 7]} intensity={3.5} color="#efffff" />
+      <pointLight position={[0, 1, 3]} intensity={62} color="#73ddff" distance={22} />
+      <gridHelper args={[34, 34, '#3f87ba', '#24527d']} position={[0, -4.7, -4]} />
+      <mesh position={[0, -4.64, -4]} rotation={[-Math.PI / 2, 0, 0]}>
+        <planeGeometry args={[34, 34]} />
+        <meshStandardMaterial color="#123d62" transparent opacity={0.32} metalness={0.7} roughness={0.28} />
       </mesh>
+      <mesh position={[0, 0, -0.4]}>
+        <cylinderGeometry args={[1.55, 1.55, 3.5, 64, 1, true]} />
+        <meshPhysicalMaterial color="#8de9ff" transparent opacity={0.22} roughness={0.1} metalness={0.15} side={2} />
+      </mesh>
+      <mesh position={[0, 0, -0.4]}>
+        <cylinderGeometry args={[0.22, 0.22, 3.2, 24, 1, true]} />
+        <meshBasicMaterial color="#eaffff" transparent opacity={0.95} />
+      </mesh>
+      {[
+        { y: 1.15, radius: 2.1, label: 'MARKET' },
+        { y: 0, radius: 2.55, label: 'LIQUIDITY' },
+        { y: -1.15, radius: 2.95, label: 'RISK' },
+      ].map((ring, index) => (
+        <group key={ring.label} position={[0, ring.y, -0.4]} rotation={[Math.PI / 2, 0, time * (index % 2 ? -0.2 : 0.22)]}>
+          <mesh>
+            <torusGeometry args={[ring.radius, 0.055, 14, 112]} />
+            <meshBasicMaterial color={index === 1 ? '#ffffff' : '#23c8ff'} />
+          </mesh>
+          <Html position={[ring.radius + 0.35, 0, 0]} transform distanceFactor={6} occlude={false}>
+            <b className="engine-ring-label">{ring.label}</b>
+          </Html>
+        </group>
+      ))}
       {!classify &&
         panels.map(([label, value, unit], index) => (
           <Panel
