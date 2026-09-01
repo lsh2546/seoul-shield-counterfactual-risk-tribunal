@@ -17,7 +17,7 @@ REVIEW = OUT / "seoul-shield-guided-demo-review-slow-4m20s.mp4"
 SRT = WORK / "review.srt"
 
 SECTIONS = [
-    (0, 15, "Two hundred forty-five option contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two form one defined-risk spread. The capital gate closes."),
+    (0, 15, "Two hundred forty-five contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two become one defined-risk spread."),
     (15, 35, "Most trading agents search for a reason to trade. When AI can move capital, prediction is only half the problem. The harder question is authority. Which safety policy deserves the right to execute? Seoul Shield answers with one signal and four policies."),
     (35, 77, "This is an Alpaca Paper Trading account. Sanitized evidence confirms one hundred thousand dollars in cash and equity, four hundred thousand dollars in buying power, options level three, no positions, and no open orders. Seoul Shield reads SPY, account exposure, market status, and two hundred forty-five option contracts. Every quote has a timestamp. This replay is marked stale. The AI layer is marked fallback, not live AI. The system never disguises missing evidence."),
     (77, 118, "The Capital Decision Engine evaluates strike, expiration, volatility when available, bid and ask, spread quality, open interest, quote age, and tradability. Every route comes from the evidence bundle. Twenty-one contracts are opportunities. Eighty require review. One hundred forty-four are blocked. Stale quotes, wide spreads, weak liquidity, and capital-risk violations are isolated before execution."),
@@ -93,6 +93,9 @@ def main() -> None:
             raw_duration = audio.getnframes() / audio.getframerate()
         target = end - start
         speed = max(0.5, min(2.0, raw_duration / (target - 0.45)))
+        if index == 0:
+            # The opening must sound deliberate: never accelerate its narration.
+            speed = min(1.0, speed)
         subprocess.run([ffmpeg, "-loglevel", "error", "-y", "-i", str(raw_path), "-af", f"atempo={speed:.6f},apad,atrim=0:{target}", str(fixed_path)], check=True)
         normalized.append(fixed_path)
         chunks = caption_chunks(text)
