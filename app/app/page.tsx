@@ -1,5 +1,5 @@
-import TribunalExperience from '@/components/tribunal-experience';
+import CapitalDecisionEngine from '@/components/capital-decision-engine';
 
 export default function Home() {
-  return <TribunalExperience />;
+  return <CapitalDecisionEngine />;
 }

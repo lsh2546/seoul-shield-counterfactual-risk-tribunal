@@ -122,12 +122,21 @@ def main() -> None:
             point["selected"] = None
         # Candidate quality is visualized independently from the snapshot-wide
         # freshness gate. A stale snapshot still blocks every live action below.
-        if not point["tradable"] or point["spread_pct"] > 0.20 or point["open_interest"] < 10:
+        if not point["tradable"]:
             point["classification"] = "RISK BLOCKED"
+            point["classification_reason"] = "NOT TRADABLE"
+        elif point["spread_pct"] > 0.20:
+            point["classification"] = "RISK BLOCKED"
+            point["classification_reason"] = "WIDE SPREAD"
+        elif point["open_interest"] < 10:
+            point["classification"] = "RISK BLOCKED"
+            point["classification_reason"] = "LOW LIQUIDITY"
         elif point["spread_pct"] <= 0.03 and point["open_interest"] >= 100:
             point["classification"] = "OPPORTUNITY"
+            point["classification_reason"] = "NARROW SPREAD + OI"
         else:
             point["classification"] = "UNCERTAIN"
+            point["classification_reason"] = "MARGINAL LIQUIDITY"
 
     bundle = {
         "schema_version": "1.0", "generated_at": datetime.now(timezone.utc).isoformat(),
