@@ -471,6 +471,13 @@ export default function CapitalControlTower() {
   const [data, setData] = useState<Preview | null>(null);
   const [time, setTime] = useState(0);
   const [running, setRunning] = useState(false);
+  const [fallback2d] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    const forced = new URLSearchParams(window.location.search).get('fallback') === '2d';
+    const canvas = document.createElement('canvas');
+    const supported = Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'));
+    return forced || !supported;
+  });
   useEffect(() => {
     void fetch('/data/preview.json', { cache: 'no-store' })
       .then((response) => response.json() as Promise<Preview>)
@@ -563,9 +570,21 @@ export default function CapitalControlTower() {
         <div className="tower-proof"><i /> {data.evidence_status}</div>
       </header>
       <section className="tower-stage">
-        <Canvas camera={{ position: [0, 1, 13], fov: 48 }} dpr={[1, 1.4]}>
-          <TowerScene data={data} time={sceneTime} />
-        </Canvas>
+        {fallback2d ? (
+          <figure className="tower-fallback" aria-label="Two-dimensional summary of the Seoul Shield risk decision">
+            <small>2D FALLBACK · VERIFIED ALPACA REPLAY</small>
+            <b>245 CONTRACTS</b>
+            <div><span className="opportunity">21 OPPORTUNITY</span><span className="uncertain">80 UNCERTAIN</span><span className="risk-blocked">144 RISK BLOCKED</span></div>
+            <strong>21 → 8 → 4 → 2</strong>
+            <p>BUY SPY 765C + SELL SPY 770C</p>
+            <em>$1,096 MAX LOSS · $1,000 LIMIT · BLOCKED</em>
+            <footer>PAPER PREVIEW · NOT SUBMITTED</footer>
+          </figure>
+        ) : (
+          <Canvas camera={{ position: [0, 1, 13], fov: 48 }} dpr={[1, 1.4]}>
+            <TowerScene data={data} time={sceneTime} />
+          </Canvas>
+        )}
         <div className="tower-grid" />
         <div className="tower-title">
           <small>{phase}</small>

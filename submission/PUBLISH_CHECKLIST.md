@@ -22,9 +22,9 @@ No external action below is authorized merely because this checklist exists.
 - [x] Status reads `VERIFIED ALPACA REPLAY · PAPER PREVIEW · NOT SUBMITTED`
 - [x] Fallback AI and stale quote disclosed
 - [x] WebGL experience and 2D fallback present
-- [ ] Production lint and build on the final commit
+- [x] Production lint and build on the final commit
 - [ ] Non-login desktop and mobile verification after deployment
-- [ ] User approval immediately before public deployment
+- [x] User approval immediately before public deployment
 - [ ] Generate QR codes only from the verified public app, GitHub, and YouTube URLs
 - [ ] Add `245 -> 21/80/144 -> 21 -> 8 -> 4 -> 2 -> BLOCKED` and the three verified QR codes to the PDF footer
 - [ ] Re-render the final one-page PDF and test all three QR codes
