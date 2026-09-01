@@ -1,5 +1,5 @@
-import CapitalDecisionEngine from '@/components/capital-decision-engine';
+import CapitalControlTower from '@/components/capital-control-tower';
 
 export default function Home() {
-  return <CapitalDecisionEngine />;
+  return <CapitalControlTower />;
 }
