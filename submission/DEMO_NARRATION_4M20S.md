@@ -2,13 +2,13 @@
 
 This is the slower review script. The visual timeline and temporary Zira narration use the same section boundaries.
 
-## 0:00–0:10 — Opening
+## 0:00–0:15 — Opening
 
-Two hundred forty-five option contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two form a defined-risk spread. The capital gate closes.
+Two hundred forty-five option contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two form one defined-risk spread. The capital gate closes.
 
-## 0:10–0:35 — Problem
+## 0:15–0:35 — Problem
 
-Most trading agents search for a reason to trade. But when AI can move capital, prediction is only half the problem. The harder question is authority. Which safety policy deserves the right to execute? Seoul Shield answers with one signal, one snapshot, and four policies.
+Most trading agents search for a reason to trade. When AI can move capital, prediction is only half the problem. The harder question is authority. Which safety policy deserves the right to execute? Seoul Shield answers with one signal and four policies.
 
 ## 0:35–1:17 — Alpaca evidence
 

@@ -3,7 +3,9 @@ import { mkdir, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const output = resolve(root, 'outputs/previews/seoul-shield-guided-demo-direct-4m20s.mp4');
+const output = resolve(root, 'outputs/previews/Seoul-Shield-FINAL-1080p.mp4');
+const narration = resolve(root, 'outputs/previews/seoul-shield-temp-female-narration.wav');
+const subtitleWork = resolve(root, 'work/guided-demo-audio');
 const profile = resolve(root, 'work/tower-capture-profile');
 const edge = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const ffmpeg = execFileSync(
@@ -73,17 +75,19 @@ for (let attempt = 0; attempt < 100; attempt += 1) {
   await wait(100);
 }
 const encoder = spawn(ffmpeg, [
-  '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', 'pipe:0', '-an',
-  '-c:v', 'libx264', '-preset', 'fast', '-crf', '19', '-pix_fmt', 'yuv420p',
-  '-movflags', '+faststart', output,
-], { stdio: ['pipe', 'ignore', 'pipe'] });
+  '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', 'pipe:0', '-i', narration,
+  '-vf', "subtitles=review.srt:force_style='FontName=Arial,FontSize=10,PrimaryColour=&H00FFFFFF,OutlineColour=&H00102038,BorderStyle=1,Outline=1,Shadow=0,MarginV=52,Alignment=2'",
+  '-c:v', 'libx264', '-profile:v', 'high', '-level:v', '4.1', '-preset', 'slow',
+  '-crf', '18', '-r', '30', '-pix_fmt', 'yuv420p',
+  '-c:a', 'aac', '-ac', '1', '-ar', '48000', '-b:a', '192k', '-t', '260', '-movflags', '+faststart', output,
+], { cwd: subtitleWork, stdio: ['pipe', 'ignore', 'pipe'] });
 let errors = '';
 encoder.stderr.on('data', (chunk) => { errors += chunk.toString(); });
 for (let frame = 0; frame < frames; frame += 1) {
   await cdp('Runtime.evaluate', { expression: `window.__setTowerTime(${frame / fps})` });
   await wait(12);
   const capture = await cdp('Page.captureScreenshot', {
-    format: 'jpeg', quality: 92, fromSurface: true, captureBeyondViewport: false,
+    format: 'jpeg', quality: 100, fromSurface: true, captureBeyondViewport: false,
   });
   if (!encoder.stdin.write(Buffer.from(capture.data, 'base64'))) {
     await new Promise((resolveDrain) => encoder.stdin.once('drain', resolveDrain));
