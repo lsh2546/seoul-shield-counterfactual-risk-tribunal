@@ -51,14 +51,15 @@ type Preview = {
   preview: { status: string; allow_submit: boolean };
 };
 const COLORS = {
-  OPPORTUNITY: '#42e6a4',
-  UNCERTAIN: '#ffc95e',
-  'RISK BLOCKED': '#ff5f59',
+  OPPORTUNITY: '#4ff2b3',
+  UNCERTAIN: '#ffd45f',
+  'RISK BLOCKED': '#ff746d',
 };
+const DURATION = 5.5;
 const SCENES = [
-  { id: 'intake', name: 'RAW MARKET INTAKE', from: 0, to: 3 },
-  { id: 'sort', name: 'AI RAPID CLASSIFICATION', from: 3, to: 6 },
-  { id: 'converge', name: 'CANDIDATE CONVERGENCE', from: 6, to: 9 },
+  { id: 'intake', name: 'RAW MARKET INTAKE', from: 0, to: 1.5 },
+  { id: 'sort', name: 'AI RAPID CLASSIFICATION', from: 1.5, to: 3.5 },
+  { id: 'converge', name: 'CANDIDATE CONVERGENCE', from: 3.5, to: DURATION },
 ] as const;
 const clamp = (n: number, a = 0, b = 1) => Math.max(a, Math.min(b, n));
 const smooth = (n: number) => {
@@ -79,7 +80,7 @@ function tilePosition(
         ? 0
         : -3.25;
   const side = index % 2 === 0 ? -1 : 1;
-  const streamZ = -28 + ((time * 13 + index * 0.71) % 38);
+  const streamZ = -28 + ((time * 22.1 + index * 0.71) % 38);
   const intake = new Vector3(
     side * (3.25 + (index % 5) * 0.42),
     (((index * 7) % 13) - 6) * 0.42,
@@ -90,11 +91,11 @@ function tilePosition(
     laneY,
     -7 + Math.floor(index / 19) * 0.64,
   );
-  if (time < 3) return intake;
-  if (time < 6) return sorting;
+  if (time < 1.5) return intake;
+  if (time < 3.5) return sorting;
   if (point.classification !== 'OPPORTUNITY')
     return new Vector3(sorting.x, sorting.y - 6, sorting.z - 8);
-  const survivors = time < 6.75 ? 21 : time < 7.35 ? 8 : time < 7.95 ? 4 : 2;
+  const survivors = time < 3.7 ? 21 : time < 3.95 ? 8 : time < 4.2 ? 4 : 2;
   if (opportunityRank >= survivors)
     return new Vector3(sorting.x * 1.8, 6.5, -12 - opportunityRank * 0.2);
   if (survivors === 2)
@@ -112,12 +113,12 @@ function tileScale(
   opportunityRank: number,
   z: number,
 ) {
-  if (time < 3) {
+  if (time < 1.5) {
     const proximity = clamp((z + 25) / 32, 0.24, 1.25);
-    return new Vector3(1.5 * proximity, 0.19 * proximity, 0.035);
+    return new Vector3(1.5 * proximity, 0.19 * proximity, 0.18);
   }
-  if (time < 6) return new Vector3(1.3, 0.22, 0.035);
-  const survivors = time < 6.75 ? 21 : time < 7.35 ? 8 : time < 7.95 ? 4 : 2;
+  if (time < 3.5) return new Vector3(1.3, 0.22, 0.07);
+  const survivors = time < 3.7 ? 21 : time < 3.95 ? 8 : time < 4.2 ? 4 : 2;
   if (point.classification !== 'OPPORTUNITY' || opportunityRank >= survivors)
     return new Vector3(0.001, 0.001, 0.001);
   return new Vector3(
@@ -143,7 +144,7 @@ function TileField({ data, time }: { data: Preview; time: number }) {
         .findIndex((candidate) => candidate.symbol === p.symbol);
       const v = tilePosition(p, i, time, rank);
       dummy.position.copy(v);
-      dummy.rotation.set(time < 3 ? -0.02 : -0.12, 0, 0);
+      dummy.rotation.set(time < 1.5 ? -0.02 : -0.12, 0, 0);
       dummy.scale.copy(tileScale(p, time, rank, v.z));
       dummy.updateMatrix();
       mesh.current!.setMatrixAt(i, dummy.matrix);
@@ -153,13 +154,13 @@ function TileField({ data, time }: { data: Preview; time: number }) {
     if (mesh.current.instanceColor)
       mesh.current.instanceColor.needsUpdate = true;
     const target =
-      time < 3
-        ? new Vector3(0, 0.2, 8 - time * 1.8)
-        : time < 6
+      time < 1.5
+        ? new Vector3(0, 0.2, 8 - time * 3.1)
+        : time < 3.5
           ? new Vector3(0, 6.8, 9.5)
           : new Vector3(0, 2.8, 8.2);
     camera.position.lerp(target, 0.08);
-    camera.lookAt(0, time < 3 ? 0 : 0.25, time < 3 ? -5 : -1);
+    camera.lookAt(0, time < 1.5 ? 0 : 0.25, time < 1.5 ? -5 : -1);
   });
   return (
     <instancedMesh
@@ -177,14 +178,14 @@ function RepresentativeLabels({ data, time }: { data: Preview; time: number }) {
   const sample = useMemo(() => {
     const selected = data.terrain.filter((p) => p.selected);
     const readable = data.terrain.filter((_, i) => i % 31 === 0).slice(0, 6);
-    const visible = time >= 7.75 ? selected : [...selected, ...readable];
+    const visible = time >= 4.2 ? selected : [...selected, ...readable];
     return visible
       .filter((p, i, a) => a.findIndex((x) => x.symbol === p.symbol) === i)
       .slice(0, 8);
   }, [data, time]);
   return (
     <>
-      {time < 8.05 &&
+      {time < 4.5 &&
         sample.map((p) => {
           const index = data.terrain.findIndex((x) => x.symbol === p.symbol),
             rank = data.terrain
@@ -226,19 +227,19 @@ function Tunnel({ data, time }: { data: Preview; time: number }) {
       <directionalLight position={[2, 8, 9]} intensity={1.8} color="#d7ffff" />
       <TileField data={data} time={time} />
       <RepresentativeLabels data={data} time={time} />
-      {time < 3 &&
+      {time < 1.5 &&
         [-5.2, -4.2, -3.2, 3.2, 4.2, 5.2].map((x) => (
           <mesh key={x} position={[x, 0, -10]} scale={[0.012, 0.012, 24]}>
             <boxGeometry />
             <meshBasicMaterial color="#63d8d1" transparent opacity={0.4} />
           </mesh>
         ))}
-      {time >= 3 &&
-        time < 7.95 &&
+      {time >= 1.5 &&
+        time < 4.5 &&
         [
-          { y: 3.25, color: '#42e6a4' },
-          { y: 0, color: '#ffc95e' },
-          { y: -3.25, color: '#ff5f59' },
+          { y: 3.25, color: '#4ff2b3' },
+          { y: 0, color: '#ffd45f' },
+          { y: -3.25, color: '#ff746d' },
         ].map((lane) => (
           <mesh
             key={lane.y}
@@ -249,7 +250,7 @@ function Tunnel({ data, time }: { data: Preview; time: number }) {
             <meshBasicMaterial color={lane.color} transparent opacity={0.22} />
           </mesh>
         ))}
-      {time >= 8 && (
+      {time >= 4.3 && (
         <mesh position={[0, 0.65, 0]} scale={[2.75, 0.86, 0.08]}>
           <boxGeometry />
           <meshBasicMaterial
@@ -298,23 +299,35 @@ export default function CapitalDecisionEngine() {
     const exact = Number(params.get('t'));
     queueMicrotask(() => {
       setReduced(matchMedia('(prefers-reduced-motion: reduce)').matches);
-      if (Number.isFinite(exact) && exact >= 0 && exact < 9) {
+      if (Number.isFinite(exact) && exact >= 0 && exact < DURATION) {
         setTime(exact);
         setPlaying(false);
       } else if (fixed) {
         setTime(
-          fixed.id === 'intake' ? 1.45 : fixed.id === 'sort' ? 5.55 : 8.55,
+          fixed.id === 'intake' ? 0.8 : fixed.id === 'sort' ? 2.8 : 5,
         );
         setPlaying(false);
       }
     });
   }, []);
   useEffect(() => {
+    const target = window as typeof window & {
+      __setReplayTime?: (value: number) => void;
+    };
+    target.__setReplayTime = (value) => {
+      setTime(clamp(value, 0, DURATION - 0.001));
+      setPlaying(false);
+    };
+    return () => {
+      delete target.__setReplayTime;
+    };
+  }, []);
+  useEffect(() => {
     if (!playing || reduced) return;
     let before = performance.now(),
       raf = 0;
     const loop = (now: number) => {
-      setTime((t) => (t + (now - before) / 1000) % 9);
+      setTime((t) => (t + (now - before) / 1000) % DURATION);
       before = now;
       raf = requestAnimationFrame(loop);
     };
@@ -345,14 +358,14 @@ export default function CapitalDecisionEngine() {
       },
       {} as Record<string, number>,
     );
-  const sortProgress = smooth((time - 3) / 2.5),
+  const sortProgress = smooth((time - 1.5) / 0.7),
     displayedCounts = {
       opportunity: Math.floor((counts.OPPORTUNITY ?? 0) * sortProgress),
       uncertain: Math.floor((counts.UNCERTAIN ?? 0) * sortProgress),
       blocked: Math.floor((counts['RISK BLOCKED'] ?? 0) * sortProgress),
     },
-    survivors = time < 6.75 ? 21 : time < 7.35 ? 8 : time < 7.95 ? 4 : 2;
-  const quarantine = time >= 3.35 && time < 6;
+    survivors = time < 3.7 ? 21 : time < 3.95 ? 8 : time < 4.2 ? 4 : 2;
+  const quarantine = time >= 1.65 && time < 3.5;
   return (
     <main className="capital-engine">
       <header className="engine-header">
@@ -422,18 +435,18 @@ export default function CapitalDecisionEngine() {
           <div className="quarantine">
             <ShieldAlert />
             <b>
-              {Math.floor((time - 3.35) / 0.3) % 4 === 0
+              {Math.floor((time - 1.65) / 0.3) % 4 === 0
                 ? 'STALE'
-                : Math.floor((time - 3.35) / 0.3) % 4 === 1
+                : Math.floor((time - 1.65) / 0.3) % 4 === 1
                   ? 'SPREAD'
-                  : Math.floor((time - 3.35) / 0.3) % 4 === 2
+                  : Math.floor((time - 1.65) / 0.3) % 4 === 2
                     ? 'LIQUIDITY'
                     : 'RISK CAP'}
             </b>
             <span>EXECUTION FIREWALL</span>
           </div>
         )}
-        {scene.id === 'converge' && time < 8.05 && (
+        {scene.id === 'converge' && time < 4.5 && (
           <div className="compression-counter">
             <small>LIQUID CANDIDATE REDUCTION</small>
             <b>
@@ -442,7 +455,7 @@ export default function CapitalDecisionEngine() {
             <span>STRIKE · EXPIRY · SPREAD · OPEN INTEREST</span>
           </div>
         )}
-        {scene.id === 'converge' && time >= 8.05 && (
+        {scene.id === 'converge' && time >= 4.5 && (
           <div className="magnet-legs">
             <div>
               <b>SPY 765C</b>
@@ -465,7 +478,7 @@ export default function CapitalDecisionEngine() {
             </div>
           </div>
         )}
-        {scene.id === 'converge' && time >= 8.05 && (
+        {scene.id === 'converge' && time >= 4.5 && (
           <div className="order-convergence">
             <small>VERIFIED DEBIT SPREAD CANDIDATE</small>
             <b>
@@ -514,10 +527,10 @@ export default function CapitalDecisionEngine() {
             setPlaying(true);
           }}
         >
-          <RotateCcw /> REPLAY 9s
+          <RotateCcw /> REPLAY 5.5s
         </button>
         <div className="engine-progress">
-          <i style={{ width: `${(time / 9) * 100}%` }} />
+          <i style={{ width: `${(time / DURATION) * 100}%` }} />
         </div>
       </footer>
     </main>
