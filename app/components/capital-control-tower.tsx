@@ -50,7 +50,7 @@ type Preview = {
   risk: { trade_risk_limit: number };
 };
 
-const DURATION = 55;
+const DURATION = 220;
 const PALETTE: Record<Classification, string> = {
   OPPORTUNITY: '#39ff88',
   UNCERTAIN: '#ffc928',
@@ -61,6 +61,18 @@ const clamp = (value: number, min = 0, max = 1) =>
 const ease = (value: number) => {
   const x = clamp(value);
   return x * x * (3 - 2 * x);
+};
+
+const guidedSceneTime = (time: number) => {
+  if (time < 8) return 13.5 + (time / 8) * 23.4;
+  if (time < 30) return 1.6;
+  if (time < 45) return 2.2;
+  if (time < 65) return 6 + ((time - 45) / 20) * 7.4;
+  if (time < 100) return 13.5 + ((time - 65) / 35) * 10.4;
+  if (time < 135) return 24 + ((time - 100) / 35) * 9;
+  if (time < 165) return 29 + ((time - 135) / 30) * 8;
+  if (time < 200) return 37 + ((time - 165) / 35) * 18;
+  return 54;
 };
 
 const PANEL_POSITIONS: [number, number, number][] = [
@@ -258,7 +270,6 @@ function PolicyTunnel({ position, color, active, blockedAt, kind }: {
       {kind === 'static' && (
         <group position={[0, 0, -(blockedAt ?? 10)]}>
           <mesh scale={[1.15, 1.15, 0.14]}><boxGeometry /><meshBasicMaterial color="#23c8ff" transparent opacity={0.88} /></mesh>
-          <Html transform distanceFactor={6} position={[0, 0, 0.25]}><b className="tunnel-gate-label">$1,000 HARD LIMIT<br /><em>BLOCKED</em></b></Html>
         </group>
       )}
       {kind === 'adaptive' && (
@@ -270,8 +281,8 @@ function PolicyTunnel({ position, color, active, blockedAt, kind }: {
       )}
       {kind === 'live' && (
         <group position={[0, 0, -(blockedAt ?? 7)]}>
-          <mesh scale={[1.3, 1.45, 0.18]}><boxGeometry /><meshBasicMaterial color="#ffd21f" transparent opacity={0.82} /></mesh>
-          <Html transform distanceFactor={5.5} position={[0, 0, 0.3]}><div className="execution-lock"><b>LOCKED</b><span>PAPER PREVIEW</span></div></Html>
+          <mesh position={[0, -0.65, 0]} scale={[1.3, 0.78, 0.18]}><boxGeometry /><meshBasicMaterial color="#ffd21f" transparent opacity={0.82} /></mesh>
+          <mesh position={[0, 0.12, 0]}><torusGeometry args={[0.5, 0.13, 10, 32, Math.PI]} /><meshBasicMaterial color="#fff0a8" /></mesh>
         </group>
       )}
     </group>
@@ -520,7 +531,8 @@ export default function CapitalControlTower() {
     },
     { OPPORTUNITY: 0, UNCERTAIN: 0, 'RISK BLOCKED': 0 } as Record<Classification, number>,
   );
-  const classificationProgress = ease((time - 14) / 2.5);
+  const sceneTime = guidedSceneTime(time);
+  const classificationProgress = ease((sceneTime - 14) / 2.5);
   const reasons = [
     'STALE QUOTE',
     'WIDE SPREAD',
@@ -528,19 +540,19 @@ export default function CapitalControlTower() {
     'MARGINAL LIQUIDITY',
     'RISK CAP',
   ];
-  const reasonIndex = Math.floor(Math.max(0, time - 16) / 0.8) % reasons.length;
-  const phase = time < 6 ? 'CONTROL TOWER' : time < 13.5 ? 'DATA EXTRACTION' : time < 24 ? 'RISK CLASSIFICATION' : time < 29 ? 'CANDIDATE CONVERGENCE' : time < 33 ? 'DEFINED-RISK CALCULATION' : time < 37 ? 'HARD RISK GATE' : 'FOUR-FUTURE TRIBUNAL';
-  const headline = time < 6
+  const reasonIndex = Math.floor(Math.max(0, sceneTime - 16) / 0.8) % reasons.length;
+  const phase = sceneTime < 6 ? 'CONTROL TOWER' : sceneTime < 13.5 ? 'DATA EXTRACTION' : sceneTime < 24 ? 'RISK CLASSIFICATION' : sceneTime < 29 ? 'CANDIDATE CONVERGENCE' : sceneTime < 33 ? 'DEFINED-RISK CALCULATION' : sceneTime < 37 ? 'HARD RISK GATE' : 'FOUR-FUTURE TRIBUNAL';
+  const headline = sceneTime < 6
     ? 'CAPITAL CONTROL TOWER'
-    : time < 13.5
+    : sceneTime < 13.5
       ? 'MARKET DATA → CENTRAL ENGINE'
-      : time < 24
+      : sceneTime < 24
         ? '245 CONTRACTS · THREE OUTCOMES'
-        : time < 29
+        : sceneTime < 29
           ? '21 → 8 → 4 → 2'
-          : time < 33
+          : sceneTime < 33
             ? 'TWO LEGS · ONE DEFINED RISK'
-            : time < 37
+            : sceneTime < 37
               ? 'CAPITAL LIMIT ENFORCEMENT'
               : 'ONE SIGNAL · FOUR EXECUTION POLICIES';
   return (
@@ -551,7 +563,7 @@ export default function CapitalControlTower() {
       </header>
       <section className="tower-stage">
         <Canvas camera={{ position: [0, 1, 13], fov: 48 }} dpr={[1, 1.4]}>
-          <TowerScene data={data} time={time} />
+          <TowerScene data={data} time={sceneTime} />
         </Canvas>
         <div className="tower-grid" />
         <div className="tower-title">
@@ -559,7 +571,7 @@ export default function CapitalControlTower() {
           <b>{headline}</b>
           <span>{data.ai_status} · {new Date(data.market.underlying_timestamp).toISOString()}</span>
         </div>
-        {time < 2.5 && (
+        {sceneTime < 2.5 && (
           <div className="tower-ready">
             <Database />
             <small>ALPACA SNAPSHOT READY</small>
@@ -568,14 +580,14 @@ export default function CapitalControlTower() {
             {!running && <button onClick={run}><Play /> RUN CAPITAL ANALYSIS <kbd>ENTER</kbd></button>}
           </div>
         )}
-        {time >= 6 && time < 13.5 && (
+        {sceneTime >= 6 && sceneTime < 13.5 && (
           <div className="extraction-status">
-            <b>{Math.min(245, Math.floor(245 * ease((time - 6) / 5)))}</b>
+            <b>{Math.min(245, Math.floor(245 * ease((sceneTime - 6) / 5)))}</b>
             <span>CONTRACTS ENTERING ANALYSIS RING</span>
             <small>PRICE · QUOTE · IV · OI · ACCOUNT RISK</small>
           </div>
         )}
-        {time >= 13.5 && time < 24 && (
+        {sceneTime >= 13.5 && sceneTime < 24 && (
           <div className="tower-sort-counts">
             {(['OPPORTUNITY', 'UNCERTAIN', 'RISK BLOCKED'] as Classification[]).map((key) => (
               <div key={key} className={key.toLowerCase().replace(' ', '-')}>
@@ -584,24 +596,24 @@ export default function CapitalControlTower() {
             ))}
           </div>
         )}
-        {time >= 16 && time < 24 && (
+        {sceneTime >= 16 && sceneTime < 24 && (
           <div className="tower-block-reason"><b>{reasons[reasonIndex]}</b><span>EXECUTION FIREWALL</span></div>
         )}
-        {time >= 24 && time < 29 && (
+        {sceneTime >= 24 && sceneTime < 29 && (
           <div className="candidate-compression">
             <small>21 → 8 → 4 → 2</small>
-            <b>{time < 25 ? '21 CANDIDATES' : time < 26 ? '8 PASSED EXPIRATION' : time < 27 ? '4 PASSED LIQUIDITY' : '2 DEFINED-RISK LEGS'}</b>
-            <span>{time < 27 ? 'PASSING CONTRACTS TURN ELECTRIC BLUE' : 'BUY 765C + SELL 770C'}</span>
+            <b>{sceneTime < 25 ? '21 CANDIDATES' : sceneTime < 26 ? '8 PASSED EXPIRATION' : sceneTime < 27 ? '4 PASSED LIQUIDITY' : '2 DEFINED-RISK LEGS'}</b>
+            <span>{sceneTime < 27 ? 'PASSING CONTRACTS TURN ELECTRIC BLUE' : 'BUY 765C + SELL 770C'}</span>
           </div>
         )}
-        {time >= 29 && time < 33 && (
+        {sceneTime >= 29 && sceneTime < 33 && (
           <div className="risk-calculation">
             <small>DEFINED-RISK CALL SPREAD</small>
             <div><span>NET DEBIT <b>$2.74</b></span><span>REQUESTED <b>4 CONTRACTS</b></span></div>
             <strong>MAX LOSS $1,096</strong>
           </div>
         )}
-        {time >= 33 && time < 37 && (
+        {sceneTime >= 33 && sceneTime < 37 && (
           <div className="hard-gate-verdict">
             <div><span>MAX LOSS</span><b>$1,096</b></div>
             <strong>$96 OVER LIMIT<em>HARD GATE: BLOCKED</em></strong>
@@ -609,12 +621,14 @@ export default function CapitalControlTower() {
             <footer>QUOTE: STALE · AI: FALLBACK / NOT LIVE AI · PAPER PREVIEW · NOT SUBMITTED</footer>
           </div>
         )}
-        {time >= 37 && time < 40 && <div className="tribunal-banner"><small>IDENTICAL ORDER SIGNAL · ONE IMPACT · FOUR DEPTH PATHS</small><b>EXECUTION AUTHORITY TRIBUNAL</b></div>}
-        {time >= 40 && time < 43 && <div className="policy-verdict no-guard"><small>NO GUARD</small><b>4 CONTRACTS · $1,096 EXPOSED</b><span>NO PROTECTIVE GATE · SHADOW ONLY</span></div>}
-        {time >= 43 && time < 46 && <div className="policy-verdict static"><small>STATIC GUARD</small><b>$1,000 HARD LIMIT · BLOCKED</b><span>$96 OVER LIMIT</span></div>}
-        {time >= 46 && time < 50 && <div className="policy-verdict adaptive"><small>ADAPTIVE GUARD</small><b>STALE QUOTE · FALLBACK AI</b><span>QUOTE AGE · AI STATUS · LIQUIDITY → FAIL-CLOSED</span></div>}
-        {time >= 50 && time < 53 && <div className="policy-verdict live"><small>LIVE EXECUTION</small><b>PAPER PREVIEW</b><span>HUMAN APPROVAL REQUIRED · NOT SUBMITTED</span></div>}
-        {time >= 53 && <div className="tribunal-banner final"><small>FOUR POLICIES · ONE EVIDENCE SNAPSHOT</small><b>ONLY LIVE EXECUTION HAS AUTHORITY — AND IT REMAINS LOCKED</b></div>}
+        {sceneTime >= 37 && sceneTime < 40 && <div className="tribunal-banner"><small>IDENTICAL ORDER SIGNAL · ONE IMPACT · FOUR DEPTH PATHS</small><b>EXECUTION AUTHORITY TRIBUNAL</b></div>}
+        {sceneTime >= 40 && sceneTime < 43 && <div className="policy-verdict no-guard"><small>NO GUARD</small><b>4 CONTRACTS · $1,096 EXPOSED</b><span>NO PROTECTIVE GATE · SHADOW ONLY</span></div>}
+        {sceneTime >= 43 && sceneTime < 46 && <div className="policy-verdict static"><small>STATIC GUARD</small><b>$1,000 HARD LIMIT · BLOCKED</b><span>$96 OVER LIMIT</span></div>}
+        {sceneTime >= 46 && sceneTime < 50 && <div className="policy-verdict adaptive"><small>ADAPTIVE GUARD</small><b>STALE QUOTE · FALLBACK AI</b><span className="inspection-line">QUOTE AGE · AI STATUS · LIQUIDITY</span><strong>FAIL-CLOSED</strong></div>}
+        {sceneTime >= 50 && sceneTime < 53 && <div className="policy-verdict live"><small>LIVE EXECUTION</small><b>PAPER PREVIEW</b><strong>HUMAN APPROVAL REQUIRED</strong><em>LOCKED</em><span>NOT SUBMITTED</span></div>}
+        {sceneTime >= 53 && <div className="tribunal-banner final"><small>FOUR POLICIES · ONE EVIDENCE SNAPSHOT</small><b>{time >= 215 ? 'MOST AGENTS SEARCH FOR A REASON TO TRADE. SEOUL SHIELD SEARCHES FOR THE REASON THEY SHOULD NOT.' : 'ONLY LIVE EXECUTION HAS AUTHORITY — AND IT REMAINS LOCKED'}</b></div>}
+        {time >= 30 && time < 65 && <div className="guided-evidence"><small>ALPACA PAPER TRADING · SANITIZED ACCOUNT EVIDENCE</small><b>CASH / EQUITY <strong>$100,000</strong></b><b>BUYING POWER <strong>$400,000</strong></b><div><span>OPTIONS LEVEL <strong>3</strong></span><span>POSITIONS <strong>0</strong></span><span>OPEN ORDERS <strong>0</strong></span></div></div>}
+        {time >= 200 && time < 215 && <div className="guided-audit"><small>TAMPER-EVIDENT EXECUTION RECORD</small><b>HASH-CHAIN AUDIT LOG</b><span>SNAPSHOT → AI/FALLBACK → POLICIES → HARD GATE → PREVIEW</span><strong>CHAIN VERIFIED · SECRETS REDACTED</strong></div>}
         <div className="tower-legend">
           <span className="opportunity">● OPPORTUNITY · SMOOTH PATH</span>
           <span className="uncertain">△ UNCERTAIN · REVIEW LANE</span>
