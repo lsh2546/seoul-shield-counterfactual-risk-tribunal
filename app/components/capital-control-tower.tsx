@@ -50,7 +50,7 @@ type Preview = {
   risk: { trade_risk_limit: number };
 };
 
-const DURATION = 42;
+const DURATION = 55;
 const PALETTE: Record<Classification, string> = {
   OPPORTUNITY: '#39ff88',
   UNCERTAIN: '#ffc928',
@@ -145,9 +145,30 @@ function CameraRig({ time }: { time: number }) {
               ? new Vector3(0, 2.8, 12.4)
               : time < 37
                 ? new Vector3(0, 1.2, 11.2)
-                : new Vector3(0, 7.2, 15.5);
-    camera.position.lerp(target, 0.045);
-    camera.lookAt(0, time >= 37 ? 0 : time >= 13.5 ? 0 : 0.4, time >= 24 ? -3 : -2.2);
+                : time < 40
+                  ? new Vector3(0, 10.5, 13.5)
+                  : time < 43
+                    ? new Vector3(-5.2, 2.2, 5 - (time - 40) * 3.6)
+                    : time < 46
+                      ? new Vector3(-1.8, -1.8, 3.5 - (time - 43) * 3.2)
+                      : time < 50
+                        ? new Vector3(2.0, 2.0, 4 - (time - 46) * 2.6)
+                        : time < 53
+                          ? new Vector3(5.2, -1.7, 4 - (time - 50) * 2.8)
+                          : new Vector3(0, 9.2, 15.8);
+    camera.position.lerp(target, time >= 37 ? 0.075 : 0.045);
+    const look = time < 40
+      ? new Vector3(0, 0, -7)
+      : time < 43
+        ? new Vector3(-5.2, 2.2, -18)
+        : time < 46
+          ? new Vector3(-1.8, -1.8, -18)
+          : time < 50
+            ? new Vector3(2, 2, -18)
+            : time < 53
+              ? new Vector3(5.2, -1.7, -18)
+              : new Vector3(0, 0, -10);
+    camera.lookAt(look);
   });
   return null;
 }
@@ -207,6 +228,56 @@ function ConvergenceScene({ data, time }: { data: Preview; time: number }) {
   );
 }
 
+function PolicyTunnel({ position, color, active, blockedAt, kind }: {
+  position: [number, number, number]; color: string; active: boolean; blockedAt?: number;
+  kind: 'no-guard' | 'static' | 'adaptive' | 'live';
+}) {
+  const pulse = useRef<Object3D>(null);
+  const inspectors = useRef<Object3D>(null);
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
+    if (pulse.current) {
+      const travel = kind === 'no-guard' ? 18 : kind === 'static' ? 10 : kind === 'adaptive' ? 8 : 7;
+      pulse.current.position.z = active ? -((t * 7) % travel) : 0;
+    }
+    if (inspectors.current) inspectors.current.rotation.z = t * 1.8;
+  });
+  return (
+    <group position={position}>
+      {Array.from({ length: 9 }, (_, index) => (
+        <mesh key={index} position={[0, 0, -index * 2.25]}>
+          <torusGeometry args={[1.25, 0.045, 8, 42]} />
+          <meshBasicMaterial color={color} transparent opacity={0.34 + index * 0.025} />
+        </mesh>
+      ))}
+      <mesh position={[0, 0, -9]} scale={[0.035, 0.035, 18]}><boxGeometry /><meshBasicMaterial color={color} transparent opacity={0.55} /></mesh>
+      <group ref={pulse}>
+        <mesh scale={[0.72, 0.38, 0.12]}><boxGeometry /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh scale={[1.15, 0.04, 0.04]}><boxGeometry /><meshBasicMaterial color={color} /></mesh>
+      </group>
+      {kind === 'static' && (
+        <group position={[0, 0, -(blockedAt ?? 10)]}>
+          <mesh scale={[1.15, 1.15, 0.14]}><boxGeometry /><meshBasicMaterial color="#23c8ff" transparent opacity={0.88} /></mesh>
+          <Html transform distanceFactor={6} position={[0, 0, 0.25]}><b className="tunnel-gate-label">$1,000 HARD LIMIT<br /><em>BLOCKED</em></b></Html>
+        </group>
+      )}
+      {kind === 'adaptive' && (
+        <group ref={inspectors} position={[0, 0, -(blockedAt ?? 8)]}>
+          {[1.45, 1.05, 0.7].map((radius, index) => (
+            <mesh key={radius} rotation={[index * 0.5, index * 0.8, 0]}><torusGeometry args={[radius, 0.055, 8, 48]} /><meshBasicMaterial color="#c77dff" /></mesh>
+          ))}
+        </group>
+      )}
+      {kind === 'live' && (
+        <group position={[0, 0, -(blockedAt ?? 7)]}>
+          <mesh scale={[1.3, 1.45, 0.18]}><boxGeometry /><meshBasicMaterial color="#ffd21f" transparent opacity={0.82} /></mesh>
+          <Html transform distanceFactor={5.5} position={[0, 0, 0.3]}><div className="execution-lock"><b>LOCKED</b><span>PAPER PREVIEW</span></div></Html>
+        </group>
+      )}
+    </group>
+  );
+}
+
 function RiskAndTribunalScene({ time }: { time: number }) {
   if (time < 29) return null;
   if (time < 33) {
@@ -227,20 +298,24 @@ function RiskAndTribunalScene({ time }: { time: number }) {
       </group>
     );
   }
-  const paths = [
-    { x: -6, color: '#ff314a', title: 'NO GUARD', detail: '4 CONTRACTS · $1,096 EXPOSURE · SHADOW ONLY' },
-    { x: -2, color: '#23c8ff', title: 'STATIC GUARD', detail: '$1,000 LIMIT · BLOCKED' },
-    { x: 2, color: '#b26cff', title: 'ADAPTIVE GUARD', detail: 'STALE QUOTE · FALLBACK AI · BLOCKED' },
-    { x: 6, color: '#ffd21f', title: 'LIVE EXECUTION', detail: 'HUMAN APPROVAL REQUIRED · NOT SUBMITTED' },
-  ];
+  const rise = ease((time - 37) / 1.2);
+  const shock = ease((time - 38.1) / 0.45);
   return (
     <>
-      {paths.map((path) => (
-        <group key={path.title} position={[path.x, 0, -5]}>
-          <mesh scale={[1.25, 0.07, 8]}><boxGeometry /><meshBasicMaterial color={path.color} /></mesh>
-          <Html position={[0, 2.2, 1]} transform distanceFactor={7} occlude={false}><div className="future-path-label" style={{ borderColor: path.color }}><b>{path.title}</b><span>{path.detail}</span></div></Html>
-        </group>
-      ))}
+      <group position={[0, -1.4 + rise * 3.1, -4]} scale={1 - shock * 0.35}>
+        <mesh><octahedronGeometry args={[0.72, 0]} /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh scale={[1 + shock * 5, 1 + shock * 5, 0.04]}><ringGeometry args={[0.9, 1.02, 64]} /><meshBasicMaterial color="#bff5ff" transparent opacity={1 - shock * 0.72} /></mesh>
+      </group>
+      <PolicyTunnel position={[-5.2, 2.2, -5]} color="#ff314a" active={time >= 39.2 && time < 43} kind="no-guard" />
+      <PolicyTunnel position={[-1.8, -1.8, -5]} color="#23c8ff" active={time >= 39.2 && time < 46} blockedAt={10} kind="static" />
+      <PolicyTunnel position={[2, 2, -5]} color="#c77dff" active={time >= 39.2 && time < 50} blockedAt={8} kind="adaptive" />
+      <PolicyTunnel position={[5.2, -1.7, -5]} color="#ffd21f" active={time >= 39.2 && time < 53} blockedAt={7} kind="live" />
+      {time >= 53 && [
+        { p: [-5.2, 3.8, -8] as [number, number, number], c: '#ff314a', t: 'NO GUARD', d: 'SHADOW ONLY' },
+        { p: [-1.8, -3.4, -8] as [number, number, number], c: '#23c8ff', t: 'STATIC', d: 'BLOCKED' },
+        { p: [2, 3.8, -8] as [number, number, number], c: '#c77dff', t: 'ADAPTIVE', d: 'FAIL-CLOSED' },
+        { p: [5.2, -3.3, -8] as [number, number, number], c: '#ffd21f', t: 'LIVE', d: 'NOT SUBMITTED' },
+      ].map((item) => <Html key={item.t} position={item.p} transform distanceFactor={8}><div className="future-final" style={{ borderColor: item.c }}><b>{item.t}</b><span>{item.d}</span></div></Html>)}
     </>
   );
 }
@@ -514,9 +589,9 @@ export default function CapitalControlTower() {
         )}
         {time >= 24 && time < 29 && (
           <div className="candidate-compression">
-            <small>OPPORTUNITY CANDIDATES</small>
-            <b>21 <i>→</i> {time < 25 ? 21 : time < 26 ? 8 : time < 27 ? 4 : 2}</b>
-            <span>PASSING CONTRACTS TURN ELECTRIC BLUE</span>
+            <small>21 → 8 → 4 → 2</small>
+            <b>{time < 25 ? '21 CANDIDATES' : time < 26 ? '8 PASSED EXPIRATION' : time < 27 ? '4 PASSED LIQUIDITY' : '2 DEFINED-RISK LEGS'}</b>
+            <span>{time < 27 ? 'PASSING CONTRACTS TURN ELECTRIC BLUE' : 'BUY 765C + SELL 770C'}</span>
           </div>
         )}
         {time >= 29 && time < 33 && (
@@ -534,9 +609,12 @@ export default function CapitalControlTower() {
             <footer>QUOTE: STALE · AI: FALLBACK / NOT LIVE AI · PAPER PREVIEW · NOT SUBMITTED</footer>
           </div>
         )}
-        {time >= 37 && (
-          <div className="tribunal-banner"><small>IDENTICAL ORDER SIGNAL</small><b>EXECUTION AUTHORITY TRIBUNAL</b></div>
-        )}
+        {time >= 37 && time < 40 && <div className="tribunal-banner"><small>IDENTICAL ORDER SIGNAL · ONE IMPACT · FOUR DEPTH PATHS</small><b>EXECUTION AUTHORITY TRIBUNAL</b></div>}
+        {time >= 40 && time < 43 && <div className="policy-verdict no-guard"><small>NO GUARD</small><b>4 CONTRACTS · $1,096 EXPOSED</b><span>NO PROTECTIVE GATE · SHADOW ONLY</span></div>}
+        {time >= 43 && time < 46 && <div className="policy-verdict static"><small>STATIC GUARD</small><b>$1,000 HARD LIMIT · BLOCKED</b><span>$96 OVER LIMIT</span></div>}
+        {time >= 46 && time < 50 && <div className="policy-verdict adaptive"><small>ADAPTIVE GUARD</small><b>STALE QUOTE · FALLBACK AI</b><span>QUOTE AGE · AI STATUS · LIQUIDITY → FAIL-CLOSED</span></div>}
+        {time >= 50 && time < 53 && <div className="policy-verdict live"><small>LIVE EXECUTION</small><b>PAPER PREVIEW</b><span>HUMAN APPROVAL REQUIRED · NOT SUBMITTED</span></div>}
+        {time >= 53 && <div className="tribunal-banner final"><small>FOUR POLICIES · ONE EVIDENCE SNAPSHOT</small><b>ONLY LIVE EXECUTION HAS AUTHORITY — AND IT REMAINS LOCKED</b></div>}
         <div className="tower-legend">
           <span className="opportunity">● OPPORTUNITY · SMOOTH PATH</span>
           <span className="uncertain">△ UNCERTAIN · REVIEW LANE</span>
