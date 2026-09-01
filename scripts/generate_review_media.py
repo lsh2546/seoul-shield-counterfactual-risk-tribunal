@@ -17,7 +17,7 @@ REVIEW = OUT / "seoul-shield-guided-demo-review-slow-4m20s.mp4"
 SRT = WORK / "review.srt"
 
 SECTIONS = [
-    (0, 15, "Two hundred forty-five contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two become one defined-risk spread."),
+    (0, 15, "Two hundred forty-five contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two form one defined-risk spread. And the capital gate closes."),
     (15, 35, "Most trading agents search for a reason to trade. When AI can move capital, prediction is only half the problem. The harder question is authority. Which safety policy deserves the right to execute? Seoul Shield answers with one signal and four policies."),
     (35, 77, "This is an Alpaca Paper Trading account. Sanitized evidence confirms one hundred thousand dollars in cash and equity, four hundred thousand dollars in buying power, options level three, no positions, and no open orders. Seoul Shield reads SPY, account exposure, market status, and two hundred forty-five option contracts. Every quote has a timestamp. This replay is marked stale. The AI layer is marked fallback, not live AI. The system never disguises missing evidence."),
     (77, 118, "The Capital Decision Engine evaluates strike, expiration, volatility when available, bid and ask, spread quality, open interest, quote age, and tradability. Every route comes from the evidence bundle. Twenty-one contracts are opportunities. Eighty require review. One hundred forty-four are blocked. Stale quotes, wide spreads, weak liquidity, and capital-risk violations are isolated before execution."),
@@ -81,6 +81,16 @@ def main() -> None:
         "$s.Speak((Get-Content -Raw -LiteralPath $TextPath))\n$s.Dispose()\n",
         encoding="utf-8",
     )
+    opening_ps1 = WORK / "speak-opening.ps1"
+    opening_ps1.write_text(
+        "param([string]$OutPath)\n"
+        "Add-Type -AssemblyName System.Speech\n"
+        "$s=New-Object System.Speech.Synthesis.SpeechSynthesizer\n"
+        "$s.SelectVoice('Microsoft Zira Desktop')\n$s.Rate=1\n$s.Volume=100\n$s.SetOutputToWaveFile($OutPath)\n"
+        "$ssml='<speak version=\"1.0\" xml:lang=\"en-US\"><voice name=\"Microsoft Zira Desktop\">Two hundred forty-five contracts enter.<break time=\"280ms\"/>Twenty-one survive.<break time=\"280ms\"/>Eight pass expiration.<break time=\"160ms\"/>Four pass liquidity.<break time=\"160ms\"/>Two form one defined-risk spread.<break time=\"240ms\"/>And the capital gate closes.<break time=\"520ms\"/></voice></speak>'\n"
+        "$s.SpeakSsml($ssml)\n$s.Dispose()\n",
+        encoding="utf-8",
+    )
     normalized: list[Path] = []
     cues: list[tuple[float, float, str]] = []
     for index, (start, end, text) in enumerate(SECTIONS):
@@ -88,13 +98,16 @@ def main() -> None:
         raw_path = WORK / f"section-{index}-raw.wav"
         fixed_path = WORK / f"section-{index}-fixed.wav"
         text_path.write_text(text, encoding="utf-8-sig")
-        subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ps1), str(text_path), str(raw_path)], check=True)
+        if index == 0:
+            subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(opening_ps1), str(raw_path)], check=True)
+        else:
+            subprocess.run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ps1), str(text_path), str(raw_path)], check=True)
         with wave.open(str(raw_path), "rb") as audio:
             raw_duration = audio.getnframes() / audio.getframerate()
         target = end - start
         speed = max(0.5, min(2.0, raw_duration / (target - 0.45)))
         if index == 0:
-            # The opening must sound deliberate: never accelerate its narration.
+            # The SSML opening already contains deliberate pauses; never accelerate it.
             speed = min(1.0, speed)
         subprocess.run([ffmpeg, "-loglevel", "error", "-y", "-i", str(raw_path), "-af", f"atempo={speed:.6f},apad,atrim=0:{target}", str(fixed_path)], check=True)
         normalized.append(fixed_path)

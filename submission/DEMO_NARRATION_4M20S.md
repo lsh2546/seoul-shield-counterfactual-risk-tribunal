@@ -4,7 +4,7 @@ This is the slower review script. The visual timeline and temporary Zira narrati
 
 ## 0:00–0:15 — Opening
 
-Two hundred forty-five contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two become one defined-risk spread.
+Two hundred forty-five contracts enter. Twenty-one survive. Eight pass expiration. Four pass liquidity. Two form one defined-risk spread. And the capital gate closes.
 
 ## 0:15–0:35 — Problem
 
