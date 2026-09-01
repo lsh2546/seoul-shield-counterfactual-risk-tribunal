@@ -63,6 +63,31 @@ class AlpacaClient:
             competition_balance_ok=abs(initial - 100_000) < 0.01,
         )
 
+    def account(self) -> dict:
+        return self._get("https://paper-api.alpaca.markets/v2/account")
+
+    def clock(self) -> dict:
+        return self._get("https://paper-api.alpaca.markets/v2/clock")
+
+    def orders(self) -> list[dict]:
+        result = self._get("https://paper-api.alpaca.markets/v2/orders", {"status": "open"})
+        return result if isinstance(result, list) else []
+
+    def latest_stock_trade(self, symbol: str, *, feed: str = "iex") -> dict:
+        return self._get(
+            f"https://data.alpaca.markets/v2/stocks/{symbol.upper()}/trades/latest",
+            {"feed": feed},
+        )
+
+    def option_contracts(self, underlying: str, *, expiration: date,
+                         option_type: str = "call") -> dict:
+        return self._get(
+            "https://paper-api.alpaca.markets/v2/options/contracts",
+            {"underlying_symbols": underlying.upper(),
+             "expiration_date": expiration.isoformat(), "type": option_type,
+             "status": "active", "limit": 10000},
+        )
+
     def option_chain(self, underlying: str, *, expiration: date,
                      option_type: str, feed: str = "indicative") -> dict:
         return self._get(
