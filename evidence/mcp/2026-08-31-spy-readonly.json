@@ -1,0 +1,39 @@
+{
+  "evidence_status": "LIVE_VERIFIED_READ_ONLY",
+  "source": "Alpaca MCP plugin",
+  "captured_at": "2026-08-31T14:15:24Z",
+  "calls": [
+    {
+      "tool": "get_clock",
+      "is_open": true,
+      "timestamp": "2026-08-31T10:14:51.579816-04:00"
+    },
+    {
+      "tool": "get_stock_latest_trade",
+      "symbol": "SPY",
+      "feed": "iex",
+      "price": 765.83,
+      "timestamp": "2026-08-31T14:15:03.236978+00:00"
+    },
+    {
+      "tool": "get_option_contracts",
+      "underlying": "SPY",
+      "expiration": "2026-09-04",
+      "selected_contracts": [
+        {"symbol": "SPY260904C00765000", "strike": 765, "tradable": true, "open_interest": 1909},
+        {"symbol": "SPY260904C00770000", "strike": 770, "tradable": true, "open_interest": 4486}
+      ]
+    },
+    {
+      "tool": "get_option_chain",
+      "feed": "indicative",
+      "quotes": [
+        {"symbol": "SPY260904C00765000", "bid": 4.67, "ask": 4.72, "delta": 0.547, "timestamp": "2026-08-31T14:15:23.961246+00:00"},
+        {"symbol": "SPY260904C00770000", "bid": 2.13, "ask": 2.15, "delta": 0.3434, "timestamp": "2026-08-31T14:15:24.320352+00:00"}
+      ]
+    }
+  ],
+  "contains_credentials": false,
+  "contains_account_identifier": false,
+  "order_submitted": false
+}
