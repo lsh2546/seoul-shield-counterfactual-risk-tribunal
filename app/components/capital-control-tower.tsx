@@ -40,9 +40,17 @@ type Preview = {
     expiration: string;
   };
   terrain: Point[];
+  selection: {
+    long: Point;
+    short: Point;
+    net_debit: number;
+    requested_contracts: number;
+    max_loss: number;
+  };
+  risk: { trade_risk_limit: number };
 };
 
-const DURATION = 24;
+const DURATION = 42;
 const PALETTE: Record<Classification, string> = {
   OPPORTUNITY: '#39ff88',
   UNCERTAIN: '#ffc928',
@@ -131,11 +139,110 @@ function CameraRig({ time }: { time: number }) {
         ? new Vector3(0, 0.7, 14)
         : time < 13.5
           ? new Vector3(Math.sin(time * 0.38) * 2.2, 1.1, 11.2)
-          : new Vector3(0, 5.8, 13.8);
+          : time < 24
+            ? new Vector3(0, 5.8, 13.8)
+            : time < 29
+              ? new Vector3(0, 2.8, 12.4)
+              : time < 37
+                ? new Vector3(0, 1.2, 11.2)
+                : new Vector3(0, 7.2, 15.5);
     camera.position.lerp(target, 0.045);
-    camera.lookAt(0, time >= 13.5 ? 0 : 0.4, -2.2);
+    camera.lookAt(0, time >= 37 ? 0 : time >= 13.5 ? 0 : 0.4, time >= 24 ? -3 : -2.2);
   });
   return null;
+}
+
+function ConvergenceScene({ data, time }: { data: Preview; time: number }) {
+  const opportunities = useMemo(
+    () => data.terrain.filter((point) => point.classification === 'OPPORTUNITY').slice(0, 21),
+    [data],
+  );
+  const mesh = useRef<InstancedMesh>(null);
+  const dummy = useMemo(() => new Object3D(), []);
+  const stage = time < 25 ? 21 : time < 26 ? 8 : time < 27 ? 4 : 2;
+  useFrame(() => {
+    if (!mesh.current) return;
+    opportunities.forEach((point, index) => {
+      const survives = index < stage;
+      if (stage === 2 && survives) {
+        dummy.position.set(index === 0 ? -2.8 : 2.8, 0.4, -1.2);
+        dummy.scale.set(2.2, 0.9, 0.12);
+      } else if (survives) {
+        dummy.position.set((index - (stage - 1) / 2) * 0.72, 0.4, -2 - index * 0.28);
+        dummy.scale.set(0.65, 0.18, 0.08);
+      } else {
+        dummy.position.set(index % 2 ? 6.8 : -6.8, -2.5 + (index % 5) * 0.35, -4 - index * 0.15);
+        dummy.scale.set(0.42, 0.1, 0.05);
+      }
+      dummy.updateMatrix();
+      mesh.current!.setMatrixAt(index, dummy.matrix);
+      mesh.current!.setColorAt(
+        index,
+        new Color(survives ? (time < 24.7 ? '#28ff9a' : '#23c8ff') : '#718093'),
+      );
+    });
+    mesh.current.instanceMatrix.needsUpdate = true;
+    if (mesh.current.instanceColor) mesh.current.instanceColor.needsUpdate = true;
+  });
+  const gates = ['EXPIRATION', 'STRIKE ORDER', 'OPEN INTEREST', 'LIQUIDITY', 'DEFINED RISK'];
+  return (
+    <>
+      <instancedMesh ref={mesh} args={[undefined, undefined, opportunities.length]} frustumCulled={false}>
+        <boxGeometry args={[1.45, 0.65, 0.08]} />
+        <meshBasicMaterial toneMapped={false} />
+      </instancedMesh>
+      {gates.map((gate, index) => (
+        <group key={gate} position={[0, 0, -8 + index * 1.65]}>
+          <mesh><torusGeometry args={[3.1, 0.035, 10, 80]} /><meshBasicMaterial color={index < Math.min(5, Math.floor((time - 24) * 1.25)) ? '#23c8ff' : '#8fa7bb'} /></mesh>
+          <Html position={[3.45, 0.25, 0]} transform distanceFactor={7} occlude={false}><b className="convergence-gate-label">{gate}</b></Html>
+        </group>
+      ))}
+      {stage === 2 && (
+        <>
+          <Html position={[-2.8, 0.4, -1]} transform distanceFactor={6} occlude={false}><div className="contract-leg-panel"><small>LONG LEG</small><b>BUY SPY 765C</b><span>ASK ${data.selection.long.ask.toFixed(2)} · OI {data.selection.long.open_interest.toLocaleString()}</span></div></Html>
+          <Html position={[2.8, 0.4, -1]} transform distanceFactor={6} occlude={false}><div className="contract-leg-panel short"><small>SHORT LEG</small><b>SELL SPY 770C</b><span>BID ${data.selection.short.bid.toFixed(2)} · OI {data.selection.short.open_interest.toLocaleString()}</span></div></Html>
+        </>
+      )}
+    </>
+  );
+}
+
+function RiskAndTribunalScene({ time }: { time: number }) {
+  if (time < 29) return null;
+  if (time < 33) {
+    return (
+      <group>
+        <mesh position={[0, 0, -2]} scale={[5.2, 0.025, 0.025]}><boxGeometry /><meshBasicMaterial color="#ffd21f" /></mesh>
+        <Html position={[-4.2, 1, -2]} transform distanceFactor={6} occlude={false}><div className="risk-leg-orb">BUY 765C</div></Html>
+        <Html position={[4.2, 1, -2]} transform distanceFactor={6} occlude={false}><div className="risk-leg-orb">SELL 770C</div></Html>
+      </group>
+    );
+  }
+  if (time < 37) {
+    const close = ease((time - 33.6) / 0.8);
+    return (
+      <group position={[0, 0, -2]}>
+        <mesh position={[-5 + close * 2.7, 0, 0]} scale={[2.2, 4, 0.16]}><boxGeometry /><meshBasicMaterial color="#ff314a" transparent opacity={0.82} /></mesh>
+        <mesh position={[5 - close * 2.7, 0, 0]} scale={[2.2, 4, 0.16]}><boxGeometry /><meshBasicMaterial color="#ff314a" transparent opacity={0.82} /></mesh>
+      </group>
+    );
+  }
+  const paths = [
+    { x: -6, color: '#ff314a', title: 'NO GUARD', detail: '4 CONTRACTS · $1,096 EXPOSURE · SHADOW ONLY' },
+    { x: -2, color: '#23c8ff', title: 'STATIC GUARD', detail: '$1,000 LIMIT · BLOCKED' },
+    { x: 2, color: '#b26cff', title: 'ADAPTIVE GUARD', detail: 'STALE QUOTE · FALLBACK AI · BLOCKED' },
+    { x: 6, color: '#ffd21f', title: 'LIVE EXECUTION', detail: 'HUMAN APPROVAL REQUIRED · NOT SUBMITTED' },
+  ];
+  return (
+    <>
+      {paths.map((path) => (
+        <group key={path.title} position={[path.x, 0, -5]}>
+          <mesh scale={[1.25, 0.07, 8]}><boxGeometry /><meshBasicMaterial color={path.color} /></mesh>
+          <Html position={[0, 2.2, 1]} transform distanceFactor={7} occlude={false}><div className="future-path-label" style={{ borderColor: path.color }}><b>{path.title}</b><span>{path.detail}</span></div></Html>
+        </group>
+      ))}
+    </>
+  );
 }
 
 function ContractFlow({ data, time }: { data: Preview; time: number }) {
@@ -256,8 +363,8 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
           />
         ))}
       {active && !classify && <DataStreams time={time} />}
-      {time >= 6 && <ContractFlow data={data} time={time} />}
-      {classify &&
+      {time >= 6 && time < 24 && <ContractFlow data={data} time={time} />}
+      {classify && time < 24 &&
         [
           { y: 3.3, color: PALETTE.OPPORTUNITY },
           { y: 0, color: PALETTE.UNCERTAIN },
@@ -268,6 +375,8 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
             <meshBasicMaterial color={lane.color} transparent opacity={0.22} />
           </mesh>
         ))}
+      {time >= 24 && time < 29 && <ConvergenceScene data={data} time={time} />}
+      <RiskAndTribunalScene time={time} />
     </>
   );
 }
@@ -345,7 +454,20 @@ export default function CapitalControlTower() {
     'RISK CAP',
   ];
   const reasonIndex = Math.floor(Math.max(0, time - 16) / 0.8) % reasons.length;
-  const phase = time < 6 ? 'CONTROL TOWER' : time < 13.5 ? 'DATA EXTRACTION' : 'RISK CLASSIFICATION';
+  const phase = time < 6 ? 'CONTROL TOWER' : time < 13.5 ? 'DATA EXTRACTION' : time < 24 ? 'RISK CLASSIFICATION' : time < 29 ? 'CANDIDATE CONVERGENCE' : time < 33 ? 'DEFINED-RISK CALCULATION' : time < 37 ? 'HARD RISK GATE' : 'FOUR-FUTURE TRIBUNAL';
+  const headline = time < 6
+    ? 'CAPITAL CONTROL TOWER'
+    : time < 13.5
+      ? 'MARKET DATA → CENTRAL ENGINE'
+      : time < 24
+        ? '245 CONTRACTS · THREE OUTCOMES'
+        : time < 29
+          ? '21 → 8 → 4 → 2'
+          : time < 33
+            ? 'TWO LEGS · ONE DEFINED RISK'
+            : time < 37
+              ? 'CAPITAL LIMIT ENFORCEMENT'
+              : 'ONE SIGNAL · FOUR EXECUTION POLICIES';
   return (
     <main className="control-tower">
       <header className="tower-header">
@@ -359,7 +481,7 @@ export default function CapitalControlTower() {
         <div className="tower-grid" />
         <div className="tower-title">
           <small>{phase}</small>
-          <b>{time < 6 ? 'CAPITAL CONTROL TOWER' : time < 13.5 ? 'MARKET DATA → CENTRAL ENGINE' : '245 CONTRACTS · THREE OUTCOMES'}</b>
+          <b>{headline}</b>
           <span>{data.ai_status} · {new Date(data.market.underlying_timestamp).toISOString()}</span>
         </div>
         {time < 2.5 && (
@@ -378,7 +500,7 @@ export default function CapitalControlTower() {
             <small>PRICE · QUOTE · IV · OI · ACCOUNT RISK</small>
           </div>
         )}
-        {time >= 13.5 && (
+        {time >= 13.5 && time < 24 && (
           <div className="tower-sort-counts">
             {(['OPPORTUNITY', 'UNCERTAIN', 'RISK BLOCKED'] as Classification[]).map((key) => (
               <div key={key} className={key.toLowerCase().replace(' ', '-')}>
@@ -387,8 +509,33 @@ export default function CapitalControlTower() {
             ))}
           </div>
         )}
-        {time >= 16 && (
+        {time >= 16 && time < 24 && (
           <div className="tower-block-reason"><b>{reasons[reasonIndex]}</b><span>EXECUTION FIREWALL</span></div>
+        )}
+        {time >= 24 && time < 29 && (
+          <div className="candidate-compression">
+            <small>OPPORTUNITY CANDIDATES</small>
+            <b>21 <i>→</i> {time < 25 ? 21 : time < 26 ? 8 : time < 27 ? 4 : 2}</b>
+            <span>PASSING CONTRACTS TURN ELECTRIC BLUE</span>
+          </div>
+        )}
+        {time >= 29 && time < 33 && (
+          <div className="risk-calculation">
+            <small>DEFINED-RISK CALL SPREAD</small>
+            <div><span>NET DEBIT <b>$2.74</b></span><span>REQUESTED <b>4 CONTRACTS</b></span></div>
+            <strong>MAX LOSS $1,096</strong>
+          </div>
+        )}
+        {time >= 33 && time < 37 && (
+          <div className="hard-gate-verdict">
+            <div><span>MAX LOSS</span><b>$1,096</b></div>
+            <strong>$96 OVER LIMIT<em>HARD GATE: BLOCKED</em></strong>
+            <div><span>POLICY LIMIT</span><b>$1,000</b></div>
+            <footer>QUOTE: STALE · AI: FALLBACK / NOT LIVE AI · PAPER PREVIEW · NOT SUBMITTED</footer>
+          </div>
+        )}
+        {time >= 37 && (
+          <div className="tribunal-banner"><small>IDENTICAL ORDER SIGNAL</small><b>EXECUTION AUTHORITY TRIBUNAL</b></div>
         )}
         <div className="tower-legend">
           <span className="opportunity">● OPPORTUNITY · SMOOTH PATH</span>

@@ -3,7 +3,7 @@ import { mkdir, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const output = resolve(root, 'outputs/previews/capital-control-tower-24s.mp4');
+const output = resolve(root, 'outputs/previews/capital-control-tower-42s.mp4');
 const profile = resolve(root, 'work/tower-capture-profile');
 const edge = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
 const ffmpeg = execFileSync(
@@ -12,7 +12,7 @@ const ffmpeg = execFileSync(
   { encoding: 'utf8' },
 ).trim();
 const fps = 30;
-const frames = 24 * fps;
+const frames = 42 * fps;
 
 await mkdir(dirname(output), { recursive: true });
 await rm(profile, { recursive: true, force: true });
