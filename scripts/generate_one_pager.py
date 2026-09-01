@@ -64,7 +64,7 @@ def main() -> None:
 
     left = []
     left += [Paragraph("THE PROBLEM", h2), Paragraph("AI can produce a persuasive options thesis, but persuasion is not permission to move capital. Seoul Shield tests one signal against four safety policies and reveals why a proposal advances, resizes, or stops.", base), Spacer(1, 5)]
-    left += [Paragraph("ONE SNAPSHOT, FOUR POLICIES", h2), Paragraph("<b>No Guard</b> preserves the proposal as a shadow baseline. <b>Static Guard</b> applies fixed limits. <b>Adaptive Guard</b> evaluates regime, quote age, liquidity, exposure, and recent loss. <b>Live Execution</b> is the only path with Paper authority, still gated by deterministic rules and human approval.", base), Spacer(1, 5)]
+    left += [Paragraph("ONE SNAPSHOT, FOUR POLICIES", h2), Paragraph("One fixed, hash-identified snapshot feeds every policy and links to the audit chain. <b>No Guard</b> preserves the proposal as a shadow baseline. <b>Static Guard</b> applies fixed limits. <b>Adaptive Guard</b> evaluates regime, quote age, liquidity, exposure, and recent loss. <b>Live Execution</b> is the only path with Paper authority, still gated by deterministic rules and human approval.", base), Spacer(1, 5)]
     left += [Paragraph("HARD SAFETY INVARIANTS", h2), Paragraph("- Two-leg, same-expiration debit spreads only<br/>- 1% maximum trade loss; 5% portfolio risk; 2% daily stop<br/>- Strike ordering and position_intent validation<br/>- Unique client_order_id and duplicate prevention<br/>- Model output can never relax a hard limit<br/>- Hash-chain audit of every decision and preview", base)]
 
     right = []

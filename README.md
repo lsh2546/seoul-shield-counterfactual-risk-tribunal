@@ -4,6 +4,13 @@
 
 Seoul Shield is a risk-first autonomous options-agent prototype for the Alpaca AI Trading Agents Hackathon. One SPY debit-spread proposal is evaluated against the same market and account snapshot by four policies: No Guard, Static Guard, Adaptive Guard, and Live Execution. Only the Live path can ever reach Alpaca Paper Trading, and deterministic hard gates always outrank model output.
 
+## Links
+
+- **Live Demo:** pending public-deployment approval
+- **Demo Video:** pending YouTube upload approval
+- **One-page PDF:** [Seoul-Shield-One-Page.pdf](output/pdf/Seoul-Shield-One-Page.pdf)
+- **Source Repository:** this repository; public URL pending approval
+
 ## Verified replay at a glance
 
 | Evidence | Verified value |
@@ -25,7 +32,7 @@ The public app is a sanitized, read-only replay. Its visible status is **VERIFIE
 ## Architecture
 
 ```text
-Alpaca account + market snapshot
+Alpaca account + one fixed, hash-identified snapshot
              |
 Option-chain classification (245 -> 21 / 80 / 144)
              |

@@ -8,7 +8,7 @@ An AI can produce a persuasive options thesis, but persuasion is not permission 
 
 ## The system
 
-Seoul Shield sends one market signal and one immutable snapshot into four simultaneous policy paths. **No Guard** preserves the unprotected proposal as a shadow baseline. **Static Guard** applies fixed limits. **Adaptive Guard** considers regime, liquidity, quote age, exposure, and recent loss. **Live Execution** is the only path capable of reaching Alpaca Paper Trading, and only after deterministic gates, idempotency checks, and explicit human approval.
+Seoul Shield sends one market signal and one fixed, hash-identified snapshot into four simultaneous policy paths. **No Guard** preserves the unprotected proposal as a shadow baseline. **Static Guard** applies fixed limits. **Adaptive Guard** considers regime, liquidity, quote age, exposure, and recent loss. **Live Execution** is the only path capable of reaching Alpaca Paper Trading, and only after deterministic gates, idempotency checks, and explicit human approval.
 
 The AI layer returns structured market-state and risk factors, but never broker authority. Timeout, invalid JSON, or an unavailable model triggers a fail-closed fallback. Hard limits cannot be weakened by model output: maximum loss per trade is 1% of equity, aggregate portfolio risk is 5%, and the daily-loss stop is 2%.
 

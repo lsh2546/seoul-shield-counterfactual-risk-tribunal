@@ -12,6 +12,7 @@ No external action below is authorized merely because this checklist exists.
 - [ ] Run final secret scan on tracked files
 - [ ] User approval immediately before creating or making GitHub repository public
 - [ ] Push the reviewed commit only after approval
+- [ ] Replace README pending-link labels with final Live Demo, GitHub, and YouTube URLs
 
 ## Read-only app readiness
 
@@ -24,6 +25,9 @@ No external action below is authorized merely because this checklist exists.
 - [ ] Production lint and build on the final commit
 - [ ] Non-login desktop and mobile verification after deployment
 - [ ] User approval immediately before public deployment
+- [ ] Generate QR codes only from the verified public app, GitHub, and YouTube URLs
+- [ ] Add `245 -> 21/80/144 -> 21 -> 8 -> 4 -> 2 -> BLOCKED` and the three verified QR codes to the PDF footer
+- [ ] Re-render the final one-page PDF and test all three QR codes
 
 ## Submission assets
 
