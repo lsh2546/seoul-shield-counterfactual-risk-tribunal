@@ -70,48 +70,61 @@ function tilePosition(
   point: Point,
   index: number,
   time: number,
+  opportunityRank: number,
 ) {
-  const lane =
+  const laneY =
     point.classification === 'OPPORTUNITY'
-      ? 3.1
+      ? 3.25
       : point.classification === 'UNCERTAIN'
         ? 0
-        : -3.1;
-  const row = (index % 13) - 6,
-    col = Math.floor(index / 13);
+        : -3.25;
+  const side = index % 2 === 0 ? -1 : 1;
+  const streamZ = -28 + ((time * 13 + index * 0.71) % 38);
   const intake = new Vector3(
-    row * 0.68,
-    (((index * 7) % 9) - 4) * 0.34,
-    -24 + col * 1.18 + (index % 5) * 0.12,
+    side * (3.25 + (index % 5) * 0.42),
+    (((index * 7) % 13) - 6) * 0.42,
+    streamZ,
   );
   const sorting = new Vector3(
-    lane + row * 0.19,
-    (((index * 5) % 11) - 5) * 0.29,
-    -7 + col * 0.52,
+    ((index % 19) - 9) * 0.48,
+    laneY,
+    -7 + Math.floor(index / 19) * 0.64,
   );
-  const isSelected = point.selected !== null;
-  const opportunityIndex = index % 21;
-  const converge = isSelected
-    ? new Vector3(point.selected === 'long' ? -1.25 : 1.25, 0, 0.4)
-    : point.classification === 'OPPORTUNITY'
-      ? new Vector3(
-          (opportunityIndex - 10) * 0.35,
-          ((index % 3) - 1) * 0.26,
-          -3 - Math.abs(opportunityIndex - 10) * 0.16,
-        )
-      : new Vector3(lane * 2, ((index % 11) - 5) * 0.36, -10 - col * 0.2);
+  if (time < 3) return intake;
+  if (time < 6) return sorting;
+  if (point.classification !== 'OPPORTUNITY')
+    return new Vector3(sorting.x, sorting.y - 6, sorting.z - 8);
+  const survivors = time < 6.75 ? 21 : time < 7.35 ? 8 : time < 7.95 ? 4 : 2;
+  if (opportunityRank >= survivors)
+    return new Vector3(sorting.x * 1.8, 6.5, -12 - opportunityRank * 0.2);
+  if (survivors === 2)
+    return new Vector3(point.selected === 'long' ? -2.05 : 2.05, 0.65, 0.3);
+  return new Vector3(
+    (opportunityRank - (survivors - 1) / 2) * 0.72,
+    1.1 + (opportunityRank % 2) * 0.34,
+    -2.5 - Math.abs(opportunityRank - survivors / 2) * 0.12,
+  );
+}
+
+function tileScale(
+  point: Point,
+  time: number,
+  opportunityRank: number,
+  z: number,
+) {
   if (time < 3) {
-    const p = smooth(time / 3);
-    return intake
-      .clone()
-      .lerp(new Vector3(intake.x * 0.45, intake.y * 0.7, 4 - col * 0.28), p);
+    const proximity = clamp((z + 25) / 32, 0.24, 1.25);
+    return new Vector3(1.5 * proximity, 0.19 * proximity, 0.035);
   }
-  if (time < 6)
-    return new Vector3(intake.x * 0.45, intake.y * 0.7, 4 - col * 0.28).lerp(
-      sorting,
-      smooth((time - 3) / 3),
-    );
-  return sorting.lerp(converge, smooth((time - 6) / 3));
+  if (time < 6) return new Vector3(1.3, 0.22, 0.035);
+  const survivors = time < 6.75 ? 21 : time < 7.35 ? 8 : time < 7.95 ? 4 : 2;
+  if (point.classification !== 'OPPORTUNITY' || opportunityRank >= survivors)
+    return new Vector3(0.001, 0.001, 0.001);
+  return new Vector3(
+    survivors === 2 ? 1.55 : 1.35,
+    survivors === 2 ? 0.46 : 0.25,
+    0.045,
+  );
 }
 
 function TileField({ data, time }: { data: Preview; time: number }) {
@@ -125,11 +138,13 @@ function TileField({ data, time }: { data: Preview; time: number }) {
   useFrame(() => {
     if (!mesh.current) return;
     data.terrain.forEach((p, i) => {
-      const v = tilePosition(p, i, time);
+      const rank = data.terrain
+        .filter((candidate) => candidate.classification === 'OPPORTUNITY')
+        .findIndex((candidate) => candidate.symbol === p.symbol);
+      const v = tilePosition(p, i, time, rank);
       dummy.position.copy(v);
-      dummy.rotation.set(-0.06, 0, 0);
-      const near = time < 3 ? clamp((v.z + 18) / 16, 0.18, 1) : 1;
-      dummy.scale.set(1.15, 0.5, 0.045 * near);
+      dummy.rotation.set(time < 3 ? -0.02 : -0.12, 0, 0);
+      dummy.scale.copy(tileScale(p, time, rank, v.z));
       dummy.updateMatrix();
       mesh.current!.setMatrixAt(i, dummy.matrix);
       mesh.current!.setColorAt(i, colors[i]);
@@ -139,12 +154,12 @@ function TileField({ data, time }: { data: Preview; time: number }) {
       mesh.current.instanceColor.needsUpdate = true;
     const target =
       time < 3
-        ? new Vector3(0, 0.2, 8 - time * 3.3)
+        ? new Vector3(0, 0.2, 8 - time * 1.8)
         : time < 6
-          ? new Vector3(0, 8.5, 8)
-          : new Vector3(0, 2.7, 8.5);
-    camera.position.lerp(target, 0.055);
-    camera.lookAt(0, time < 6 ? 0 : 0.2, time < 3 ? -3 : 0);
+          ? new Vector3(0, 6.8, 9.5)
+          : new Vector3(0, 2.8, 8.2);
+    camera.position.lerp(target, 0.08);
+    camera.lookAt(0, time < 3 ? 0 : 0.25, time < 3 ? -5 : -1);
   });
   return (
     <instancedMesh
@@ -152,13 +167,8 @@ function TileField({ data, time }: { data: Preview; time: number }) {
       args={[undefined, undefined, data.terrain.length]}
       frustumCulled={false}
     >
-      <boxGeometry args={[1.6, 0.82, 0.08]} />
-      <meshStandardMaterial
-        roughness={0.28}
-        metalness={0.52}
-        emissiveIntensity={0.36}
-        toneMapped={false}
-      />
+      <boxGeometry args={[1.7, 0.8, 0.06]} />
+      <meshBasicMaterial transparent opacity={0.62} toneMapped={false} />
     </instancedMesh>
   );
 }
@@ -167,39 +177,44 @@ function RepresentativeLabels({ data, time }: { data: Preview; time: number }) {
   const sample = useMemo(() => {
     const selected = data.terrain.filter((p) => p.selected);
     const readable = data.terrain.filter((_, i) => i % 31 === 0).slice(0, 6);
-    return [...selected, ...readable]
+    const visible = time >= 7.75 ? selected : [...selected, ...readable];
+    return visible
       .filter((p, i, a) => a.findIndex((x) => x.symbol === p.symbol) === i)
       .slice(0, 8);
-  }, [data]);
+  }, [data, time]);
   return (
     <>
-      {sample.map((p) => {
-        const index = data.terrain.findIndex((x) => x.symbol === p.symbol),
-          pos = tilePosition(p, index, time);
-        return (
-          <Html
-            key={p.symbol}
-            position={pos}
-            transform
-            distanceFactor={6.4}
-            occlude={false}
-            className={`contract-tile ${p.classification.toLowerCase().replace(' ', '-')} ${p.selected ? 'chosen' : ''}`}
-          >
-            <b>SPY {p.strike}C</b>
-            <span>
-              EXP {p.expiration.slice(5).replace('-', '/')} · IV{' '}
-              {p.iv === null ? 'N/A' : `${(p.iv * 100).toFixed(1)}%`}
-            </span>
-            <span>
-              OI {p.open_interest.toLocaleString()} · {p.bid.toFixed(2)} /{' '}
-              {p.ask.toFixed(2)}
-            </span>
-            <small>
-              AGE {Math.round(p.quote_age_seconds ?? 0).toLocaleString()}s
-            </small>
-          </Html>
-        );
-      })}
+      {time < 8.05 &&
+        sample.map((p) => {
+          const index = data.terrain.findIndex((x) => x.symbol === p.symbol),
+            rank = data.terrain
+              .filter((candidate) => candidate.classification === 'OPPORTUNITY')
+              .findIndex((candidate) => candidate.symbol === p.symbol),
+            pos = tilePosition(p, index, time, rank);
+          return (
+            <Html
+              key={p.symbol}
+              position={pos}
+              transform
+              distanceFactor={6.4}
+              occlude={false}
+              className={`contract-tile ${p.classification.toLowerCase().replace(' ', '-')} ${p.selected ? 'chosen' : ''}`}
+            >
+              <b>SPY {p.strike}C</b>
+              <span>
+                EXP {p.expiration.slice(5).replace('-', '/')} · IV{' '}
+                {p.iv === null ? 'N/A' : `${(p.iv * 100).toFixed(1)}%`}
+              </span>
+              <span>
+                OI {p.open_interest.toLocaleString()} · {p.bid.toFixed(2)} /{' '}
+                {p.ask.toFixed(2)}
+              </span>
+              <small>
+                AGE {Math.round(p.quote_age_seconds ?? 0).toLocaleString()}s
+              </small>
+            </Html>
+          );
+        })}
     </>
   );
 }
@@ -207,18 +222,44 @@ function RepresentativeLabels({ data, time }: { data: Preview; time: number }) {
 function Tunnel({ data, time }: { data: Preview; time: number }) {
   return (
     <>
-      <ambientLight intensity={0.65} />
-      <directionalLight position={[2, 8, 9]} intensity={2.4} color="#b7ffff" />
-      <pointLight position={[0, 0, 2]} intensity={28} color="#39e7d0" />
+      <ambientLight intensity={0.9} />
+      <directionalLight position={[2, 8, 9]} intensity={1.8} color="#d7ffff" />
       <TileField data={data} time={time} />
       <RepresentativeLabels data={data} time={time} />
       {time < 3 &&
-        Array.from({ length: 12 }, (_, i) => (
-          <mesh key={i} position={[0, 0, -4 - i * 2.6]}>
-            <torusGeometry args={[6.4, 0.025, 4, 48]} />
-            <meshBasicMaterial color="#1b817f" transparent opacity={0.42} />
+        [-5.2, -4.2, -3.2, 3.2, 4.2, 5.2].map((x) => (
+          <mesh key={x} position={[x, 0, -10]} scale={[0.012, 0.012, 24]}>
+            <boxGeometry />
+            <meshBasicMaterial color="#63d8d1" transparent opacity={0.4} />
           </mesh>
         ))}
+      {time >= 3 &&
+        time < 7.95 &&
+        [
+          { y: 3.25, color: '#42e6a4' },
+          { y: 0, color: '#ffc95e' },
+          { y: -3.25, color: '#ff5f59' },
+        ].map((lane) => (
+          <mesh
+            key={lane.y}
+            position={[0, lane.y, -3.5]}
+            scale={[8.8, 0.025, 9]}
+          >
+            <boxGeometry />
+            <meshBasicMaterial color={lane.color} transparent opacity={0.22} />
+          </mesh>
+        ))}
+      {time >= 8 && (
+        <mesh position={[0, 0.65, 0]} scale={[2.75, 0.86, 0.08]}>
+          <boxGeometry />
+          <meshBasicMaterial
+            color="#ffd36e"
+            transparent
+            opacity={0.2}
+            wireframe
+          />
+        </mesh>
+      )}
     </>
   );
 }
@@ -251,12 +292,19 @@ export default function CapitalDecisionEngine() {
       .catch(() => setData(null));
   }, []);
   useEffect(() => {
-    const requested = new URLSearchParams(location.search).get('scene');
+    const params = new URLSearchParams(location.search);
+    const requested = params.get('scene');
     const fixed = SCENES.find((s) => s.id === requested);
+    const exact = Number(params.get('t'));
     queueMicrotask(() => {
       setReduced(matchMedia('(prefers-reduced-motion: reduce)').matches);
-      if (fixed) {
-        setTime((fixed.from + fixed.to) / 2);
+      if (Number.isFinite(exact) && exact >= 0 && exact < 9) {
+        setTime(exact);
+        setPlaying(false);
+      } else if (fixed) {
+        setTime(
+          fixed.id === 'intake' ? 1.45 : fixed.id === 'sort' ? 5.55 : 8.55,
+        );
         setPlaying(false);
       }
     });
@@ -297,7 +345,14 @@ export default function CapitalDecisionEngine() {
       },
       {} as Record<string, number>,
     );
-  const quarantine = time >= 4.8 && time < 6;
+  const sortProgress = smooth((time - 3) / 2.5),
+    displayedCounts = {
+      opportunity: Math.floor((counts.OPPORTUNITY ?? 0) * sortProgress),
+      uncertain: Math.floor((counts.UNCERTAIN ?? 0) * sortProgress),
+      blocked: Math.floor((counts['RISK BLOCKED'] ?? 0) * sortProgress),
+    },
+    survivors = time < 6.75 ? 21 : time < 7.35 ? 8 : time < 7.95 ? 4 : 2;
+  const quarantine = time >= 3.35 && time < 6;
   return (
     <main className="capital-engine">
       <header className="engine-header">
@@ -343,22 +398,22 @@ export default function CapitalDecisionEngine() {
         {scene.id === 'intake' && (
           <div className="hero-counter">
             <strong>245</strong>
-            <b>LIVE OPTION CONTRACTS</b>
-            <span>STREAMING FROM ALPACA REPLAY</span>
+            <b>CONTRACTS INGESTED</b>
+            <span>ACTUAL ALPACA OPTION SNAPSHOT</span>
           </div>
         )}
         {scene.id === 'sort' && (
           <div className="sort-counter">
             <div className="green">
-              <strong>{counts.OPPORTUNITY}</strong>
+              <strong>{displayedCounts.opportunity}</strong>
               <b>OPPORTUNITY</b>
             </div>
             <div className="amber">
-              <strong>{counts.UNCERTAIN}</strong>
+              <strong>{displayedCounts.uncertain}</strong>
               <b>UNCERTAIN</b>
             </div>
             <div className="red">
-              <strong>{counts['RISK BLOCKED']}</strong>
+              <strong>{displayedCounts.blocked}</strong>
               <b>RISK BLOCKED</b>
             </div>
           </div>
@@ -367,18 +422,50 @@ export default function CapitalDecisionEngine() {
           <div className="quarantine">
             <ShieldAlert />
             <b>
-              {Math.floor(time * 3) % 4 === 0
+              {Math.floor((time - 3.35) / 0.3) % 4 === 0
                 ? 'STALE'
-                : Math.floor(time * 3) % 4 === 1
-                  ? 'WIDE SPREAD'
-                  : Math.floor(time * 3) % 4 === 2
-                    ? 'LOW LIQUIDITY'
+                : Math.floor((time - 3.35) / 0.3) % 4 === 1
+                  ? 'SPREAD'
+                  : Math.floor((time - 3.35) / 0.3) % 4 === 2
+                    ? 'LIQUIDITY'
                     : 'RISK CAP'}
             </b>
             <span>EXECUTION FIREWALL</span>
           </div>
         )}
-        {scene.id === 'converge' && (
+        {scene.id === 'converge' && time < 8.05 && (
+          <div className="compression-counter">
+            <small>LIQUID CANDIDATE REDUCTION</small>
+            <b>
+              21 <i>→</i> {survivors}
+            </b>
+            <span>STRIKE · EXPIRY · SPREAD · OPEN INTEREST</span>
+          </div>
+        )}
+        {scene.id === 'converge' && time >= 8.05 && (
+          <div className="magnet-legs">
+            <div>
+              <b>SPY 765C</b>
+              <span>
+                BUY · IV {(data.selection.long.iv! * 100).toFixed(1)}%
+              </span>
+              <small>
+                OI {data.selection.long.open_interest.toLocaleString()}
+              </small>
+            </div>
+            <i>DEFINED RISK RANGE</i>
+            <div>
+              <b>SPY 770C</b>
+              <span>
+                SELL · IV {(data.selection.short.iv! * 100).toFixed(1)}%
+              </span>
+              <small>
+                OI {data.selection.short.open_interest.toLocaleString()}
+              </small>
+            </div>
+          </div>
+        )}
+        {scene.id === 'converge' && time >= 8.05 && (
           <div className="order-convergence">
             <small>VERIFIED DEBIT SPREAD CANDIDATE</small>
             <b>
@@ -386,7 +473,7 @@ export default function CapitalDecisionEngine() {
             </b>
             <div>
               <span>
-                MAX LOSS{' '}
+                DEFINED LOSS{' '}
                 <strong>${data.selection.max_loss.toLocaleString()}</strong>
               </span>
               <span>
