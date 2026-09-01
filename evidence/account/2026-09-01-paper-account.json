@@ -1,0 +1,24 @@
+{
+  "evidence_status": "LIVE_VERIFIED",
+  "verified_at": "2026-09-01T13:02:00+09:00",
+  "environment": "paper",
+  "endpoint": "https://paper-api.alpaca.markets/v2",
+  "account_number_masked": "***NQXY",
+  "status": "ACTIVE",
+  "cash": 100000.0,
+  "equity": 100000.0,
+  "buying_power": 400000.0,
+  "daily_change": 0.0,
+  "options_level": 3,
+  "trading_blocked": false,
+  "open_positions_count": 0,
+  "open_orders_count": 0,
+  "competition_balance_ok": true,
+  "credentials_stored_in_evidence": false,
+  "allow_submit": false,
+  "order_submitted": false,
+  "sources": [
+    "Alpaca Paper dashboard",
+    "Authenticated Paper Trading API account response"
+  ]
+}
