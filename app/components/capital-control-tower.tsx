@@ -50,7 +50,7 @@ type Preview = {
   risk: { trade_risk_limit: number };
 };
 
-const DURATION = 220;
+const DURATION = 260;
 const PALETTE: Record<Classification, string> = {
   OPPORTUNITY: '#39ff88',
   UNCERTAIN: '#ffc928',
@@ -531,7 +531,8 @@ export default function CapitalControlTower() {
     },
     { OPPORTUNITY: 0, UNCERTAIN: 0, 'RISK BLOCKED': 0 } as Record<Classification, number>,
   );
-  const sceneTime = guidedSceneTime(time);
+  const timelineTime = time * (220 / 260);
+  const sceneTime = guidedSceneTime(timelineTime);
   const classificationProgress = ease((sceneTime - 14) / 2.5);
   const reasons = [
     'STALE QUOTE',
@@ -626,9 +627,9 @@ export default function CapitalControlTower() {
         {sceneTime >= 43 && sceneTime < 46 && <div className="policy-verdict static"><small>STATIC GUARD</small><b>$1,000 HARD LIMIT · BLOCKED</b><span>$96 OVER LIMIT</span></div>}
         {sceneTime >= 46 && sceneTime < 50 && <div className="policy-verdict adaptive"><small>ADAPTIVE GUARD</small><b>STALE QUOTE · FALLBACK AI</b><span className="inspection-line">QUOTE AGE · AI STATUS · LIQUIDITY</span><strong>FAIL-CLOSED</strong></div>}
         {sceneTime >= 50 && sceneTime < 53 && <div className="policy-verdict live"><small>LIVE EXECUTION</small><b>PAPER PREVIEW</b><strong>HUMAN APPROVAL REQUIRED</strong><em>LOCKED</em><span>NOT SUBMITTED</span></div>}
-        {sceneTime >= 53 && <div className="tribunal-banner final"><small>FOUR POLICIES · ONE EVIDENCE SNAPSHOT</small><b>{time >= 215 ? 'MOST AGENTS SEARCH FOR A REASON TO TRADE. SEOUL SHIELD SEARCHES FOR THE REASON THEY SHOULD NOT.' : 'ONLY LIVE EXECUTION HAS AUTHORITY — AND IT REMAINS LOCKED'}</b></div>}
-        {time >= 30 && time < 65 && <div className="guided-evidence"><small>ALPACA PAPER TRADING · SANITIZED ACCOUNT EVIDENCE</small><b>CASH / EQUITY <strong>$100,000</strong></b><b>BUYING POWER <strong>$400,000</strong></b><div><span>OPTIONS LEVEL <strong>3</strong></span><span>POSITIONS <strong>0</strong></span><span>OPEN ORDERS <strong>0</strong></span></div></div>}
-        {time >= 200 && time < 215 && <div className="guided-audit"><small>TAMPER-EVIDENT EXECUTION RECORD</small><b>HASH-CHAIN AUDIT LOG</b><span>SNAPSHOT → AI/FALLBACK → POLICIES → HARD GATE → PREVIEW</span><strong>CHAIN VERIFIED · SECRETS REDACTED</strong></div>}
+        {sceneTime >= 53 && <div className="tribunal-banner final"><small>FOUR POLICIES · ONE EVIDENCE SNAPSHOT</small><b>{timelineTime >= 215 ? 'MOST AGENTS SEARCH FOR A REASON TO TRADE. SEOUL SHIELD SEARCHES FOR THE REASON THEY SHOULD NOT.' : 'ONLY LIVE EXECUTION HAS AUTHORITY — AND IT REMAINS LOCKED'}</b></div>}
+        {timelineTime >= 30 && timelineTime < 65 && <div className="guided-evidence"><small>ALPACA PAPER TRADING · SANITIZED ACCOUNT EVIDENCE</small><b>CASH / EQUITY <strong>$100,000</strong></b><b>BUYING POWER <strong>$400,000</strong></b><div><span>OPTIONS LEVEL <strong>3</strong></span><span>POSITIONS <strong>0</strong></span><span>OPEN ORDERS <strong>0</strong></span></div></div>}
+        {timelineTime >= 200 && timelineTime < 215 && <div className="guided-audit"><small>TAMPER-EVIDENT EXECUTION RECORD</small><b>HASH-CHAIN AUDIT LOG</b><span>SNAPSHOT → AI/FALLBACK → POLICIES → HARD GATE → PREVIEW</span><strong>CHAIN VERIFIED · SECRETS REDACTED</strong></div>}
         <div className="tower-legend">
           <span className="opportunity">● OPPORTUNITY · SMOOTH PATH</span>
           <span className="uncertain">△ UNCERTAIN · REVIEW LANE</span>
