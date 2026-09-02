@@ -7,9 +7,9 @@ Seoul Shield is a risk-first autonomous options-agent prototype for the Alpaca A
 ## Links
 
 - **Live Demo:** https://seoul-shield-risk-tribunal.ljs2546.chatgpt.site
-- **Demo Video:** pending YouTube upload approval
+- **Demo Video:** https://www.youtube.com/watch?v=nveiZhnRdK8
 - **One-page PDF:** [Seoul-Shield-One-Page.pdf](output/pdf/Seoul-Shield-One-Page.pdf)
-- **Source Repository:** this repository; public URL pending approval
+- **Source Repository:** https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal
 
 ## Verified replay at a glance
 

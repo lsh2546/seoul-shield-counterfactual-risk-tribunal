@@ -7,15 +7,25 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
+from reportlab.platypus import Image as RLImage
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
+
+import qrcode
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output" / "pdf" / "Seoul-Shield-One-Page.pdf"
+TMP = ROOT / "tmp" / "pdfs"
+LINKS = {
+    "LIVE DEMO": "https://seoul-shield-risk-tribunal.ljs2546.chatgpt.site",
+    "GITHUB": "https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal",
+    "YOUTUBE": "https://www.youtube.com/watch?v=nveiZhnRdK8",
+}
 
 
 def main() -> None:
     OUT.parent.mkdir(parents=True, exist_ok=True)
+    TMP.mkdir(parents=True, exist_ok=True)
     font = "Helvetica"
     font_bold = "Helvetica-Bold"
     arial = Path("C:/Windows/Fonts/arial.ttf")
@@ -92,7 +102,35 @@ def main() -> None:
                                 ("INNERGRID", (0, 0), (-1, -1), 0.4, line), ("VALIGN", (0, 0), (-1, -1), "TOP"),
                                 ("LEFTPADDING", (0, 0), (-1, -1), 7), ("RIGHTPADDING", (0, 0), (-1, -1), 7),
                                 ("TOPPADDING", (0, 0), (-1, -1), 5), ("BOTTOMPADDING", (0, 0), (-1, -1), 5)]))
-    story += [footer, Spacer(1, 5), Paragraph("Educational hackathon prototype - not investment advice - no live-money account support", ParagraphStyle("legal", parent=small, alignment=1, fontSize=6.2))]
+    qr_cells = []
+    for label, url in LINKS.items():
+        path = TMP / f"qr-{label.lower().replace(' ', '-')}.png"
+        qr = qrcode.QRCode(version=None, box_size=8, border=3, error_correction=qrcode.constants.ERROR_CORRECT_M)
+        qr.add_data(url)
+        qr.make(fit=True)
+        qr.make_image(fill_color="#071A33", back_color="white").save(path)
+        qr_cells.append(Table([[RLImage(str(path), width=0.55 * inch, height=0.55 * inch),
+                                Paragraph(f"<b>{label}</b><br/><font size='5.5'>{url}</font>", small)]],
+                              colWidths=[0.62 * inch, 2.42 * inch],
+                              style=TableStyle([("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                                                ("LEFTPADDING", (0, 0), (-1, -1), 2),
+                                                ("RIGHTPADDING", (0, 0), (-1, -1), 2),
+                                                ("TOPPADDING", (0, 0), (-1, -1), 2),
+                                                ("BOTTOMPADDING", (0, 0), (-1, -1), 2)])))
+    flow = Paragraph("<b>245</b>  &#8594;  <b>21 / 80 / 144</b>  &#8594;  <b>21</b>  &#8594;  <b>8</b>  &#8594;  <b>4</b>  &#8594;  <b>2</b>  &#8594;  <font color='#D9344B'><b>BLOCKED</b></font>",
+                     ParagraphStyle("flow", parent=base, fontName=font_bold, fontSize=10, leading=12,
+                                    alignment=1, textColor=blue))
+    qr_table = Table([qr_cells], colWidths=[3.28 * inch] * 3)
+    qr_table.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), HexColor("#F7FAFD")),
+                                  ("BOX", (0, 0), (-1, -1), 0.7, line),
+                                  ("INNERGRID", (0, 0), (-1, -1), 0.4, line),
+                                  ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                                  ("LEFTPADDING", (0, 0), (-1, -1), 4),
+                                  ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+                                  ("TOPPADDING", (0, 0), (-1, -1), 3),
+                                  ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
+    story += [footer, Spacer(1, 4), flow, Spacer(1, 3), qr_table, Spacer(1, 3),
+              Paragraph("Educational hackathon prototype - not investment advice - no live-money account support", ParagraphStyle("legal", parent=small, alignment=1, fontSize=6.2))]
     doc.build(story)
     print(OUT)
 

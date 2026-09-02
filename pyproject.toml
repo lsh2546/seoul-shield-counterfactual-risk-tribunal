@@ -5,6 +5,9 @@ description = "Risk-first AI options agent for the Alpaca AI Trading Agents Hack
 requires-python = ">=3.11"
 dependencies = []
 
+[project.optional-dependencies]
+docs = ["reportlab>=4.0", "qrcode[pil]>=7.4"]
+
 [project.scripts]
 seoul-shield = "seoul_shield.cli:main"
 
