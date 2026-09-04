@@ -26,6 +26,6 @@ Alpaca Trading API, Alpaca Market Data API, Alpaca Paper Trading, Gemini structu
 
 ## Links
 
-- Demo: https://seoul-shield-risk-tribunal.ljs2546.chatgpt.site/submission-final.html
+- Demo: https://lsh2546.github.io/seoul-shield-counterfactual-risk-tribunal/
 - Repository: https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal
-- Video: pending final upload
+- Video: https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal/blob/master/submission/assets/Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4
