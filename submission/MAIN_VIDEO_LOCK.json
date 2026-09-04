@@ -1,11 +1,11 @@
 {
   "role": "main_submission_video_source",
   "status": "LOCKED",
-  "filename": "Seoul-Shield-Autonomous-Control-Layer-4m20s-V3-SUBTITLE-SAFEZONE-CANDIDATE.mp4",
-  "relative_path": "outputs/main-presentation-2026-09-04/Seoul-Shield-Autonomous-Control-Layer-4m20s-V3-SUBTITLE-SAFEZONE-CANDIDATE.mp4",
-  "sha256": "4E2AD210B280964EE3F7E327F86ADB0A1155110B5D90E9C4540E164819DAF0C2",
-  "bytes": 9938919,
-  "duration_seconds": 260.0,
+  "filename": "Seoul-Shield-Autonomous-Control-Layer-SINGLE-CAPTION-MASTER.mp4",
+  "relative_path": "outputs/main-presentation-2026-09-04/Seoul-Shield-Autonomous-Control-Layer-SINGLE-CAPTION-MASTER.mp4",
+  "sha256": "56D4889C63C4A89002247BA9C0494AF4F2471FDF37504FF6CBAD747ED070403B",
+  "bytes": 10870541,
+  "duration_seconds": 270.5,
   "video": {
     "codec": "h264",
     "width": 1920,
@@ -16,6 +16,6 @@
     "codec": "aac"
   },
   "excluded_versions": ["V4", "V5", "V6", "V7", "V8", "V9"],
-  "public_url": "https://youtu.be/cwlbxvQxEEM",
-  "public_url_status": "VERIFIED_UNLISTED_NON_LOGIN_1080P"
+  "public_url": null,
+  "public_url_status": "LOCKED_LOCAL_AWAITING_APPROVAL_AND_UPLOAD"
 }
