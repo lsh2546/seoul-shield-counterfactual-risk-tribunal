@@ -61,13 +61,13 @@ def make_video(preview: dict, blocked: dict, candidate: dict) -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     slides = [
         ("01", "THE DIFFERENCE", "COMPARE TWO FUTURES BEFORE CAPITAL MOVES", ["AI proposes. Deterministic risk verifies.", "Human authority remains outside the model."]),
-        ("02", "LIVE MARKET EVIDENCE", "ALPACA DATA → GEMINI STRUCTURED DECISION", ["SPY · QQQ · AAPL · NVDA scanned", "Gemini schema verified · response hashed", "AAPL selected · bullish confidence 85%"]),
-        ("03", "ORIGINAL FUTURE", "4 CONTRACTS · MAX LOSS $952", ["Conservative risk cap: $500", "Excess risk: $452", "→ BLOCKED"]),
+        ("02", "LIVE MARKET EVIDENCE", "ALPACA DATA → GEMINI STRUCTURED DECISION", ["Using live Alpaca market data, Seoul Shield scanned", "SPY · QQQ · AAPL · NVDA", "Gemini schema verified · response hashed", "AAPL selected · bullish confidence 85%"]),
+        ("03", "ORIGINAL FUTURE", "4 CONTRACTS · $952 PROPOSED MAX LOSS · BLOCKED", ["Conservative risk cap: $500", "Excess risk: $452", "→ BLOCKED"]),
         ("04", "CONTROLLED FUTURE", "2 CONTRACTS · MAX LOSS $476", ["Risk reduced by $476", "Account risk: 0.476%", "Paper Preview created · not submitted"]),
         ("05", "VERIFIED INPUTS", "NO INVENTED IV PERCENTILE", ["Long IV 28.03% · Short IV 27.67%", "OI 5,994 / 4,223 · fresh quotes", "IV_HISTORY_UNAVAILABLE policy applied"]),
         ("06", "MARKET CHANGED", "BULLISH → BEARISH", ["AAPL 5-minute return turned negative", "AAPL 15-minute return turned negative", "A bullish spread was no longer valid"]),
         ("07", "FINAL VERDICT", "NOT EXECUTED — SAFETY GATE BLOCKED", ["Bull Call rejected after direction reversal", "No market-order conversion · no fabricated fill"]),
-        ("08", "BROKER TRUTH", "ORDERS 0 · POSITIONS 0 · LOSS $0", ["Alpaca Paper account verified", "No fill · no realized or unrealized P&L claim"]),
+        ("08", "BROKER TRUTH", "ORDERS 0 · POSITIONS 0 · CAPITAL MOVED $0", ["Alpaca Paper account verified", "No fill · no realized or unrealized P&L claim"]),
         ("09", "VERIFIED LINEAGE", "INPUT HASH → DECISION → RESULT HASH", ["Audit chain verified", f"Preview evidence {sha(PREVIEW)[:16]}…", f"NO TRADE evidence {sha(BLOCK)[:16]}…"]),
     ]
     paths = []
@@ -95,7 +95,7 @@ def make_pdf() -> None:
                                ("TOPPADDING",(0,0),(-1,-1),8),("BOTTOMPADDING",(0,0),(-1,-1),8),
                                ("LEFTPADDING",(0,0),(-1,-1),10),("RIGHTPADDING",(0,0),(-1,-1),10),
                                ("VALIGN",(0,0),(-1,-1),"MIDDLE")]))
-    metrics = Table([[Paragraph("<b>4 CONTRACTS</b><br/>ORIGINAL", base), Paragraph("<b>$952</b><br/>MAX LOSS", base),
+    metrics = Table([[Paragraph("<b>4 CONTRACTS</b><br/>ORIGINAL", base), Paragraph("<b>$952</b><br/>PROPOSED MAX LOSS · BLOCKED", base),
                       Paragraph("<b>2 CONTRACTS</b><br/>CONTROLLED", base), Paragraph("<b>$476</b><br/>MAX LOSS", base)]], colWidths=[2.475*inch]*4)
     metrics.setStyle(TableStyle([("BACKGROUND",(0,0),(-1,-1),HexColor("#EAF5FA")),("BOX",(0,0),(-1,-1),.7,cyan),
                                  ("INNERGRID",(0,0),(-1,-1),.4,HexColor("#B8D5E2")),("PADDING",(0,0),(-1,-1),8)]))
@@ -105,9 +105,9 @@ def make_pdf() -> None:
     right = [Paragraph("TWO FUTURES", h), Paragraph("The original four-contract AAPL 330/335 bull call debit spread carried $952 maximum loss and was blocked at $452 over the conservative limit. The controlled two-contract future carried $476 maximum loss, or 0.476% of equity, and reached Paper Preview only.", base), Spacer(1,6),
              Paragraph("THE SAFETY EVENT", h), Paragraph("Before execution, AAPL changed from bullish to bearish across the measured 5- and 15-minute windows. The bullish strategy became directionally incompatible. Seoul Shield invalidated the preview and kept the broker latch closed.", base), Spacer(1,7),
              Table([[Paragraph("NOT EXECUTED — SAFETY GATE BLOCKED", ParagraphStyle("v",fontName="Helvetica-Bold",fontSize=14,textColor=white,alignment=1))],
-                    [Paragraph("ORDERS 0  ·  POSITIONS 0  ·  LOSS $0<br/>NO FILL OR P&amp;L CLAIM", ParagraphStyle("v2",fontName="Helvetica-Bold",fontSize=9,textColor=white,alignment=1))]], colWidths=[4.8*inch], style=TableStyle([("BACKGROUND",(0,0),(-1,0),red),("BACKGROUND",(0,1),(-1,1),navy),("BOX",(0,0),(-1,-1),1,red),("PADDING",(0,0),(-1,-1),8)]))]
+                    [Paragraph("ORDERS 0  ·  POSITIONS 0  ·  CAPITAL MOVED $0<br/>NO FILL OR P&amp;L CLAIM", ParagraphStyle("v2",fontName="Helvetica-Bold",fontSize=9,textColor=white,alignment=1))]], colWidths=[4.8*inch], style=TableStyle([("BACKGROUND",(0,0),(-1,0),red),("BACKGROUND",(0,1),(-1,1),navy),("BOX",(0,0),(-1,-1),1,red),("PADDING",(0,0),(-1,-1),8)]))]
     cols = Table([[left,right]], colWidths=[4.9*inch,4.9*inch], style=TableStyle([("VALIGN",(0,0),(-1,-1),"TOP"),("RIGHTPADDING",(0,0),(0,0),12),("LEFTPADDING",(1,0),(1,0),12)]))
-    footer = Paragraph("Evidence: Alpaca Paper Trading and Market Data APIs · Gemini structured response · deterministic risk engine · chained SHA-256 audit · ALPACA_ALLOW_SUBMIT=false", small)
+    footer = Paragraph("Verifiable evidence · Alpaca Paper Trading · ALPACA_ALLOW_SUBMIT=false · Not financial advice", small)
     doc.build([title,Spacer(1,7),metrics,Spacer(1,9),cols,Spacer(1,8),footer])
 
 
@@ -116,7 +116,7 @@ def main() -> None:
     make_video(preview, blocked, candidate)
     make_pdf()
     manifest = {"video": str(VIDEO), "pdf": str(PDF), "sources": {str(p.relative_to(ROOT)): sha(p) for p in [CANDIDATE, PREVIEW, BLOCK]},
-                "claims": {"orders": 0, "positions": 0, "loss": 0, "executed": False}}
+                "claims": {"orders": 0, "positions": 0, "capital_moved": 0, "executed": False}}
     (OUT / "manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(json.dumps(manifest, indent=2))
 

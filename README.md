@@ -2,7 +2,7 @@
 
 ## 2026 Final Verified Safety Result
 
-**NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, loss $0.**
+**NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, capital moved $0.**
 
 Using live Alpaca Paper data, Gemini selected AAPL with a schema-verified bullish assessment. The proposed four-contract AAPL 330/335 bull call debit spread carried **$952 maximum loss** and failed the conservative **$500** risk cap. Seoul Shield resized it to two contracts with **$476 maximum loss** and created a Paper Preview only. Before execution, AAPL's measured 5- and 15-minute direction turned bearish. The system invalidated the bullish strategy, kept `ALPACA_ALLOW_SUBMIT=false`, and submitted no order.
 

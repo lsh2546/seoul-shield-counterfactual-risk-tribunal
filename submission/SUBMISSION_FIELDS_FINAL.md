@@ -18,7 +18,7 @@ Live Alpaca Paper evidence showed a Gemini-verified AAPL candidate. The original
 
 ## Final result
 
-NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, loss $0. No fill or P&L is claimed.
+NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, capital moved $0. No fill or P&L is claimed.
 
 ## Technologies
 

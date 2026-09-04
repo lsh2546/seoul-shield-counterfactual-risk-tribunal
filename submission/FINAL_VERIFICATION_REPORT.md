@@ -2,7 +2,7 @@
 
 ## Final evidence result
 
-NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, loss $0. No fill, realized P&L, or unrealized P&L is claimed.
+NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, capital moved $0. No fill, realized P&L, or unrealized P&L is claimed.
 
 ## Verified artifacts
 
@@ -29,7 +29,7 @@ NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, loss $0. No fill, rea
 - GitHub Pages build: built
 - Public page HTTP status: 200
 - Public page safety verdict present: yes
-- Public page orders 0, positions 0, loss $0 present: yes
+- Public page orders 0, positions 0, capital moved $0 present: yes
 - Secret scan of public files: zero detected credentials
 - ALPACA_ALLOW_SUBMIT=false: verified
 - Video: H.264, 1920x1080, 30 fps, 90 seconds

@@ -41,7 +41,7 @@ No external action below is authorized merely because this checklist exists.
 
 - [x] Separate 90-second final video created without overwriting the approved 4:20 video
 - [x] Video states NOT EXECUTED - SAFETY GATE BLOCKED
-- [x] Video states orders 0, positions 0, loss $0
+- [x] Video states orders 0, positions 0, capital moved $0
 - [x] Updated one-page PDF rendered and visually inspected
 - [x] README updated with $952 blocked and $476 controlled future
 - [x] Public GitHub repository pushed and verified PUBLIC
