@@ -15,9 +15,9 @@ Seoul Shield is an autonomous control layer that continuously revalidates AI tra
 ## Links
 
 - **Verified Safety Demo:** https://lsh2546.github.io/seoul-shield-counterfactual-risk-tribunal/
-- **Main submission video source:** `Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4`
-- **Main video SHA-256:** `4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86`
-- **Public main-video URL:** https://youtu.be/G3IC3uWAbaM
+- **Main submission video source:** `Seoul-Shield-Autonomous-Control-Layer-4m20s-V3-SUBTITLE-SAFEZONE-CANDIDATE.mp4`
+- **Main video SHA-256:** `4E2AD210B280964EE3F7E327F86ADB0A1155110B5D90E9C4540E164819DAF0C2`
+- **Public main-video URL:** https://youtu.be/cwlbxvQxEEM
 - **90-second supporting demo:** [Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4](submission/assets/Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4)
 - **One-page PDF:** [Seoul-Shield-Verified-Safety-Evidence-One-Page.pdf](output/pdf/Seoul-Shield-Verified-Safety-Evidence-One-Page.pdf)
 - **Source Repository:** https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal

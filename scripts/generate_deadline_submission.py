@@ -109,9 +109,9 @@ def make_pdf() -> None:
     cols = Table([[left,right]], colWidths=[4.9*inch,4.9*inch], style=TableStyle([("VALIGN",(0,0),(-1,-1),"TOP"),("RIGHTPADDING",(0,0),(0,0),12),("LEFTPADDING",(1,0),(1,0),12)]))
     footer = Paragraph("Verifiable evidence · Alpaca Paper Trading · ALPACA_ALLOW_SUBMIT=false · Not financial advice", small)
     video_id = Paragraph(
-        "Main video: Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4<br/>"
-        "SHA-256: 4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86<br/>"
-        "YouTube: https://youtu.be/G3IC3uWAbaM",
+        "Main video: Seoul-Shield-Autonomous-Control-Layer-4m20s-V3-SUBTITLE-SAFEZONE-CANDIDATE.mp4<br/>"
+        "SHA-256: 4E2AD210B280964EE3F7E327F86ADB0A1155110B5D90E9C4540E164819DAF0C2<br/>"
+        "YouTube: https://youtu.be/cwlbxvQxEEM",
         ParagraphStyle("video_id", parent=small, fontName="Courier", fontSize=5.8, leading=7.2),
     )
     doc.build([title,Spacer(1,7),metrics,Spacer(1,9),cols,Spacer(1,5),footer,Spacer(1,2),video_id])

@@ -36,8 +36,8 @@ The public experience demonstrates a reusable safety and audit layer for asset m
 **Evidence:** VERIFIED ALPACA REPLAY · PAPER PREVIEW · NOT SUBMITTED  
 **Safety latch:** `ALPACA_ALLOW_SUBMIT=false`
 
-**Main video:** `Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4`
+**Main video:** `Seoul-Shield-Autonomous-Control-Layer-4m20s-V3-SUBTITLE-SAFEZONE-CANDIDATE.mp4`
 
-**SHA-256:** `4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86`
+**SHA-256:** `4E2AD210B280964EE3F7E327F86ADB0A1155110B5D90E9C4540E164819DAF0C2`
 
-**YouTube:** https://youtu.be/G3IC3uWAbaM
+**YouTube:** https://youtu.be/cwlbxvQxEEM

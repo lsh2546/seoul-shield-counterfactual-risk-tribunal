@@ -39,8 +39,8 @@ No external action below is authorized merely because this checklist exists.
 
 ## Locked main-video identity
 
-- Filename: `Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4`
-- SHA-256: `4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86`
+- Filename: `Seoul-Shield-Autonomous-Control-Layer-4m20s-V3-SUBTITLE-SAFEZONE-CANDIDATE.mp4`
+- SHA-256: `4E2AD210B280964EE3F7E327F86ADB0A1155110B5D90E9C4540E164819DAF0C2`
 - V4 through V9 are excluded and must not be uploaded or submitted.
 
 ## Deadline safety evidence package
