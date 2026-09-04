@@ -1,5 +1,13 @@
 # Seoul Shield - Counterfactual Risk Tribunal
 
+## 2026 Final Verified Safety Result
+
+**NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, loss $0.**
+
+Using live Alpaca Paper data, Gemini selected AAPL with a schema-verified bullish assessment. The proposed four-contract AAPL 330/335 bull call debit spread carried **$952 maximum loss** and failed the conservative **$500** risk cap. Seoul Shield resized it to two contracts with **$476 maximum loss** and created a Paper Preview only. Before execution, AAPL's measured 5- and 15-minute direction turned bearish. The system invalidated the bullish strategy, kept `ALPACA_ALLOW_SUBMIT=false`, and submitted no order.
+
+The evidence package does not claim a fill, position, profit, loss, or P&L. Historical IV percentile data was unavailable, so the system disclosed `IV_HISTORY_UNAVAILABLE` and used actual current IV, spread, OI, volume, quote age, and measured returns under a stricter deterministic policy.
+
 > Other agents prove they can trade. Seoul Shield proves which safety policy deserves the right to trade.
 
 Seoul Shield is a risk-first autonomous options-agent prototype for the Alpaca AI Trading Agents Hackathon. One SPY debit-spread proposal is evaluated against the same market and account snapshot by four policies: No Guard, Static Guard, Adaptive Guard, and Live Execution. Only the Live path can ever reach Alpaca Paper Trading, and deterministic hard gates always outrank model output.

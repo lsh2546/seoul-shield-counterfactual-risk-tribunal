@@ -1,0 +1,27 @@
+{
+  "schema_version": "seoul-shield.ai-evidence.v1",
+  "status": "AI VERIFIED",
+  "provider": "gemini_developer",
+  "model": "gemini-3.8-flash",
+  "recorded_at": "2026-09-03T08:10:11.896988+00:00",
+  "input_sha256": "6c2ae2262c295837beb95c0b7879c80a4f9d57845a6211b6cb819a1051d77e7e",
+  "local_schema_validated": true,
+  "structured_response": {
+    "regime": "calm",
+    "volatility_risk": "medium",
+    "liquidity_risk": "high",
+    "event_risk": "low",
+    "direction": "neutral",
+    "confidence": 0.7,
+    "risk_multiplier": 0.25,
+    "reasons": [
+      "Extremely stale quote age exceeding 12 hours",
+      "Moderate bid-ask spread with stable underlying return",
+      "Average volatility percentile at the median level"
+    ]
+  },
+  "latency_ms": 18825,
+  "order_authority": false,
+  "hard_gate_final_authority": true,
+  "evidence_sha256": "829fae917ff2ae6d9940ef7711481febc41ae20a9e89b03fb0efded756b172d3"
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "seoul-shield.live-candidates.v1",
+  "status": "MODEL RESPONSE VERIFIED · SELECTION COMPLETE · NO ORDER SUBMITTED",
+  "collected_at": "2026-09-03T14:22:30.133280+00:00",
+  "source": "Alpaca Market Data API · IEX",
+  "market": {
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T10:22:25.559484388-04:00",
+    "candidates": [
+      {
+        "symbol": "SPY",
+        "price": 768.81,
+        "change_pct": 0.481,
+        "volume": 323811,
+        "bid": 768.58,
+        "ask": 768.82,
+        "trade_timestamp": "2026-09-03T14:22:26.088571441Z",
+        "quote_timestamp": "2026-09-03T14:22:26.11389917Z",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "QQQ",
+        "price": 713.03,
+        "change_pct": 0.523,
+        "volume": 88458,
+        "bid": 713.24,
+        "ask": 713.41,
+        "trade_timestamp": "2026-09-03T14:22:16.42894407Z",
+        "quote_timestamp": "2026-09-03T14:22:26.1718638Z",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "AAPL",
+        "price": 328.835,
+        "change_pct": 1.1707,
+        "volume": 212570,
+        "bid": 328.61,
+        "ask": 328.9,
+        "trade_timestamp": "2026-09-03T14:22:24.27156935Z",
+        "quote_timestamp": "2026-09-03T14:22:26.060226287Z",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "NVDA",
+        "price": 228.275,
+        "change_pct": 1.711,
+        "volume": 729562,
+        "bid": 228.3,
+        "ask": 229,
+        "trade_timestamp": "2026-09-03T14:22:22.322853647Z",
+        "quote_timestamp": "2026-09-03T14:22:26.035717374Z",
+        "source": "Alpaca Market Data API · IEX"
+      }
+    ]
+  },
+  "ai": {
+    "status": "MODEL RESPONSE VERIFIED",
+    "provider": "gemini_developer",
+    "model": "gemini-3.5-flash",
+    "model_time": null,
+    "latency_ms": 15792,
+    "schema_validated": true,
+    "input_sha256": "cd137bfa352334d47c3821941868355c7c3f4650be56765050edc20f7d0b0ec4",
+    "output_sha256": "c65878b57744194623c30207511cc4359f50589e717822f29e65e82b594e7871",
+    "result": {
+      "candidates": [
+        {
+          "symbol": "SPY",
+          "score": 65,
+          "reason": "Moderate volume and steady upward movement with a tight bid-ask spread of 0.24."
+        },
+        {
+          "symbol": "QQQ",
+          "score": 60,
+          "reason": "Positive momentum but lower relative volume and slightly wider bid-ask spread of 0.17."
+        },
+        {
+          "symbol": "AAPL",
+          "score": 80,
+          "reason": "Strong positive change of 1.17% with solid volume and a tight bid-ask spread of 0.29."
+        },
+        {
+          "symbol": "NVDA",
+          "score": 90,
+          "reason": "Highest percentage gain of 1.71% and leading volume of 729,562, indicating strong market interest."
+        }
+      ],
+      "selected_symbol": "NVDA",
+      "direction": "bullish",
+      "confidence": 0.85,
+      "selection_reasons": [
+        "NVDA exhibits the strongest relative strength with a 1.71% price increase.",
+        "Highest trading volume among all candidates indicates strong institutional participation.",
+        "The price is trading near the ask, confirming aggressive buying pressure."
+      ]
+    }
+  },
+  "execution": {
+    "paper_trading": true,
+    "allow_submit": false,
+    "order_submitted": false
+  }
+}

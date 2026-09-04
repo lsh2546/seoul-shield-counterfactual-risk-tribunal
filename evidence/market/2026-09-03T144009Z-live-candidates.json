@@ -1,0 +1,192 @@
+{
+  "schema_version": "seoul-shield.live-candidates.v1",
+  "status": "MODEL RESPONSE VERIFIED · SELECTION COMPLETE · NO ORDER SUBMITTED",
+  "collected_at": "2026-09-03T14:40:09.807125+00:00",
+  "source": "Alpaca Market Data API · IEX",
+  "market": {
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T10:40:05.322231552-04:00",
+    "candidates": [
+      {
+        "symbol": "SPY",
+        "price": 768.2,
+        "change_pct": 0.4012,
+        "volume": 370938,
+        "bid": 768.17,
+        "ask": 768.39,
+        "trade_timestamp": "2026-09-03T14:39:57.757755809Z",
+        "quote_timestamp": "2026-09-03T14:40:05.783304135Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:34:00Z",
+          "start_price": 767.96,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 768.2,
+          "return_pct": 0.031252,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 768.865,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 768.2,
+          "return_pct": -0.086491,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "mixed",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "QQQ",
+        "price": 711.65,
+        "change_pct": 0.3285,
+        "volume": 113956,
+        "bid": 711.69,
+        "ask": 711.73,
+        "trade_timestamp": "2026-09-03T14:39:59.986862716Z",
+        "quote_timestamp": "2026-09-03T14:40:05.958489703Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:34:00Z",
+          "start_price": 711.67,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 711.65,
+          "return_pct": -0.00281,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 713.4,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 711.65,
+          "return_pct": -0.245304,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "bearish",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "AAPL",
+        "price": 328.34,
+        "change_pct": 1.0184,
+        "volume": 327729,
+        "bid": 328.27,
+        "ask": 328.37,
+        "trade_timestamp": "2026-09-03T14:40:05.282159929Z",
+        "quote_timestamp": "2026-09-03T14:40:05.635424754Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:34:00Z",
+          "start_price": 329.41,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 328.375,
+          "return_pct": -0.314198,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 329.17,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 328.375,
+          "return_pct": -0.241517,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "bearish",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "NVDA",
+        "price": 226.8,
+        "change_pct": 1.0538,
+        "volume": 891697,
+        "bid": 226.78,
+        "ask": 226.81,
+        "trade_timestamp": "2026-09-03T14:40:05.658749177Z",
+        "quote_timestamp": "2026-09-03T14:40:05.928198115Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:34:00Z",
+          "start_price": 226.415,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 226.78,
+          "return_pct": 0.161208,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 228.08,
+          "end_timestamp": "2026-09-03T14:39:00Z",
+          "end_price": 226.78,
+          "return_pct": -0.569975,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "mixed",
+        "source": "Alpaca Market Data API · IEX"
+      }
+    ]
+  },
+  "ai": {
+    "status": "MODEL RESPONSE VERIFIED",
+    "provider": "gemini_developer",
+    "model": "gemini-3.7-flash",
+    "model_time": null,
+    "latency_ms": 6762,
+    "schema_validated": true,
+    "input_sha256": "4de4213cc3cc3be21dc417164549fb6e6b2f85eae3b5fdb530c207783b2893de",
+    "output_sha256": "cfa57b25004e966187a2d3198d7102cdac9aff3ef46d48413dc7fcb2a19cc09e",
+    "result": {
+      "candidates": [
+        {
+          "symbol": "SPY",
+          "score": 45,
+          "reason": "Mixed short-term trend with flat momentum over 5m and 15m."
+        },
+        {
+          "symbol": "QQQ",
+          "score": 60,
+          "reason": "Bearish short-term indicator with steady downward 15m momentum."
+        },
+        {
+          "symbol": "AAPL",
+          "score": 78,
+          "reason": "Consistent downward momentum across both 5m and 15m intervals."
+        },
+        {
+          "symbol": "NVDA",
+          "score": 55,
+          "reason": "Mixed direction with strong 5m rebound against 15m decline."
+        }
+      ],
+      "selected_symbol": "AAPL",
+      "direction": "bearish",
+      "confidence": 0.75,
+      "selection_reasons": [
+        "Consistent negative returns across 5m and 15m windows",
+        "Strongest relative downward momentum among candidates"
+      ]
+    }
+  },
+  "execution_filter": {
+    "status": "ELIGIBLE_CANDIDATE_SELECTED",
+    "gemini_direction": "bearish",
+    "eligible_symbols": [
+      "QQQ",
+      "AAPL"
+    ],
+    "excluded_symbols": [
+      "SPY",
+      "NVDA"
+    ],
+    "selected_symbol": "AAPL",
+    "rule": "bullish requires 5m>0 and 15m>0; bearish requires 5m<0 and 15m<0"
+  },
+  "execution": {
+    "paper_trading": true,
+    "allow_submit": false,
+    "order_submitted": false
+  }
+}

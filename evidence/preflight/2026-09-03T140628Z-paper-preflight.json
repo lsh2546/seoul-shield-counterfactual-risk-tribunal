@@ -1,0 +1,280 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-09-03T14:06:28.753041+00:00",
+  "status": "LIVE PREFLIGHT · PAPER PREVIEW · NOT SUBMITTED",
+  "account": {
+    "environment": "paper",
+    "account_masked": "***NQXY",
+    "status": "ACTIVE",
+    "cash": 100000.0,
+    "equity": 100000.0,
+    "buying_power": 400000.0,
+    "options_level": 3,
+    "trading_blocked": false,
+    "starting_balance_verified": true,
+    "positions": 0,
+    "open_orders": 0,
+    "daily_pnl": 0.0
+  },
+  "market": {
+    "symbol": "NVDA",
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T10:06:25.406380519-04:00",
+    "underlying_price": 227.84,
+    "underlying_timestamp": "2026-09-03T14:06:28.4289182Z",
+    "expiration": "2026-09-11",
+    "contracts_received": 80
+  },
+  "selected_legs": {
+    "long": {
+      "symbol": "NVDA260911C00227500",
+      "strike": 227.5,
+      "expiration": "2026-09-11",
+      "bid": 4.53,
+      "ask": 4.59,
+      "midpoint": 4.56,
+      "spread_pct": 0.013158,
+      "open_interest": 4078,
+      "volume": 2009,
+      "iv": 0.3198,
+      "delta": 0.5285,
+      "gamma": 0.0369,
+      "theta": -0.2797,
+      "vega": 0.1342,
+      "tradable": true,
+      "observed_at": "2026-09-03T14:06:28.077031896Z",
+      "quote_age_seconds": 0.7
+    },
+    "short": {
+      "symbol": "NVDA260911C00232500",
+      "strike": 232.5,
+      "expiration": "2026-09-11",
+      "bid": 2.37,
+      "ask": 2.4,
+      "midpoint": 2.385,
+      "spread_pct": 0.012579,
+      "open_interest": 4013,
+      "volume": 1217,
+      "iv": 0.3132,
+      "delta": 0.3457,
+      "gamma": 0.0349,
+      "theta": -0.251,
+      "vega": 0.1244,
+      "tradable": true,
+      "observed_at": "2026-09-03T14:06:28.273834906Z",
+      "quote_age_seconds": 0.5
+    }
+  },
+  "original": {
+    "quantity": 4,
+    "net_debit": 2.22,
+    "max_loss": 888.0,
+    "approved": true,
+    "reasons": []
+  },
+  "alternative": {
+    "quantity": 4,
+    "net_debit": 2.22,
+    "max_loss": 888.0,
+    "approved": true,
+    "reasons": []
+  },
+  "ai": {
+    "candidate_evidence_file": "2026-09-03T140605Z-live-candidates.json",
+    "candidate_result": {
+      "status": "MODEL RESPONSE VERIFIED",
+      "provider": "gemini_developer",
+      "model": "gemini-3.7-flash",
+      "model_time": null,
+      "latency_ms": 14434,
+      "schema_validated": true,
+      "input_sha256": "5cd5eeb237414a9a52844b0d5eb6eb1c52e565f1657b262b87d861a11cc47e61",
+      "output_sha256": "94c0bd702e41e867e5e05ca2e4c13806c2000df87ce01b3d79405dd26889e2f9",
+      "result": {
+        "candidates": [
+          {
+            "symbol": "SPY",
+            "score": 75,
+            "reason": "Solid liquidity and positive change percentage indicating steady momentum."
+          },
+          {
+            "symbol": "QQQ",
+            "score": 68,
+            "reason": "Moderate volume and positive price performance, trailing SPY slightly."
+          },
+          {
+            "symbol": "AAPL",
+            "score": 65,
+            "reason": "Wider bid-ask spread relative to price but showing positive upward movement."
+          },
+          {
+            "symbol": "NVDA",
+            "score": 92,
+            "reason": "Highest volume and strongest relative performance with a 1.56% gain and tight spread."
+          }
+        ],
+        "selected_symbol": "NVDA",
+        "direction": "bullish",
+        "confidence": 0.88,
+        "selection_reasons": [
+          "Strongest positive price momentum among all candidates (+1.5595%)",
+          "Highest traded volume demonstrating strong market participation",
+          "Tight bid-ask spread indicating low execution slippage risk"
+        ]
+      }
+    },
+    "risk_result": {
+      "regime": "calm",
+      "volatility_risk": "medium",
+      "liquidity_risk": "low",
+      "event_risk": "low",
+      "direction": "neutral",
+      "confidence": 0.85,
+      "risk_multiplier": 1,
+      "reasons": [
+        "Moderate volatility percentile of 0.50",
+        "Tight bid-ask spread under normal range",
+        "Flat recent price return"
+      ]
+    },
+    "evidence": {
+      "input": {
+        "snapshot_id": "nvda-20260903T140628Z",
+        "observed_at": "2026-09-03T14:06:28.273834906Z",
+        "underlying": "NVDA",
+        "volatility_percentile": 0.5,
+        "bid_ask_spread_pct": 0.013158,
+        "open_interest": 4013,
+        "quote_age_seconds": 0.7,
+        "recent_return_pct": 0
+      },
+      "input_sha256": "07dc0089746759aa405ba1f38969ce71801e94c5a8aa0d42e0555fb5b9b45e32",
+      "provider": "gemini_developer",
+      "model": "gemini-3.7-flash",
+      "response": {
+        "regime": "calm",
+        "volatility_risk": "medium",
+        "liquidity_risk": "low",
+        "event_risk": "low",
+        "direction": "neutral",
+        "confidence": 0.85,
+        "risk_multiplier": 1,
+        "reasons": [
+          "Moderate volatility percentile of 0.50",
+          "Tight bid-ask spread under normal range",
+          "Flat recent price return"
+        ]
+      },
+      "latency_ms": 7257,
+      "timed_out": false,
+      "fallback": null,
+      "error_type": null
+    },
+    "structured_call_ok": true
+  },
+  "strategy_decision": "NO TRADE · DIRECTIONAL STRATEGY REJECTED",
+  "checks": {
+    "paper_account": true,
+    "competition_balance": true,
+    "options_level_3": true,
+    "market_open": true,
+    "fresh_quote": true,
+    "liquidity": true,
+    "directional_strategy": false,
+    "strike_order": true,
+    "tradable_contracts": true,
+    "risk_limit": true,
+    "structured_ai": true,
+    "idempotency_unused": true,
+    "status_lookup_ready": true,
+    "cancel_ready": true
+  },
+  "policies": [
+    {
+      "universe": "no_guard",
+      "action": "approve",
+      "requested_quantity": 4,
+      "approved_quantity": 4,
+      "reasons": [
+        "shadow baseline: no risk controls"
+      ],
+      "max_loss": 888.0,
+      "actual_order_authority": false,
+      "snapshot_id": "nvda-20260903T140628Z"
+    },
+    {
+      "universe": "static_guard",
+      "action": "approve",
+      "requested_quantity": 4,
+      "approved_quantity": 4,
+      "reasons": [
+        "fixed 1% trade / 5% portfolio / 2% daily stop"
+      ],
+      "max_loss": 888.0,
+      "actual_order_authority": false,
+      "snapshot_id": "nvda-20260903T140628Z"
+    },
+    {
+      "universe": "adaptive_guard",
+      "action": "approve",
+      "requested_quantity": 4,
+      "approved_quantity": 4,
+      "reasons": [
+        "AI regime=calm, multiplier=1",
+        "Moderate volatility percentile of 0.50",
+        "Tight bid-ask spread under normal range",
+        "Flat recent price return"
+      ],
+      "max_loss": 888.0,
+      "actual_order_authority": false,
+      "snapshot_id": "nvda-20260903T140628Z"
+    },
+    {
+      "universe": "live_execution",
+      "action": "approve",
+      "requested_quantity": 4,
+      "approved_quantity": 4,
+      "reasons": [
+        "AI regime=calm, multiplier=1",
+        "Moderate volatility percentile of 0.50",
+        "Tight bid-ask spread under normal range",
+        "Flat recent price return",
+        "preview only until explicit human approval"
+      ],
+      "max_loss": 888.0,
+      "actual_order_authority": true,
+      "snapshot_id": "nvda-20260903T140628Z"
+    }
+  ],
+  "preview": {
+    "status": "NOT SUBMITTED",
+    "allow_submit": false,
+    "preflight_pass": false,
+    "sanitized_payload": {
+      "qty": "4",
+      "order_class": "mleg",
+      "type": "limit",
+      "time_in_force": "day",
+      "limit_price": "2.22",
+      "legs": [
+        {
+          "symbol": "NVDA260911C00227500",
+          "ratio_qty": "1",
+          "side": "buy",
+          "position_intent": "buy_to_open"
+        },
+        {
+          "symbol": "NVDA260911C00232500",
+          "ratio_qty": "1",
+          "side": "sell",
+          "position_intent": "sell_to_open"
+        }
+      ],
+      "client_order_id": "sst-20260903140628-4c"
+    }
+  },
+  "security": {
+    "credentials_in_bundle": false,
+    "full_account_number_in_bundle": false
+  }
+}

@@ -1,0 +1,210 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-09-03T07:37:24.570872+00:00",
+  "status": "LIVE PREFLIGHT · PAPER PREVIEW · NOT SUBMITTED",
+  "account": {
+    "environment": "paper",
+    "account_masked": "***NQXY",
+    "status": "ACTIVE",
+    "cash": 100000.0,
+    "equity": 100000.0,
+    "buying_power": 400000.0,
+    "options_level": 3,
+    "trading_blocked": false,
+    "starting_balance_verified": true,
+    "positions": 0,
+    "open_orders": 0,
+    "daily_pnl": 0.0
+  },
+  "market": {
+    "symbol": "SPY",
+    "market_open": false,
+    "clock_timestamp": "2026-09-03T03:37:21.176571525-04:00",
+    "underlying_price": 765.2,
+    "underlying_timestamp": "2026-09-02T20:00:05.232875462Z",
+    "expiration": "2026-09-11",
+    "contracts_received": 195
+  },
+  "selected_legs": {
+    "long": {
+      "symbol": "SPY260911C00765000",
+      "strike": 765.0,
+      "expiration": "2026-09-11",
+      "bid": 5.84,
+      "ask": 5.87,
+      "midpoint": 5.855,
+      "spread_pct": 0.005124,
+      "open_interest": 2090,
+      "volume": 15492,
+      "tradable": true,
+      "observed_at": "2026-09-02T19:59:59.900116854Z",
+      "quote_age_seconds": 41844.7
+    },
+    "short": {
+      "symbol": "SPY260911C00770000",
+      "strike": 770.0,
+      "expiration": "2026-09-11",
+      "bid": 3.19,
+      "ask": 3.21,
+      "midpoint": 3.2,
+      "spread_pct": 0.00625,
+      "open_interest": 3513,
+      "volume": 8300,
+      "tradable": true,
+      "observed_at": "2026-09-02T19:59:59.27818788Z",
+      "quote_age_seconds": 41845.3
+    }
+  },
+  "original": {
+    "quantity": 4,
+    "net_debit": 2.68,
+    "max_loss": 1072.0,
+    "approved": false,
+    "reasons": [
+      "per-trade risk limit exceeded"
+    ]
+  },
+  "alternative": {
+    "quantity": 3,
+    "net_debit": 2.68,
+    "max_loss": 804.0,
+    "approved": true,
+    "reasons": []
+  },
+  "ai": {
+    "result": {
+      "regime": "dislocated",
+      "volatility_risk": "medium",
+      "liquidity_risk": "high",
+      "event_risk": "medium",
+      "direction": "neutral",
+      "confidence": 0,
+      "risk_multiplier": 0,
+      "reasons": [
+        "model unavailable; deterministic fail-closed fallback applied"
+      ]
+    },
+    "evidence": {
+      "input": {
+        "snapshot_id": "spy-20260903T073724Z",
+        "observed_at": "2026-09-02T19:59:59.900116854Z",
+        "underlying": "SPY",
+        "volatility_percentile": 0.5,
+        "bid_ask_spread_pct": 0.00625,
+        "open_interest": 2090,
+        "quote_age_seconds": 41845.3,
+        "recent_return_pct": 0
+      },
+      "input_sha256": "5e9b4d645870bc4e4974cfd53dbebb4a918bdf0ed06e43b0c52a172b73bc3976",
+      "provider": "gemini_developer",
+      "model": "gemini-3.6-flash",
+      "response": null,
+      "latency_ms": 2992,
+      "timed_out": false,
+      "fallback": "static_guard",
+      "error_type": "HTTP_503"
+    },
+    "structured_call_ok": false
+  },
+  "checks": {
+    "paper_account": true,
+    "competition_balance": true,
+    "options_level_3": true,
+    "market_open": false,
+    "fresh_quote": false,
+    "liquidity": true,
+    "strike_order": true,
+    "tradable_contracts": true,
+    "risk_limit": true,
+    "structured_ai": false,
+    "idempotency_unused": true,
+    "status_lookup_ready": true,
+    "cancel_ready": true
+  },
+  "policies": [
+    {
+      "universe": "no_guard",
+      "action": "approve",
+      "requested_quantity": 3,
+      "approved_quantity": 3,
+      "reasons": [
+        "shadow baseline: no risk controls"
+      ],
+      "max_loss": 804.0,
+      "actual_order_authority": false,
+      "snapshot_id": "spy-20260903T073724Z"
+    },
+    {
+      "universe": "static_guard",
+      "action": "approve",
+      "requested_quantity": 3,
+      "approved_quantity": 3,
+      "reasons": [
+        "fixed 1% trade / 5% portfolio / 2% daily stop"
+      ],
+      "max_loss": 804.0,
+      "actual_order_authority": false,
+      "snapshot_id": "spy-20260903T073724Z"
+    },
+    {
+      "universe": "adaptive_guard",
+      "action": "reject",
+      "requested_quantity": 3,
+      "approved_quantity": 0,
+      "reasons": [
+        "AI regime=dislocated, multiplier=0",
+        "model unavailable; deterministic fail-closed fallback applied",
+        "quote older than 30 seconds"
+      ],
+      "max_loss": 0.0,
+      "actual_order_authority": false,
+      "snapshot_id": "spy-20260903T073724Z"
+    },
+    {
+      "universe": "live_execution",
+      "action": "reject",
+      "requested_quantity": 3,
+      "approved_quantity": 0,
+      "reasons": [
+        "AI regime=dislocated, multiplier=0",
+        "model unavailable; deterministic fail-closed fallback applied",
+        "quote older than 30 seconds",
+        "preview only until explicit human approval"
+      ],
+      "max_loss": 0.0,
+      "actual_order_authority": true,
+      "snapshot_id": "spy-20260903T073724Z"
+    }
+  ],
+  "preview": {
+    "status": "NOT SUBMITTED",
+    "allow_submit": false,
+    "preflight_pass": false,
+    "sanitized_payload": {
+      "qty": "3",
+      "order_class": "mleg",
+      "type": "limit",
+      "time_in_force": "day",
+      "limit_price": "2.68",
+      "legs": [
+        {
+          "symbol": "SPY260911C00765000",
+          "ratio_qty": "1",
+          "side": "buy",
+          "position_intent": "buy_to_open"
+        },
+        {
+          "symbol": "SPY260911C00770000",
+          "ratio_qty": "1",
+          "side": "sell",
+          "position_intent": "sell_to_open"
+        }
+      ],
+      "client_order_id": "sst-20260903073724-3c"
+    }
+  },
+  "security": {
+    "credentials_in_bundle": false,
+    "full_account_number_in_bundle": false
+  }
+}

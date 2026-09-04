@@ -3,7 +3,7 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Html } from '@react-three/drei';
 import { Activity, Database, Play, ShieldCheck } from 'lucide-react';
-import { Color, InstancedMesh, Object3D, Vector3 } from 'three';
+import { Color, DoubleSide, InstancedMesh, Object3D, Vector3 } from 'three';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type Classification = 'OPPORTUNITY' | 'UNCERTAIN' | 'RISK BLOCKED';
@@ -129,7 +129,8 @@ function DataStreams({ time }: { time: number }) {
         origin[2] * (1 - travel) - 0.4,
       );
       dummy.lookAt(0, 0, 0);
-      dummy.scale.set(0.055, 0.055, 0.55 + progress * 0.65);
+      dummy.rotateZ((i % 5 - 2) * 0.07);
+      dummy.scale.set(0.08, 0.04, 0.75 + progress * 0.9);
       dummy.updateMatrix();
       mesh.current.setMatrixAt(i, dummy.matrix);
     }
@@ -138,7 +139,7 @@ function DataStreams({ time }: { time: number }) {
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, 90]} frustumCulled={false}>
       <boxGeometry />
-      <meshBasicMaterial color="#f3ffff" transparent opacity={0.88} />
+      <meshStandardMaterial color="#dfffff" emissive="#23c8ff" emissiveIntensity={2.4} metalness={0.8} roughness={0.18} transparent opacity={0.94} />
     </instancedMesh>
   );
 }
@@ -168,7 +169,7 @@ function CameraRig({ time }: { time: number }) {
                         : time < 53
                           ? new Vector3(5.2, -1.7, 4 - (time - 50) * 2.8)
                           : new Vector3(0, 9.2, 15.8);
-    camera.position.lerp(target, time >= 37 ? 0.075 : 0.045);
+    camera.position.lerp(target, time >= 37 ? 0.09 : 0.06);
     const look = time < 40
       ? new Vector3(0, 0, -7)
       : time < 43
@@ -183,6 +184,28 @@ function CameraRig({ time }: { time: number }) {
     camera.lookAt(look);
   });
   return null;
+}
+
+function ControlCenterArchitecture({ time }: { time: number }) {
+  const ribs = useRef<Object3D>(null);
+  useFrame(({ clock }) => {
+    if (ribs.current) ribs.current.rotation.z = Math.sin(clock.elapsedTime * 0.12) * 0.012;
+  });
+  const redAlert = time >= 33 && time < 37;
+  return (
+    <group ref={ribs}>
+      {Array.from({ length: 18 }, (_, index) => (
+        <group key={index} position={[0, 0, -index * 2.8 + 4]}>
+          <mesh position={[-8.6, 0, 0]} rotation={[0, 0, -0.13]} scale={[0.12, 6.4, 0.32]}><boxGeometry /><meshStandardMaterial color="#173f61" metalness={0.92} roughness={0.2} /></mesh>
+          <mesh position={[8.6, 0, 0]} rotation={[0, 0, 0.13]} scale={[0.12, 6.4, 0.32]}><boxGeometry /><meshStandardMaterial color="#173f61" metalness={0.92} roughness={0.2} /></mesh>
+          <mesh position={[0, 5.35, 0]} scale={[8.5, 0.08, 0.32]}><boxGeometry /><meshStandardMaterial color="#215478" emissive={redAlert ? '#ff314a' : '#23c8ff'} emissiveIntensity={redAlert ? 3.5 : 0.75} metalness={0.9} roughness={0.18} /></mesh>
+        </group>
+      ))}
+      <mesh position={[-9.3, 0, -17]} rotation={[0, Math.PI / 2, 0]}><planeGeometry args={[48, 13]} /><meshStandardMaterial color="#0a263f" metalness={0.7} roughness={0.26} side={DoubleSide} /></mesh>
+      <mesh position={[9.3, 0, -17]} rotation={[0, -Math.PI / 2, 0]}><planeGeometry args={[48, 13]} /><meshStandardMaterial color="#0a263f" metalness={0.7} roughness={0.26} side={DoubleSide} /></mesh>
+      <mesh position={[0, 5.8, -17]} rotation={[Math.PI / 2, 0, 0]}><planeGeometry args={[19, 48]} /><meshStandardMaterial color="#0c2d49" metalness={0.72} roughness={0.3} side={DoubleSide} /></mesh>
+    </group>
+  );
 }
 
 function ConvergenceScene({ data, time }: { data: Preview; time: number }) {
@@ -240,9 +263,9 @@ function ConvergenceScene({ data, time }: { data: Preview; time: number }) {
   );
 }
 
-function PolicyTunnel({ position, color, active, blockedAt, kind }: {
+function PolicyTunnel({ position, color, active, blockedAt, kind, label, verdict, showLabel }: {
   position: [number, number, number]; color: string; active: boolean; blockedAt?: number;
-  kind: 'no-guard' | 'static' | 'adaptive' | 'live';
+  kind: 'no-guard' | 'static' | 'adaptive' | 'live'; label: string; verdict: string; showLabel: boolean;
 }) {
   const pulse = useRef<Object3D>(null);
   const inspectors = useRef<Object3D>(null);
@@ -256,13 +279,18 @@ function PolicyTunnel({ position, color, active, blockedAt, kind }: {
   });
   return (
     <group position={position}>
-      {Array.from({ length: 9 }, (_, index) => (
-        <mesh key={index} position={[0, 0, -index * 2.25]}>
-          <torusGeometry args={[1.25, 0.045, 8, 42]} />
-          <meshBasicMaterial color={color} transparent opacity={0.34 + index * 0.025} />
-        </mesh>
-      ))}
-      <mesh position={[0, 0, -9]} scale={[0.035, 0.035, 18]}><boxGeometry /><meshBasicMaterial color={color} transparent opacity={0.55} /></mesh>
+      {showLabel && <Html position={[0, 1.75, 0]} center occlude={false}>
+        <div className={`tunnel-verdict ${kind}`}><b>{label}</b><strong>{verdict}</strong></div>
+      </Html>}
+      {[-1.45, 1.45].map((x) => <mesh key={`rail-x-${x}`} position={[x, 0, -9]} scale={[0.045, 0.045, 18]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.35} metalness={0.8} roughness={0.2} /></mesh>)}
+      {[-1.05, 1.05].map((y) => <mesh key={`rail-y-${y}`} position={[0, y, -9]} scale={[1.5, 0.045, 18]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.15} metalness={0.8} roughness={0.2} /></mesh>)}
+      {[0, -18].map((z) => <group key={`frame-${z}`} position={[0, 0, z]}>
+        <mesh position={[-1.45, 0, 0]} scale={[0.07, 1.12, 0.09]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.5} /></mesh>
+        <mesh position={[1.45, 0, 0]} scale={[0.07, 1.12, 0.09]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.5} /></mesh>
+        <mesh position={[0, 1.05, 0]} scale={[1.52, 0.07, 0.09]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.5} /></mesh>
+        <mesh position={[0, -1.05, 0]} scale={[1.52, 0.07, 0.09]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={1.5} /></mesh>
+      </group>)}
+      <mesh position={[0, -1.12, -9]} scale={[1.48, 0.025, 18]}><boxGeometry /><meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.8} transparent opacity={0.28} /></mesh>
       <group ref={pulse}>
         <mesh scale={[0.72, 0.38, 0.12]}><boxGeometry /><meshBasicMaterial color="#ffffff" /></mesh>
         <mesh scale={[1.15, 0.04, 0.04]}><boxGeometry /><meshBasicMaterial color={color} /></mesh>
@@ -274,7 +302,7 @@ function PolicyTunnel({ position, color, active, blockedAt, kind }: {
       )}
       {kind === 'adaptive' && (
         <group ref={inspectors} position={[0, 0, -(blockedAt ?? 8)]}>
-          {[1.45, 1.05, 0.7].map((radius, index) => (
+          {[1.05].map((radius, index) => (
             <mesh key={radius} rotation={[index * 0.5, index * 0.8, 0]}><torusGeometry args={[radius, 0.055, 8, 48]} /><meshBasicMaterial color="#c77dff" /></mesh>
           ))}
         </group>
@@ -304,8 +332,8 @@ function RiskAndTribunalScene({ time }: { time: number }) {
     const close = ease((time - 33.6) / 0.8);
     return (
       <group position={[0, 0, -2]}>
-        <mesh position={[-5 + close * 2.7, 0, 0]} scale={[2.2, 4, 0.16]}><boxGeometry /><meshBasicMaterial color="#ff314a" transparent opacity={0.82} /></mesh>
-        <mesh position={[5 - close * 2.7, 0, 0]} scale={[2.2, 4, 0.16]}><boxGeometry /><meshBasicMaterial color="#ff314a" transparent opacity={0.82} /></mesh>
+        <mesh position={[-5 + close * 2.7, 0, 0]} scale={[2.2, 4, 0.34]}><boxGeometry /><meshStandardMaterial color="#9f071d" emissive="#ff1838" emissiveIntensity={2.3} metalness={0.78} roughness={0.17} /></mesh>
+        <mesh position={[5 - close * 2.7, 0, 0]} scale={[2.2, 4, 0.34]}><boxGeometry /><meshStandardMaterial color="#9f071d" emissive="#ff1838" emissiveIntensity={2.3} metalness={0.78} roughness={0.17} /></mesh>
       </group>
     );
   }
@@ -314,19 +342,13 @@ function RiskAndTribunalScene({ time }: { time: number }) {
   return (
     <>
       <group position={[0, -1.4 + rise * 3.1, -4]} scale={1 - shock * 0.35}>
-        <mesh><octahedronGeometry args={[0.72, 0]} /><meshBasicMaterial color="#ffffff" /></mesh>
+        <mesh><octahedronGeometry args={[0.72, 0]} /><meshStandardMaterial color="#ffffff" emissive="#bff5ff" emissiveIntensity={3} metalness={0.85} roughness={0.12} /></mesh>
         <mesh scale={[1 + shock * 5, 1 + shock * 5, 0.04]}><ringGeometry args={[0.9, 1.02, 64]} /><meshBasicMaterial color="#bff5ff" transparent opacity={1 - shock * 0.72} /></mesh>
       </group>
-      <PolicyTunnel position={[-5.2, 2.2, -5]} color="#ff314a" active={time >= 39.2 && time < 43} kind="no-guard" />
-      <PolicyTunnel position={[-1.8, -1.8, -5]} color="#23c8ff" active={time >= 39.2 && time < 46} blockedAt={10} kind="static" />
-      <PolicyTunnel position={[2, 2, -5]} color="#c77dff" active={time >= 39.2 && time < 50} blockedAt={8} kind="adaptive" />
-      <PolicyTunnel position={[5.2, -1.7, -5]} color="#ffd21f" active={time >= 39.2 && time < 53} blockedAt={7} kind="live" />
-      {time >= 53 && [
-        { p: [-5.2, 3.8, -8] as [number, number, number], c: '#ff314a', t: 'NO GUARD', d: 'SHADOW ONLY' },
-        { p: [-1.8, -3.4, -8] as [number, number, number], c: '#23c8ff', t: 'STATIC', d: 'BLOCKED' },
-        { p: [2, 3.8, -8] as [number, number, number], c: '#c77dff', t: 'ADAPTIVE', d: 'FAIL-CLOSED' },
-        { p: [5.2, -3.3, -8] as [number, number, number], c: '#ffd21f', t: 'LIVE', d: 'NOT SUBMITTED' },
-      ].map((item) => <Html key={item.t} position={item.p} transform distanceFactor={8}><div className="future-final" style={{ borderColor: item.c }}><b>{item.t}</b><span>{item.d}</span></div></Html>)}
+      <PolicyTunnel position={[-4.1, 2.0, -4]} color="#ff314a" active={time >= 39.2 && time < 43} kind="no-guard" label="NO GUARD" verdict="APPROVE · SHADOW ONLY" showLabel={time < 40} />
+      <PolicyTunnel position={[4.1, 2.0, -4]} color="#23c8ff" active={time >= 39.2 && time < 46} blockedAt={10} kind="static" label="STATIC GUARD" verdict="REJECT" showLabel={time < 40} />
+      <PolicyTunnel position={[-4.1, -2.0, -4]} color="#c77dff" active={time >= 39.2 && time < 50} blockedAt={8} kind="adaptive" label="ADAPTIVE GUARD" verdict="REJECT · FAIL-CLOSED" showLabel={time < 40} />
+      <PolicyTunnel position={[4.1, -2.0, -4]} color="#ffd21f" active={time >= 39.2 && time < 53} blockedAt={7} kind="live" label="LIVE EXECUTION" verdict="LOCKED · NOT SUBMITTED" showLabel={time < 40} />
     </>
   );
 }
@@ -349,7 +371,8 @@ function ContractFlow({ data, time }: { data: Preview; time: number }) {
           (((index * 5) % 17) - 8) * 0.12,
           z,
         );
-        dummy.scale.set(0.72, 0.08, 0.16);
+        dummy.rotation.set(-0.08, side * 0.14, side * 0.05);
+        dummy.scale.set(0.72, 0.12, 0.24);
       } else {
         const lane =
           point.classification === 'OPPORTUNITY'
@@ -368,7 +391,7 @@ function ContractFlow({ data, time }: { data: Preview; time: number }) {
           point.classification === 'RISK BLOCKED' ? 0.14 : 0.05,
         );
       }
-      dummy.rotation.set(-0.08, 0, 0);
+      if (time >= 13.5) dummy.rotation.set(-0.08, 0, 0);
       dummy.updateMatrix();
       mesh.current!.setMatrixAt(index, dummy.matrix);
       mesh.current!.setColorAt(index, colors[index]);
@@ -383,7 +406,7 @@ function ContractFlow({ data, time }: { data: Preview; time: number }) {
       frustumCulled={false}
     >
       <boxGeometry args={[1.5, 0.65, 0.08]} />
-      <meshBasicMaterial transparent opacity={0.9} toneMapped={false} />
+      <meshStandardMaterial transparent opacity={0.94} metalness={0.82} roughness={0.16} emissiveIntensity={1.6} toneMapped={false} />
     </instancedMesh>
   );
 }
@@ -406,9 +429,12 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
   return (
     <>
       <CameraRig time={time} />
-      <ambientLight intensity={1.25} />
+      <fog attach="fog" args={['#071a2d', 13, 48]} />
+      <ControlCenterArchitecture time={time} />
+      <ambientLight intensity={1.65} />
       <directionalLight position={[0, 9, 7]} intensity={3.5} color="#efffff" />
       <pointLight position={[0, 1, 3]} intensity={62} color="#73ddff" distance={22} />
+      <pointLight position={[0, 3, -18]} intensity={80} color={time >= 33 && time < 37 ? '#ff314a' : '#23c8ff'} distance={36} />
       <gridHelper args={[34, 34, '#3f87ba', '#24527d']} position={[0, -4.7, -4]} />
       <mesh position={[0, -4.64, -4]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[34, 34]} />
@@ -416,11 +442,11 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
       </mesh>
       <mesh position={[0, 0, -0.4]}>
         <cylinderGeometry args={[1.55, 1.55, 3.5, 64, 1, true]} />
-        <meshPhysicalMaterial color="#8de9ff" transparent opacity={0.22} roughness={0.1} metalness={0.15} side={2} />
+        <meshPhysicalMaterial color="#8de9ff" transparent opacity={0.3} roughness={0.08} metalness={0.5} transmission={0.36} thickness={0.7} side={DoubleSide} />
       </mesh>
       <mesh position={[0, 0, -0.4]}>
         <cylinderGeometry args={[0.22, 0.22, 3.2, 24, 1, true]} />
-        <meshBasicMaterial color="#eaffff" transparent opacity={0.95} />
+        <meshStandardMaterial color="#ffffff" emissive="#23c8ff" emissiveIntensity={4} transparent opacity={0.98} />
       </mesh>
       {[
         { y: 1.15, radius: 2.1, label: 'MARKET' },
@@ -430,7 +456,7 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
         <group key={ring.label} position={[0, ring.y, -0.4]} rotation={[Math.PI / 2, 0, time * (index % 2 ? -0.2 : 0.22)]}>
           <mesh>
             <torusGeometry args={[ring.radius, 0.055, 14, 112]} />
-            <meshBasicMaterial color={index === 1 ? '#ffffff' : '#23c8ff'} />
+            <meshStandardMaterial color={index === 1 ? '#ffffff' : '#23c8ff'} emissive={index === 2 ? '#ff314a' : '#23c8ff'} emissiveIntensity={2.2} metalness={0.8} roughness={0.15} />
           </mesh>
           <Html position={[ring.radius + 0.35, 0, 0]} transform distanceFactor={6} occlude={false}>
             <b className="engine-ring-label">{ring.label}</b>
@@ -469,8 +495,18 @@ function TowerScene({ data, time }: { data: Preview; time: number }) {
 
 export default function CapitalControlTower() {
   const [data, setData] = useState<Preview | null>(null);
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState(() => typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('cover') === '1' ? 178 : 0);
   const [running, setRunning] = useState(false);
+  const [coverMode] = useState(() => typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('cover') === '1');
+  const [reviewFrame] = useState(() => typeof window !== 'undefined'
+    ? new URLSearchParams(window.location.search).get('reviewFrame')
+    : null);
+  const [terminalMode] = useState(() => typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('terminal') === '1');
+  const [cinematicMode] = useState(() => typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('cinematic') === '1');
+  const [thumbnailMode] = useState(() => typeof window !== 'undefined'
+    && new URLSearchParams(window.location.search).get('thumbnail') === '1');
   const [fallback2d] = useState(() => {
     if (typeof window === 'undefined') return false;
     const forced = new URLSearchParams(window.location.search).get('fallback') === '2d';
@@ -564,12 +600,13 @@ export default function CapitalControlTower() {
               ? 'CAPITAL LIMIT ENFORCEMENT'
               : 'ONE SIGNAL · FOUR EXECUTION POLICIES';
   return (
-    <main className="control-tower">
-      <header className="tower-header">
+    <main className={`control-tower ${time >= 244 ? 'ending-clean' : ''} ${reviewFrame ? 'evidence-review-mode' : ''} ${terminalMode ? 'terminal-remaster-mode' : ''} ${cinematicMode || thumbnailMode ? 'cinematic-remaster-mode' : ''}`}>
+      {time < 244 && <header className="tower-header">
         <div><ShieldCheck /><b>SEOUL SHIELD</b><span>CAPITAL CONTROL TOWER</span></div>
         <div className="tower-proof"><i /> {data.evidence_status}</div>
-      </header>
+      </header>}
       <section className="tower-stage">
+        <div className={`cinematic-grade ${sceneTime >= 33 && sceneTime < 37 ? 'alert' : ''}`} />
         {fallback2d ? (
           <figure className="tower-fallback" aria-label="Two-dimensional summary of the Seoul Shield risk decision">
             <small>2D FALLBACK · VERIFIED ALPACA REPLAY</small>
@@ -580,17 +617,24 @@ export default function CapitalControlTower() {
             <em>$1,096 MAX LOSS · $1,000 LIMIT · BLOCKED</em>
             <footer>PAPER PREVIEW · NOT SUBMITTED</footer>
           </figure>
-        ) : (
+        ) : time < 244 ? (
           <Canvas camera={{ position: [0, 1, 13], fov: 48 }} dpr={[1, 1.4]}>
             <TowerScene data={data} time={sceneTime} />
           </Canvas>
-        )}
+        ) : null}
         <div className="tower-grid" />
-        <div className="tower-title">
+        {timelineTime < 3.4 && (
+          <div className="cinematic-opening">
+            <b>245 CONTRACTS.</b>
+            <strong>ONE CAPITAL GATE.</strong>
+            <span>ALPACA OPTIONS · VERIFIED REPLAY</span>
+          </div>
+        )}
+        {time < 244 && <div className="tower-title">
           <small>{phase}</small>
           <b>{headline}</b>
           <span>{data.ai_status} · {new Date(data.market.underlying_timestamp).toISOString()}</span>
-        </div>
+        </div>}
         {sceneTime < 2.5 && (
           <div className="tower-ready">
             <Database />
@@ -649,15 +693,168 @@ export default function CapitalControlTower() {
         {sceneTime >= 53 && <div className="tribunal-banner final"><small>FOUR POLICIES · ONE EVIDENCE SNAPSHOT</small><b>{timelineTime >= 215 ? 'MOST AGENTS SEARCH FOR A REASON TO TRADE. SEOUL SHIELD SEARCHES FOR THE REASON THEY SHOULD NOT.' : 'ONLY LIVE EXECUTION HAS AUTHORITY — AND IT REMAINS LOCKED'}</b></div>}
         {timelineTime >= 30 && timelineTime < 65 && <div className="guided-evidence"><small>ALPACA PAPER TRADING · SANITIZED ACCOUNT EVIDENCE</small><b>CASH / EQUITY <strong>$100,000</strong></b><b>BUYING POWER <strong>$400,000</strong></b><div><span>OPTIONS LEVEL <strong>3</strong></span><span>POSITIONS <strong>0</strong></span><span>OPEN ORDERS <strong>0</strong></span></div></div>}
         {timelineTime >= 200 && timelineTime < 215 && <div className="guided-audit"><small>TAMPER-EVIDENT EXECUTION RECORD</small><b>HASH-CHAIN AUDIT LOG</b><span>SNAPSHOT → AI/FALLBACK → POLICIES → HARD GATE → PREVIEW</span><strong>CHAIN VERIFIED · SECRETS REDACTED</strong></div>}
-        <div className="tower-legend">
+        {time >= 244 && <div className="cinematic-final"><b>AI MAY PROPOSE.</b><strong>ONLY POLICY EARNS THE RIGHT TO TRADE.</strong><span>VERIFIED ALPACA REPLAY · PAPER PREVIEW · NOT SUBMITTED</span></div>}
+        {coverMode && <div className="cinematic-cover"><b>HARD GATE:</b><strong>BLOCKED</strong><span><i>RISK</i> $1,096 <em>&gt;</em> <i>LIMIT</i> $1,000</span><small>SEOUL SHIELD · COUNTERFACTUAL RISK TRIBUNAL</small></div>}
+        {reviewFrame && <div className={`evidence-review evidence-review-${reviewFrame}`}>
+          <div className="review-depth-rails" aria-hidden="true"><i /><i /><i /><i /></div>
+          {reviewFrame === 'opening' && <><small>SEOUL SHIELD · AUTONOMOUS RISK-GOVERNED OPTIONS AGENT</small><b>AI PROPOSED AN UNSAFE TRADE.</b><strong>SEOUL SHIELD RESIZED THE RISK.</strong><em>ONLY AN APPROVED PAPER ORDER CAN REACH ALPACA.</em><span>FINAL EXECUTION EVIDENCE PENDING MARKET OPEN</span></>}
+          {reviewFrame === 'gemini' && <><small>LIVE MARKET SNAPSHOT → STRUCTURED MODEL INFERENCE</small><b>GEMINI DECISION</b><strong>AI VERIFIED</strong><em>MODEL gemini-3.8-flash</em><span>SCHEMA VALID · INPUT SHA-256 6C2AE226…D77E7E</span></>}
+          {reviewFrame === 'blocked' && <><small>DETERMINISTIC CAPITAL FIREWALL</small><b>UNSAFE ORDER BLOCKED</b><strong>$1,072 <i>&gt;</i> $1,000</strong><em>4 CONTRACTS · $72 OVER POLICY LIMIT</em><span>TEMPORARY STALE-QUOTE VALIDATION VALUE</span></>}
+          {reviewFrame === 'alternative' && <><small>AUTONOMOUS POLICY-COMPLIANT SEARCH</small><b>SAFE ALTERNATIVE</b><strong>3 CONTRACTS · $804</strong><em>MAX LOSS · 0.804% OF EQUITY</em><span>RISK LIMIT PASSED · FRESH QUOTE STILL REQUIRED</span></>}
+          {reviewFrame === 'order' && <><small>ALPACA PAPER EXECUTION GATEWAY</small><b>HUMAN APPROVAL</b><strong>ORDER NOT SUBMITTED</strong><em>MARKET CLOSED · QUOTE STALE</em><span>ORDER ID PENDING · ALPACA_ALLOW_SUBMIT=FALSE</span></>}
+          {reviewFrame === 'pnl' && <><small>ALPACA PAPER POSITION MONITOR</small><b>FILL / STATUS</b><strong>PENDING REAL EXECUTION</strong><em>PAPER P&amp;L UNAVAILABLE</em><span>NO POSITION · NO FILL · NO FABRICATED RESULT</span></>}
+          {reviewFrame === 'audit' && <><small>TAMPER-EVIDENT DECISION RECORD</small><b>HASH VERIFIED</b><strong>9 EVENTS LINKED</strong><em>SNAPSHOT → GEMINI → POLICIES → PREFLIGHT</em><span>SECRETS REDACTED · ORDER SUBMISSION LOCKED</span></>}
+          {reviewFrame === 'ending' && <><small>SEOUL SHIELD · COUNTERFACTUAL RISK TRIBUNAL</small><b>AI MAY PROPOSE.</b><strong>ONLY POLICY EARNS<br />THE RIGHT TO TRADE.</strong><span>AI VERIFIED · ALPACA PAPER PREFLIGHT · NOT SUBMITTED</span></>}
+        </div>}
+        {terminalMode && time < 244 && <TerminalRemasterOverlay time={time} />}
+        {(cinematicMode || thumbnailMode) && <CinematicRemasterOverlay time={time} thumbnail={thumbnailMode} />}
+        {time < 244 && <div className="tower-legend">
           <span className="opportunity">● OPPORTUNITY · SMOOTH PATH</span>
           <span className="uncertain">△ UNCERTAIN · REVIEW LANE</span>
           <span className="risk-blocked">▣ RISK BLOCKED · QUARANTINE</span>
-        </div>
+        </div>}
       </section>
-      <footer className="tower-footer">
+      {time < 244 && <footer className="tower-footer">
         <span>{phase}</span><i><em style={{ width: `${(time / DURATION) * 100}%` }} /></i><b>{time.toFixed(1)} / {DURATION.toFixed(1)} SEC</b>
-      </footer>
+      </footer>}
     </main>
   );
+}
+
+const pending = 'AWAITING LIVE MARKET DATA';
+
+function TerminalMetric({ label, value, tone = 'data' }: { label: string; value: string; tone?: 'data' | 'up' | 'down' | 'ai' | 'warn' }) {
+  return <div className={`terminal-metric ${tone}`}><span>{label}</span><b>{value}</b></div>;
+}
+
+function TerminalRemasterOverlay({ time }: { time: number }) {
+  const stage = time < 36 ? 'LIVE DATA' : time < 75 ? 'AI ANALYSIS' : time < 112 ? 'UNSAFE ORDER' : time < 148 ? 'SAFE ALTERNATIVE' : time < 178 ? 'HUMAN APPROVAL' : time < 210 ? 'ALPACA PAPER EXECUTION' : time < 232 ? 'POSITION / P&L' : 'HASH VERIFIED';
+  const blocked = time >= 75 && time < 112;
+  const passed = time >= 112 && time < 148;
+  const awaitingOrder = time >= 178 && time < 232;
+  const stageStatus = blocked ? 'ORDER BLOCKED' : passed ? 'RISK CAP PASSED' : awaitingOrder ? 'NOT SUBMITTED' : stage === 'HASH VERIFIED' ? 'AI EVIDENCE VERIFIED · EXECUTION PENDING' : pending;
+  return <div className={`terminal-remaster ${blocked ? 'risk-flash' : ''}`}>
+    <div className="terminal-topline">
+      <div><strong>SEOUL SHIELD</strong><span>INSTITUTIONAL OPTIONS RISK TERMINAL</span></div>
+      <div className="terminal-session"><i /> PAPER TRADING · SUBMISSION LOCKED</div>
+    </div>
+    <div className="terminal-stage-label"><span>{stage}</span><b>{stageStatus}</b></div>
+
+    <section className="terminal-chain terminal-depth-back">
+      <header><b>LIVE OPTIONS CHAIN</b><span>ALPACA MARKET DATA</span></header>
+      <div className="terminal-chain-head"><span>CONTRACT</span><span>BID</span><span>ASK</span><span>MID</span><span>SPR</span><span>VOL</span><span>OI</span><span>Δ</span></div>
+      {['SPY CALL · LEG A','SPY CALL · LEG B','SPY CALL · CANDIDATE','SPY PUT · CANDIDATE','SPY CALL · CANDIDATE'].map((name, i) => <div className={`terminal-chain-row ${i < 2 ? 'selected' : ''}`} key={name}>
+        <span>{name}</span>{Array.from({length:7},(_,n)=><span key={n}>—</span>)}
+      </div>)}
+      <footer>{pending}</footer>
+    </section>
+
+    <section className="terminal-market terminal-depth-front">
+      <header><b>SPY</b><span>UNDERLYING</span></header>
+      <strong>—</strong><em>—%</em>
+      <div className="terminal-spark"><i /><i /><i /><i /><i /><i /></div>
+      <small>PRICE · CHANGE · TIMESTAMP</small>
+      <b>{pending}</b>
+    </section>
+
+    <section className="terminal-contract terminal-depth-mid">
+      <header><b>SELECTED SPREAD</b><span>DEFINED RISK</span></header>
+      <div className="terminal-legs"><strong>BUY SPY CALL</strong><i>+</i><strong>SELL SPY CALL</strong></div>
+      <div className="terminal-contract-grid">
+        <TerminalMetric label="EXPIRATION" value="—" />
+        <TerminalMetric label="STRIKES" value="— / —" />
+        <TerminalMetric label="BID / ASK" value="— / —" />
+        <TerminalMetric label="MID / SPREAD" value="— / —" />
+        <TerminalMetric label="VOLUME / OI" value="— / —" />
+        <TerminalMetric label="DELTA / GAMMA" value="— / —" />
+        <TerminalMetric label="THETA / VEGA" value="— / —" />
+        <TerminalMetric label="QUOTE TIME" value="—" />
+      </div>
+      <footer>{pending}</footer>
+    </section>
+
+    <section className="terminal-ai terminal-depth-front">
+      <header><b>GEMINI RISK ANALYSIS</b><span>STRUCTURED JSON · SCHEMA VALIDATED</span></header>
+      <div className="terminal-ai-score"><span>CONFIDENCE</span><strong>—</strong></div>
+      <ul><li>OPPORTUNITY <b>AWAITING DATA</b></li><li>LIQUIDITY RISK <b>AWAITING DATA</b></li><li>VOLATILITY / REGIME <b>AWAITING DATA</b></li><li>PORTFOLIO CONFLICT <b>AWAITING DATA</b></li></ul>
+      <footer>AI VERIFIED · MARKET DECISION PENDING FRESH SNAPSHOT</footer>
+    </section>
+
+    <section className={`terminal-risk terminal-depth-mid ${passed ? 'passed' : ''}`}>
+      <header><b>CAPITAL RISK GATE</b><span>DETERMINISTIC POLICY</span></header>
+      <div className="terminal-risk-grid">
+        <TerminalMetric label="CONTRACTS" value="—" />
+        <TerminalMetric label="TOTAL COST" value="—" />
+        <TerminalMetric label="MAX PROFIT" value="—" />
+        <TerminalMetric label="MAX LOSS" value="—" tone={blocked ? 'down' : 'warn'} />
+        <TerminalMetric label="BREAKEVEN" value="—" />
+        <TerminalMetric label="ACCOUNT LIMIT" value="—" />
+        <TerminalMetric label="POST-TRADE CAPACITY" value="—" />
+      </div>
+      <strong>{blocked ? 'ORDER BLOCKED' : passed ? 'RISK CAP PASSED' : pending}</strong>
+    </section>
+
+    <section className="terminal-orders terminal-depth-back">
+      <header><b>ALPACA PAPER ORDER</b><span>EXECUTION BLOTTER</span></header>
+      <div><span>ORDER STATUS</span><b>{awaitingOrder ? 'NOT SUBMITTED' : 'AWAITING APPROVAL'}</b></div>
+      <div><span>FILLED QTY / AVG PRICE</span><b>— / —</b></div>
+      <div><span>POSITION / PAPER P&amp;L</span><b>— / —</b></div>
+      <footer>NO ORDER · NO FILL · NO FABRICATED P&amp;L</footer>
+    </section>
+
+    <div className="terminal-audit"><span>MEASURED AT</span><b>AWAITING FRESH MARKET TIMESTAMP</b><span>SOURCE</span><b>ALPACA PAPER</b><span>AUDIT HASH</span><b>AWAITING EXECUTION EVIDENCE</b></div>
+  </div>;
+}
+
+function CinematicRemasterOverlay({ time, thumbnail }: { time: number; thumbnail: boolean }) {
+  const stage = thumbnail ? 'thumbnail' : time < 32 ? 'proposed' : time < 72 ? 'vetoed' : time < 112 ? 'alternative' : time < 150 ? 'approval' : time < 195 ? 'execution' : time < 225 ? 'position' : 'verified';
+  const copy: Record<string, [string,string,string]> = {
+    proposed:['MARKET DATA REQUIRED','LIVE SPY OPTIONS ANALYSIS','AWAITING VERIFIED ALPACA SNAPSHOT'],
+    vetoed:['RISK CALCULATION PENDING','ORIGINAL ORDER REVIEW','AWAITING FRESH QUOTE'],
+    alternative:['RESIZE CALCULATION PENDING','CONTROLLED ALTERNATIVE','AWAITING FRESH-QUOTE VALIDATION'],
+    approval:['PREFLIGHT INCOMPLETE','HUMAN APPROVAL REQUIRED','PAPER EXECUTION LOCKED'],
+    execution:['ORDER NOT SUBMITTED','ALPACA PAPER EXECUTION','AWAITING APPROVAL'],
+    position:['NO VERIFIED POSITION','UNREALIZED P&L: $—','NO FABRICATED OUTCOME'],
+    verified:['MODEL RESPONSE VERIFIED','SCHEMA VERIFIED','MARKET DECISION PENDING'],
+    thumbnail:['LIVE SPY OPTIONS','RISK-GOVERNED PAPER EXECUTION','AWAITING VERIFIED MARKET DATA'],
+  };
+  const [eyebrow,headline,status]=copy[stage];
+  const danger=false;
+  const safe=false;
+  const loopStages=['SCAN','CLASSIFY','PROPOSE','VERIFY','RESIZE','APPROVAL','EXECUTE','MONITOR'];
+  const evidenceState={liveMarketReady:false,proposalReady:false,riskVerified:false,humanApproved:false,orderSubmitted:false,positionOpen:false};
+  const completedLoop= evidenceState.positionOpen ? 8 : evidenceState.orderSubmitted ? 7 : evidenceState.humanApproved ? 6 : evidenceState.riskVerified ? 5 : evidenceState.proposalReady ? 3 : evidenceState.liveMarketReady ? 1 : 0;
+  const rankedCandidates=['SPY','QQQ','AAPL','NVDA'];
+  return <div data-render-ready="true" data-render-stage={stage} className={`cinematic-remaster cinematic-${stage} ${danger?'danger':''} ${safe?'safe':''}`}>
+    <div className="market-index-bar">{['S&P 500','NASDAQ','DOW','VIX'].map(name=><div key={name}><b>{name}</b><span>—</span><em>AWAITING LIVE DATA</em></div>)}</div>
+    <div className="autonomous-loop"><header><b>AUTONOMOUS DECISION LOOP</b><span>MARKET INPUT PENDING · PAPER EXECUTION LOCKED</span></header><div>{loopStages.map((name,i)=><span className={i===completedLoop?'active':i<completedLoop?'complete':''} key={name}><i>{i<completedLoop?'✓':String(i+1).padStart(2,'0')}</i><b>{name}</b></span>)}</div></div>
+    <div className="cinematic-depth-field" aria-hidden="true">{Array.from({length:18},(_,i)=><i key={i} style={{'--i':i} as React.CSSProperties}/>)}</div>
+    <div className="market-hero" aria-hidden="true">
+      <div className="market-symbol"><b>SPY</b><span>AWAITING LIVE MARKET DATA</span></div>
+      <div className="market-empty-chart"><b>AWAITING LIVE ALPACA TIME SERIES</b><span>NO SYNTHETIC CANDLES · NO SIMULATED PRICE PATH</span></div>
+      <div className="market-tape">EXPIRATION&nbsp;— &nbsp; STRIKE&nbsp;— &nbsp; BID&nbsp;— &nbsp; ASK&nbsp;— &nbsp; IV&nbsp;— &nbsp; OI&nbsp;— &nbsp; DELTA&nbsp;—</div>
+    </div>
+    <div className="option-ladder" aria-hidden="true"><header>LIVE OPTIONS CHAIN</header>{['CALL · —','CALL · —','CANDIDATE LEG · —','CANDIDATE LEG · —','PUT · —'].map((x,i)=><div className={i===2||i===3?'candidate':''} key={x+i}><b>{x}</b><span>BID —</span><span>ASK —</span><span>OI —</span></div>)}</div>
+    <div className="market-watchlist"><header>AI WATCHLIST</header>{['SPY','QQQ','IWM','AAPL','NVDA'].map((name)=><div key={name}><b>{name}</b><span>—%</span><em>AWAITING LIVE SCORE</em></div>)}</div>
+    <div className="market-position"><header>PAPER POSITION</header><strong>PAPER P&amp;L&nbsp; —</strong><div><span>AVG ENTRY</span><b>—</b></div><div><span>CURRENT</span><b>—</b></div><div><span>QTY / RETURN</span><b>— / —%</b></div><footer>NO POSITION · NOT SUBMITTED</footer></div>
+    <div className="market-order-timeline"><b>ORDER LIFECYCLE</b><span>APPROVAL&nbsp; ○</span><i>→</i><span>SUBMITTED&nbsp; ○</span><i>→</i><span>FILLED&nbsp; ○</span><i>→</i><span>CLOSED&nbsp; ○</span></div>
+    <div className="ai-decision-core" aria-label="AI decision core awaiting verified live market data">
+      <header><span>LIVE MARKET INPUT</span><b>AI DECISION CORE</b><em>AWAITING VERIFIED ALPACA DATA</em></header>
+      <div className="core-orbits" aria-hidden="true">
+        {rankedCandidates.map((symbol,i)=><span className={`orbit orbit-${i+1}`} key={symbol}><i>{symbol}</i><strong>PENDING</strong><small>PRICE — &nbsp; CHG —% &nbsp; VOL —</small></span>)}
+      </div>
+      <div className="core-engine"><small>SELECTION PENDING</small><strong>CONFIDENCE<br/>—%</strong><em>RANKING SCORE —</em></div>
+      <div className="core-verification"><span>MODEL <b>GEMINI-3.8-FLASH</b></span><span>RESPONSE <b>18,825 MS</b></span><span>SCHEMA <b>PASS</b></span></div>
+      <footer><span>SELECTED CONTRACT</span><b>AWAITING LIVE OPTIONS CHAIN</b><em>NO ORDER SUBMITTED</em></footer>
+    </div>
+    <div className="digital-twin">
+      <header><span>MARKET DIGITAL TWIN</span><b>ONE SIGNAL · TWO PRE-TRADE FUTURES</b></header>
+      <section className="future original"><small>ORIGINAL FUTURE</small><strong>QUANTITY — <em>LIVE INPUT PENDING</em></strong><div className="pnl-axis"><i/><em>EXPECTED P&amp;L CURVE PENDING</em></div><dl><dt>MAX LOSS</dt><dd>$—</dd><dt>ACCOUNT RISK</dt><dd>—%</dd><dt>DECISION</dt><dd>AWAITING DATA</dd></dl></section>
+      <div className="twin-split"><span>AI<br/>PROPOSAL</span><i>⇢</i><b>RISK<br/>ENGINE</b><i>⇢</i></div>
+      <section className="future controlled"><small>CONTROLLED FUTURE</small><strong>QUANTITY — <em>RISK RESULT PENDING</em></strong><div className="pnl-axis"><i/><em>EXPECTED P&amp;L CURVE PENDING</em></div><dl><dt>MAX LOSS</dt><dd>$—</dd><dt>REMAINING CAPACITY</dt><dd>$—</dd><dt>DECISION</dt><dd>AWAITING DATA</dd></dl></section>
+    </div>
+    <div className="decision-lineage"><span>INPUT HASH</span><i>→</i><span>GEMINI</span><i>→</i><span>RISK GATE</span><i>→</i><span>HUMAN</span><i>→</i><span>ALPACA PAPER</span><i>→</i><span>RESULT HASH</span></div>
+    <div className="cinematic-copy"><small>{eyebrow}</small><b>{headline}</b><span>{status}</span></div>
+    <div className="cinematic-proof"><span>GEMINI · STRUCTURED DECISION</span><span>ALPACA · PAPER TRADING</span><span>DETERMINISTIC · RISK GATE</span></div>
+  </div>;
 }

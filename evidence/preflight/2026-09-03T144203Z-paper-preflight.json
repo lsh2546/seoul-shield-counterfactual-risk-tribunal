@@ -1,0 +1,306 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-09-03T14:42:03.967038+00:00",
+  "status": "LIVE PREFLIGHT · NO TRADE · NO ORDER PREVIEW",
+  "account": {
+    "environment": "paper",
+    "account_masked": "***NQXY",
+    "status": "ACTIVE",
+    "cash": 100000.0,
+    "equity": 100000.0,
+    "buying_power": 400000.0,
+    "options_level": 3,
+    "trading_blocked": false,
+    "starting_balance_verified": true,
+    "positions": 0,
+    "open_orders": 0,
+    "daily_pnl": 0.0
+  },
+  "market": {
+    "symbol": "AAPL",
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T10:42:00.698402959-04:00",
+    "underlying_price": 328.165,
+    "underlying_timestamp": "2026-09-03T14:42:00.305888766Z",
+    "expiration": "2026-09-11",
+    "contracts_received": 79,
+    "recent_return_windows": {
+      "5m": {
+        "requested_minutes": 5,
+        "source": "Alpaca Market Data API · IEX · 1Min bars",
+        "start_timestamp": "2026-09-03T14:36:00Z",
+        "start_price": 329.49,
+        "end_timestamp": "2026-09-03T14:41:00Z",
+        "end_price": 328.17,
+        "actual_elapsed_seconds": 300,
+        "return_pct": -0.400619
+      },
+      "15m": {
+        "requested_minutes": 15,
+        "source": "Alpaca Market Data API · IEX · 1Min bars",
+        "start_timestamp": "2026-09-03T14:26:00Z",
+        "start_price": 329.93,
+        "end_timestamp": "2026-09-03T14:41:00Z",
+        "end_price": 328.17,
+        "actual_elapsed_seconds": 900,
+        "return_pct": -0.533446
+      }
+    },
+    "short_term_direction": "bearish",
+    "volatility_percentile_evidence": {
+      "status": "IV_HISTORY_UNAVAILABLE",
+      "volatility_percentile": null,
+      "reason": "verified historical option IV series unavailable",
+      "current_long_iv": 0.2734,
+      "current_short_iv": 0.2723
+    }
+  },
+  "selected_legs": {
+    "long": {
+      "symbol": "AAPL260911C00327500",
+      "strike": 327.5,
+      "expiration": "2026-09-11",
+      "bid": 5.77,
+      "ask": 5.8,
+      "midpoint": 5.785,
+      "spread_pct": 0.005186,
+      "open_interest": 1015,
+      "volume": 1016,
+      "iv": 0.2734,
+      "delta": 0.5369,
+      "gamma": 0.0299,
+      "theta": -0.3467,
+      "vega": 0.193,
+      "tradable": true,
+      "observed_at": "2026-09-03T14:42:02.774243443Z",
+      "quote_age_seconds": 1.2
+    },
+    "short": {
+      "symbol": "AAPL260911C00332500",
+      "strike": 332.5,
+      "expiration": "2026-09-11",
+      "bid": 3.42,
+      "ask": 3.65,
+      "midpoint": 3.535,
+      "spread_pct": 0.065064,
+      "open_interest": 1640,
+      "volume": 456,
+      "iv": 0.2723,
+      "delta": 0.3886,
+      "gamma": 0.029,
+      "theta": -0.3292,
+      "vega": 0.1862,
+      "tradable": true,
+      "observed_at": "2026-09-03T14:42:02.776061697Z",
+      "quote_age_seconds": 1.2
+    }
+  },
+  "original": {
+    "quantity": 4,
+    "net_debit": 2.38,
+    "max_loss": 952.0,
+    "approved": false,
+    "reasons": [
+      "max loss $952.00 exceeds IV_HISTORY_UNAVAILABLE limit $500.00",
+      "excess $452.00"
+    ]
+  },
+  "alternative": {
+    "quantity": 2,
+    "net_debit": 2.38,
+    "max_loss": 476.0,
+    "approved": true,
+    "reasons": []
+  },
+  "ai": {
+    "candidate_evidence_file": "2026-09-03T144009Z-live-candidates.json",
+    "candidate_result": {
+      "status": "MODEL RESPONSE VERIFIED",
+      "provider": "gemini_developer",
+      "model": "gemini-3.7-flash",
+      "model_time": null,
+      "latency_ms": 6762,
+      "schema_validated": true,
+      "input_sha256": "4de4213cc3cc3be21dc417164549fb6e6b2f85eae3b5fdb530c207783b2893de",
+      "output_sha256": "cfa57b25004e966187a2d3198d7102cdac9aff3ef46d48413dc7fcb2a19cc09e",
+      "result": {
+        "candidates": [
+          {
+            "symbol": "SPY",
+            "score": 45,
+            "reason": "Mixed short-term trend with flat momentum over 5m and 15m."
+          },
+          {
+            "symbol": "QQQ",
+            "score": 60,
+            "reason": "Bearish short-term indicator with steady downward 15m momentum."
+          },
+          {
+            "symbol": "AAPL",
+            "score": 78,
+            "reason": "Consistent downward momentum across both 5m and 15m intervals."
+          },
+          {
+            "symbol": "NVDA",
+            "score": 55,
+            "reason": "Mixed direction with strong 5m rebound against 15m decline."
+          }
+        ],
+        "selected_symbol": "AAPL",
+        "direction": "bearish",
+        "confidence": 0.75,
+        "selection_reasons": [
+          "Consistent negative returns across 5m and 15m windows",
+          "Strongest relative downward momentum among candidates"
+        ]
+      }
+    },
+    "risk_result": {
+      "regime": "iv_history_unavailable",
+      "volatility_risk": "unknown",
+      "liquidity_risk": "low",
+      "event_risk": "unknown",
+      "direction": "bearish",
+      "confidence": 0,
+      "risk_multiplier": 0.5,
+      "reasons": [
+        "historical IV percentile unavailable; deterministic conservative policy applied",
+        "risk cap reduced from 1.0% to 0.5%",
+        "quantity capped at 50% of original"
+      ]
+    },
+    "evidence": {
+      "input": {
+        "snapshot_id": "aapl-20260903T144203Z",
+        "observed_at": "2026-09-03T14:42:02.776061697Z",
+        "underlying": "AAPL",
+        "volatility_percentile": null,
+        "bid_ask_spread_pct": 0.065064,
+        "open_interest": 1015,
+        "quote_age_seconds": 1.2,
+        "recent_return_pct": -0.400619
+      },
+      "input_sha256": "2b43e4d983836817db09eebeaaddcab5cb4790190aac64ea6a9c165b41ef6f38",
+      "provider": "gemini_developer",
+      "model": "gemini-3.7-flash",
+      "response": null,
+      "latency_ms": 0,
+      "timed_out": false,
+      "fallback": "IV_HISTORY_UNAVAILABLE",
+      "error_type": "HISTORICAL_IV_SERIES_UNAVAILABLE"
+    },
+    "structured_call_ok": true
+  },
+  "iv_history_unavailable_policy": {
+    "status": "APPLIED",
+    "volatility_percentile": null,
+    "risk_limit_fraction": 0.005,
+    "risk_limit_amount": 500.0,
+    "original_quantity": 4,
+    "maximum_quantity": 2,
+    "approved_quantity": 2,
+    "requirements": {
+      "max_spread_pct": 0.1,
+      "min_open_interest": 500,
+      "min_leg_volume": 50,
+      "max_quote_age_seconds": 10,
+      "both_current_ivs_required": true
+    },
+    "observed": {
+      "long_iv": 0.2734,
+      "short_iv": 0.2723,
+      "max_spread_pct": 0.065064,
+      "min_open_interest": 1015,
+      "min_leg_volume": 456,
+      "max_quote_age_seconds": 1.2
+    },
+    "passed": true
+  },
+  "strategy_decision": "NO TRADE · BULL CALL INCOMPATIBLE WITH BEARISH SIGNAL",
+  "direction_alignment": "ALIGNED",
+  "final_decision": "NO TRADE · STRATEGY DIRECTION INCOMPATIBLE",
+  "checks": {
+    "paper_account": true,
+    "competition_balance": true,
+    "options_level_3": true,
+    "market_open": true,
+    "fresh_quote": true,
+    "liquidity": true,
+    "directional_strategy": false,
+    "strike_order": true,
+    "tradable_contracts": true,
+    "risk_limit": true,
+    "structured_ai": true,
+    "iv_history_unavailable_policy": true,
+    "idempotency_unused": true,
+    "status_lookup_ready": true,
+    "cancel_ready": true
+  },
+  "policies": [
+    {
+      "universe": "no_guard",
+      "action": "approve",
+      "requested_quantity": 2,
+      "approved_quantity": 2,
+      "reasons": [
+        "shadow baseline: no risk controls"
+      ],
+      "max_loss": 476.0,
+      "actual_order_authority": false,
+      "snapshot_id": "aapl-20260903T144203Z"
+    },
+    {
+      "universe": "static_guard",
+      "action": "approve",
+      "requested_quantity": 2,
+      "approved_quantity": 2,
+      "reasons": [
+        "fixed 1% trade / 5% portfolio / 2% daily stop"
+      ],
+      "max_loss": 476.0,
+      "actual_order_authority": false,
+      "snapshot_id": "aapl-20260903T144203Z"
+    },
+    {
+      "universe": "adaptive_guard",
+      "action": "resize",
+      "requested_quantity": 2,
+      "approved_quantity": 1,
+      "reasons": [
+        "AI regime=iv_history_unavailable, multiplier=0.5",
+        "historical IV percentile unavailable; deterministic conservative policy applied",
+        "risk cap reduced from 1.0% to 0.5%",
+        "quantity capped at 50% of original"
+      ],
+      "max_loss": 238.0,
+      "actual_order_authority": false,
+      "snapshot_id": "aapl-20260903T144203Z"
+    },
+    {
+      "universe": "live_execution",
+      "action": "resize",
+      "requested_quantity": 2,
+      "approved_quantity": 1,
+      "reasons": [
+        "AI regime=iv_history_unavailable, multiplier=0.5",
+        "historical IV percentile unavailable; deterministic conservative policy applied",
+        "risk cap reduced from 1.0% to 0.5%",
+        "quantity capped at 50% of original",
+        "preview only until explicit human approval"
+      ],
+      "max_loss": 238.0,
+      "actual_order_authority": true,
+      "snapshot_id": "aapl-20260903T144203Z"
+    }
+  ],
+  "preview": {
+    "status": "NOT CREATED · NO TRADE",
+    "allow_submit": false,
+    "preflight_pass": false,
+    "sanitized_payload": null
+  },
+  "security": {
+    "credentials_in_bundle": false,
+    "full_account_number_in_bundle": false
+  }
+}

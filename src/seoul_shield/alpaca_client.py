@@ -79,6 +79,14 @@ class AlpacaClient:
             {"feed": feed},
         )
 
+    def stock_bars(self, symbol: str, *, start: str, end: str,
+                   timeframe: str = "1Min", feed: str = "iex") -> dict:
+        return self._get(
+            f"https://data.alpaca.markets/v2/stocks/{symbol.upper()}/bars",
+            {"start": start, "end": end, "timeframe": timeframe,
+             "feed": feed, "adjustment": "raw", "limit": 1000},
+        )
+
     def option_contracts(self, underlying: str, *, expiration: date,
                          option_type: str = "call") -> dict:
         return self._get(

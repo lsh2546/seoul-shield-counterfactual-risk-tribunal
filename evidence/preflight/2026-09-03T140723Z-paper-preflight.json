@@ -1,0 +1,263 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-09-03T14:07:23.254849+00:00",
+  "status": "LIVE PREFLIGHT · NO TRADE · NO ORDER PREVIEW",
+  "account": {
+    "environment": "paper",
+    "account_masked": "***NQXY",
+    "status": "ACTIVE",
+    "cash": 100000.0,
+    "equity": 100000.0,
+    "buying_power": 400000.0,
+    "options_level": 3,
+    "trading_blocked": false,
+    "starting_balance_verified": true,
+    "positions": 0,
+    "open_orders": 0,
+    "daily_pnl": 0.0
+  },
+  "market": {
+    "symbol": "NVDA",
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T10:07:19.914017467-04:00",
+    "underlying_price": 227.76,
+    "underlying_timestamp": "2026-09-03T14:07:21.441183824Z",
+    "expiration": "2026-09-11",
+    "contracts_received": 80
+  },
+  "selected_legs": {
+    "long": {
+      "symbol": "NVDA260911C00227500",
+      "strike": 227.5,
+      "expiration": "2026-09-11",
+      "bid": 4.43,
+      "ask": 4.52,
+      "midpoint": 4.475,
+      "spread_pct": 0.020112,
+      "open_interest": 4078,
+      "volume": 2091,
+      "iv": 0.3156,
+      "delta": 0.5266,
+      "gamma": 0.0374,
+      "theta": -0.2762,
+      "vega": 0.1342,
+      "tradable": true,
+      "observed_at": "2026-09-03T14:07:21.913347255Z",
+      "quote_age_seconds": 1.3
+    },
+    "short": {
+      "symbol": "NVDA260911C00232500",
+      "strike": 232.5,
+      "expiration": "2026-09-11",
+      "bid": 2.3,
+      "ask": 2.34,
+      "midpoint": 2.32,
+      "spread_pct": 0.017241,
+      "open_interest": 4013,
+      "volume": 1289,
+      "iv": 0.3095,
+      "delta": 0.3418,
+      "gamma": 0.0352,
+      "theta": -0.247,
+      "vega": 0.1238,
+      "tradable": true,
+      "observed_at": "2026-09-03T14:07:21.951117101Z",
+      "quote_age_seconds": 1.3
+    }
+  },
+  "original": {
+    "quantity": 4,
+    "net_debit": 2.22,
+    "max_loss": 888.0,
+    "approved": true,
+    "reasons": []
+  },
+  "alternative": {
+    "quantity": 4,
+    "net_debit": 2.22,
+    "max_loss": 888.0,
+    "approved": true,
+    "reasons": []
+  },
+  "ai": {
+    "candidate_evidence_file": "2026-09-03T140605Z-live-candidates.json",
+    "candidate_result": {
+      "status": "MODEL RESPONSE VERIFIED",
+      "provider": "gemini_developer",
+      "model": "gemini-3.7-flash",
+      "model_time": null,
+      "latency_ms": 14434,
+      "schema_validated": true,
+      "input_sha256": "5cd5eeb237414a9a52844b0d5eb6eb1c52e565f1657b262b87d861a11cc47e61",
+      "output_sha256": "94c0bd702e41e867e5e05ca2e4c13806c2000df87ce01b3d79405dd26889e2f9",
+      "result": {
+        "candidates": [
+          {
+            "symbol": "SPY",
+            "score": 75,
+            "reason": "Solid liquidity and positive change percentage indicating steady momentum."
+          },
+          {
+            "symbol": "QQQ",
+            "score": 68,
+            "reason": "Moderate volume and positive price performance, trailing SPY slightly."
+          },
+          {
+            "symbol": "AAPL",
+            "score": 65,
+            "reason": "Wider bid-ask spread relative to price but showing positive upward movement."
+          },
+          {
+            "symbol": "NVDA",
+            "score": 92,
+            "reason": "Highest volume and strongest relative performance with a 1.56% gain and tight spread."
+          }
+        ],
+        "selected_symbol": "NVDA",
+        "direction": "bullish",
+        "confidence": 0.88,
+        "selection_reasons": [
+          "Strongest positive price momentum among all candidates (+1.5595%)",
+          "Highest traded volume demonstrating strong market participation",
+          "Tight bid-ask spread indicating low execution slippage risk"
+        ]
+      }
+    },
+    "risk_result": {
+      "regime": "calm",
+      "volatility_risk": "medium",
+      "liquidity_risk": "medium",
+      "event_risk": "low",
+      "direction": "neutral",
+      "confidence": 0.85,
+      "risk_multiplier": 0.75,
+      "reasons": [
+        "Bid-ask spread is slightly elevated at 2.01%",
+        "Volatility percentile is moderate at 50%",
+        "Open interest is stable at 4013 contracts",
+        "Recent returns are flat with fresh quote data"
+      ]
+    },
+    "evidence": {
+      "input": {
+        "snapshot_id": "nvda-20260903T140723Z",
+        "observed_at": "2026-09-03T14:07:21.951117101Z",
+        "underlying": "NVDA",
+        "volatility_percentile": 0.5,
+        "bid_ask_spread_pct": 0.020112,
+        "open_interest": 4013,
+        "quote_age_seconds": 1.3,
+        "recent_return_pct": 0
+      },
+      "input_sha256": "7b3b89a5048b60437039761a04406117fea8ffa53d67b909b9693c26b34118e2",
+      "provider": "gemini_developer",
+      "model": "gemini-3.5-flash",
+      "response": {
+        "regime": "calm",
+        "volatility_risk": "medium",
+        "liquidity_risk": "medium",
+        "event_risk": "low",
+        "direction": "neutral",
+        "confidence": 0.85,
+        "risk_multiplier": 0.75,
+        "reasons": [
+          "Bid-ask spread is slightly elevated at 2.01%",
+          "Volatility percentile is moderate at 50%",
+          "Open interest is stable at 4013 contracts",
+          "Recent returns are flat with fresh quote data"
+        ]
+      },
+      "latency_ms": 26985,
+      "timed_out": false,
+      "fallback": null,
+      "error_type": null
+    },
+    "structured_call_ok": true
+  },
+  "strategy_decision": "NO TRADE · DIRECTIONAL STRATEGY REJECTED",
+  "checks": {
+    "paper_account": true,
+    "competition_balance": true,
+    "options_level_3": true,
+    "market_open": true,
+    "fresh_quote": true,
+    "liquidity": true,
+    "directional_strategy": false,
+    "strike_order": true,
+    "tradable_contracts": true,
+    "risk_limit": true,
+    "structured_ai": true,
+    "idempotency_unused": true,
+    "status_lookup_ready": true,
+    "cancel_ready": true
+  },
+  "policies": [
+    {
+      "universe": "no_guard",
+      "action": "approve",
+      "requested_quantity": 4,
+      "approved_quantity": 4,
+      "reasons": [
+        "shadow baseline: no risk controls"
+      ],
+      "max_loss": 888.0,
+      "actual_order_authority": false,
+      "snapshot_id": "nvda-20260903T140723Z"
+    },
+    {
+      "universe": "static_guard",
+      "action": "approve",
+      "requested_quantity": 4,
+      "approved_quantity": 4,
+      "reasons": [
+        "fixed 1% trade / 5% portfolio / 2% daily stop"
+      ],
+      "max_loss": 888.0,
+      "actual_order_authority": false,
+      "snapshot_id": "nvda-20260903T140723Z"
+    },
+    {
+      "universe": "adaptive_guard",
+      "action": "resize",
+      "requested_quantity": 4,
+      "approved_quantity": 3,
+      "reasons": [
+        "AI regime=calm, multiplier=0.75",
+        "Bid-ask spread is slightly elevated at 2.01%",
+        "Volatility percentile is moderate at 50%",
+        "Open interest is stable at 4013 contracts",
+        "Recent returns are flat with fresh quote data"
+      ],
+      "max_loss": 666.0,
+      "actual_order_authority": false,
+      "snapshot_id": "nvda-20260903T140723Z"
+    },
+    {
+      "universe": "live_execution",
+      "action": "resize",
+      "requested_quantity": 4,
+      "approved_quantity": 3,
+      "reasons": [
+        "AI regime=calm, multiplier=0.75",
+        "Bid-ask spread is slightly elevated at 2.01%",
+        "Volatility percentile is moderate at 50%",
+        "Open interest is stable at 4013 contracts",
+        "Recent returns are flat with fresh quote data",
+        "preview only until explicit human approval"
+      ],
+      "max_loss": 666.0,
+      "actual_order_authority": true,
+      "snapshot_id": "nvda-20260903T140723Z"
+    }
+  ],
+  "preview": {
+    "status": "NOT CREATED · NO TRADE",
+    "allow_submit": false,
+    "preflight_pass": false,
+    "sanitized_payload": null
+  },
+  "security": {
+    "credentials_in_bundle": false,
+    "full_account_number_in_bundle": false
+  }
+}

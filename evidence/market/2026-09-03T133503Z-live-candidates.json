@@ -1,0 +1,72 @@
+{
+  "schema_version": "seoul-shield.live-candidates.v1",
+  "status": "MODEL RESPONSE VERIFIED · NO ORDER SUBMITTED",
+  "collected_at": "2026-09-03T13:35:03.456002+00:00",
+  "source": "Alpaca Market Data API · IEX",
+  "market": {
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T09:34:58.847890307-04:00",
+    "candidates": [
+      {
+        "symbol": "SPY",
+        "price": 768.99,
+        "change_pct": 0.5045,
+        "volume": 49544,
+        "bid": 768.46,
+        "ask": 769.77,
+        "trade_timestamp": "2026-09-03T13:34:58.290794042Z",
+        "quote_timestamp": "2026-09-03T13:34:59.466451809Z",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "QQQ",
+        "price": 711.38,
+        "change_pct": 0.2904,
+        "volume": 15275,
+        "bid": 710.92,
+        "ask": 711.04,
+        "trade_timestamp": "2026-09-03T13:34:48.167780201Z",
+        "quote_timestamp": "2026-09-03T13:34:59.451161404Z",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "AAPL",
+        "price": 325.62,
+        "change_pct": 0.1815,
+        "volume": 40971,
+        "bid": 325.47,
+        "ask": 325.66,
+        "trade_timestamp": "2026-09-03T13:34:59.444632769Z",
+        "quote_timestamp": "2026-09-03T13:34:59.406309257Z",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "NVDA",
+        "price": 227.03,
+        "change_pct": 1.1562,
+        "volume": 114311,
+        "bid": 224.9,
+        "ask": 227.03,
+        "trade_timestamp": "2026-09-03T13:34:58.626048329Z",
+        "quote_timestamp": "2026-09-03T13:34:59.468552048Z",
+        "source": "Alpaca Market Data API · IEX"
+      }
+    ]
+  },
+  "ai": {
+    "status": "PENDING",
+    "provider": "gemini",
+    "model": "auto",
+    "model_time": null,
+    "schema_validated": false,
+    "input_sha256": "647aad3ff68d6346d060d3936032d27ebbec1b9f573bde02ce18986422959eaa",
+    "output_sha256": null,
+    "result": null,
+    "error_type": "ValueError"
+  },
+  "execution": {
+    "paper_trading": true,
+    "allow_submit": false,
+    "order_submitted": false
+  }
+}

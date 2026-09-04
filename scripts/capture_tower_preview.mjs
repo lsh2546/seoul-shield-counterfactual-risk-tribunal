@@ -3,40 +3,49 @@ import { mkdir, rm } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
-const output = resolve(root, 'outputs/previews/Seoul-Shield-FINAL-1080p.mp4');
-const narration = resolve(root, 'outputs/previews/seoul-shield-temp-female-narration.wav');
+const segmentStart = Number(process.env.SEOUL_SHIELD_SEGMENT_START ?? 0);
+const segmentEnd = Number(process.env.SEOUL_SHIELD_SEGMENT_END ?? 260);
+const output = resolve(root, process.env.SEOUL_SHIELD_SEGMENT_OUTPUT ?? 'outputs/previews/Seoul-Shield-CINEMATIC-REMASTER-4m20s.mp4');
+const narration = resolve(root, process.env.SEOUL_SHIELD_NARRATION ?? 'outputs/previews/seoul-shield-temp-female-narration.wav');
 const subtitleWork = resolve(root, 'work/guided-demo-audio');
-const profile = resolve(root, 'work/tower-capture-profile');
-const edge = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
+const profile = resolve(root, process.env.SEOUL_SHIELD_CAPTURE_PROFILE ?? 'work/tower-capture-profile');
+const edge = process.env.SEOUL_SHIELD_BROWSER_EXECUTABLE ?? 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
+const debuggingPort = Number(process.env.SEOUL_SHIELD_DEBUGGING_PORT ?? 9334);
 const ffmpeg = execFileSync(
   'python',
   ['-c', 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())'],
   { encoding: 'utf8' },
 ).trim();
-const fps = 30;
-const frames = 260 * fps;
+// Capture deterministically at 15 unique WebGL frames per second and encode a
+// constant 30 fps delivery file. This keeps the final container requirement
+// while avoiding redundant browser screenshots for held/slow narration shots.
+const fps = Number(process.env.SEOUL_SHIELD_CAPTURE_FPS ?? 15);
+const frames = Math.round((segmentEnd - segmentStart) * fps);
 
 await mkdir(dirname(output), { recursive: true });
 await rm(profile, { recursive: true, force: true });
 const browser = spawn(edge, [
   '--headless=new',
-  '--remote-debugging-port=9334',
+  '--no-sandbox',
+  '--disable-gpu-sandbox',
+  `--remote-debugging-port=${debuggingPort}`,
   '--remote-allow-origins=*',
   `--user-data-dir=${profile}`,
   '--window-size=1920,1080',
   '--hide-scrollbars',
   '--use-angle=swiftshader',
+  '--enable-unsafe-swiftshader',
   '--disable-background-timer-throttling',
   '--disable-renderer-backgrounding',
-  'http://127.0.0.1:3001/',
+  'http://localhost:3001/',
 ], { stdio: 'ignore' });
 const wait = (ms) => new Promise((resolveWait) => setTimeout(resolveWait, ms));
 
 let page;
 for (let attempt = 0; attempt < 100; attempt += 1) {
   try {
-    const targets = await fetch('http://127.0.0.1:9334/json').then((response) => response.json());
-    page = targets.find((item) => item.type === 'page' && item.url.includes('127.0.0.1:3001'));
+    const targets = await fetch(`http://127.0.0.1:${debuggingPort}/json`).then((response) => response.json());
+    page = targets.find((item) => item.type === 'page' && item.url.includes('localhost:3001'));
     if (page) break;
   } catch {}
   await wait(100);
@@ -75,16 +84,16 @@ for (let attempt = 0; attempt < 100; attempt += 1) {
   await wait(100);
 }
 const encoder = spawn(ffmpeg, [
-  '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', 'pipe:0', '-i', narration,
-  '-vf', "subtitles=review.srt:force_style='FontName=Arial,FontSize=10,PrimaryColour=&H00FFFFFF,OutlineColour=&H00102038,BorderStyle=1,Outline=1,Shadow=0,MarginV=52,Alignment=2'",
+  '-y', '-f', 'image2pipe', '-framerate', String(fps), '-i', 'pipe:0', '-ss', String(segmentStart), '-i', narration,
+  '-vf', `setpts=PTS+${segmentStart}/TB,subtitles=review.srt:force_style='FontName=Arial,FontSize=11.5,PrimaryColour=&H00FFFFFF,OutlineColour=&H00102038,BackColour=&H99000000,BorderStyle=3,Outline=1,Shadow=1,MarginV=34,Alignment=2',setpts=PTS-${segmentStart}/TB`,
   '-c:v', 'libx264', '-profile:v', 'high', '-level:v', '4.1', '-preset', 'slow',
   '-crf', '18', '-r', '30', '-pix_fmt', 'yuv420p',
-  '-c:a', 'aac', '-ac', '1', '-ar', '48000', '-b:a', '192k', '-t', '260', '-movflags', '+faststart', output,
+  '-c:a', 'aac', '-ac', '1', '-ar', '48000', '-b:a', '192k', '-t', String(segmentEnd - segmentStart), '-movflags', '+faststart', output,
 ], { cwd: subtitleWork, stdio: ['pipe', 'ignore', 'pipe'] });
 let errors = '';
 encoder.stderr.on('data', (chunk) => { errors += chunk.toString(); });
 for (let frame = 0; frame < frames; frame += 1) {
-  await cdp('Runtime.evaluate', { expression: `window.__setTowerTime(${frame / fps})` });
+  await cdp('Runtime.evaluate', { expression: `window.__setTowerTime(${segmentStart + frame / fps})` });
   await wait(12);
   const capture = await cdp('Page.captureScreenshot', {
     format: 'jpeg', quality: 100, fromSurface: true, captureBeyondViewport: false,

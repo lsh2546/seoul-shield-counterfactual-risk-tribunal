@@ -1,0 +1,193 @@
+{
+  "schema_version": "seoul-shield.live-candidates.v1",
+  "status": "MODEL RESPONSE VERIFIED · SELECTION COMPLETE · NO ORDER SUBMITTED",
+  "collected_at": "2026-09-03T14:30:40.132095+00:00",
+  "source": "Alpaca Market Data API · IEX",
+  "market": {
+    "market_open": true,
+    "clock_timestamp": "2026-09-03T10:30:35.525058248-04:00",
+    "candidates": [
+      {
+        "symbol": "SPY",
+        "price": 768.825,
+        "change_pct": 0.4829,
+        "volume": 341860,
+        "bid": 768.8,
+        "ask": 769.13,
+        "trade_timestamp": "2026-09-03T14:30:32.441362707Z",
+        "quote_timestamp": "2026-09-03T14:30:36.154646269Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 768.865,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 768.67,
+          "return_pct": -0.025362,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:14:00Z",
+          "start_price": 768.37,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 768.67,
+          "return_pct": 0.039044,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "mixed",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "QQQ",
+        "price": 713.12,
+        "change_pct": 0.5357,
+        "volume": 105120,
+        "bid": 713.32,
+        "ask": 713.44,
+        "trade_timestamp": "2026-09-03T14:30:27.241525064Z",
+        "quote_timestamp": "2026-09-03T14:30:36.156751196Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 713.4,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 713.06,
+          "return_pct": -0.047659,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:14:00Z",
+          "start_price": 712.0,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 713.06,
+          "return_pct": 0.148876,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "mixed",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "AAPL",
+        "price": 330.27,
+        "change_pct": 1.6122,
+        "volume": 268473,
+        "bid": 330.26,
+        "ask": 330.3,
+        "trade_timestamp": "2026-09-03T14:30:34.659176823Z",
+        "quote_timestamp": "2026-09-03T14:30:36.122011391Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 329.17,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 329.765,
+          "return_pct": 0.180758,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:14:00Z",
+          "start_price": 328.08,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 329.765,
+          "return_pct": 0.513594,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "bullish",
+        "source": "Alpaca Market Data API · IEX"
+      },
+      {
+        "symbol": "NVDA",
+        "price": 227.43,
+        "change_pct": 1.3345,
+        "volume": 779269,
+        "bid": 227.44,
+        "ask": 227.47,
+        "trade_timestamp": "2026-09-03T14:30:32.663624202Z",
+        "quote_timestamp": "2026-09-03T14:30:36.075927574Z",
+        "return_5m": {
+          "minutes": 5,
+          "start_timestamp": "2026-09-03T14:24:00Z",
+          "start_price": 228.08,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 227.35,
+          "return_pct": -0.320063,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "return_15m": {
+          "minutes": 15,
+          "start_timestamp": "2026-09-03T14:14:00Z",
+          "start_price": 228.025,
+          "end_timestamp": "2026-09-03T14:29:00Z",
+          "end_price": 227.35,
+          "return_pct": -0.29602,
+          "source": "Alpaca IEX 1Min bars"
+        },
+        "short_term_direction": "bearish",
+        "source": "Alpaca Market Data API · IEX"
+      }
+    ]
+  },
+  "ai": {
+    "status": "MODEL RESPONSE VERIFIED",
+    "provider": "gemini_developer",
+    "model": "gemini-3.5-flash",
+    "model_time": null,
+    "latency_ms": 15437,
+    "schema_validated": true,
+    "input_sha256": "6d8996e1dc3b0bb5990bb84a5c27c6d1a415abddf6556b78387bad9cc3302dd9",
+    "output_sha256": "2fc312a582e68fc2f3fe247b8fbe1dbe44adb87554b801a167eba14e03bd95a0",
+    "result": {
+      "candidates": [
+        {
+          "symbol": "SPY",
+          "score": 50,
+          "reason": "Mixed short-term direction with flat 15-minute and 5-minute returns, indicating low momentum."
+        },
+        {
+          "symbol": "QQQ",
+          "score": 55,
+          "reason": "Mixed short-term direction with slight positive 15-minute return but negative 5-minute return."
+        },
+        {
+          "symbol": "AAPL",
+          "score": 90,
+          "reason": "Strong bullish short-term direction with positive returns over both 15-minute and 5-minute intervals."
+        },
+        {
+          "symbol": "NVDA",
+          "score": 25,
+          "reason": "Bearish short-term direction with negative returns over both 15-minute and 5-minute intervals."
+        }
+      ],
+      "selected_symbol": "AAPL",
+      "direction": "bullish",
+      "confidence": 0.85,
+      "selection_reasons": [
+        "AAPL exhibits a clear bullish short-term direction.",
+        "AAPL has positive returns over both the 5-minute and 15-minute horizons.",
+        "AAPL shows strong relative strength compared to the broader market indices (SPY and QQQ)."
+      ]
+    }
+  },
+  "execution_filter": {
+    "status": "ELIGIBLE_CANDIDATE_SELECTED",
+    "gemini_direction": "bullish",
+    "eligible_symbols": [
+      "AAPL"
+    ],
+    "excluded_symbols": [
+      "SPY",
+      "QQQ",
+      "NVDA"
+    ],
+    "selected_symbol": "AAPL",
+    "rule": "bullish requires 5m>0 and 15m>0; bearish requires 5m<0 and 15m<0"
+  },
+  "execution": {
+    "paper_trading": true,
+    "allow_submit": false,
+    "order_submitted": false
+  }
+}

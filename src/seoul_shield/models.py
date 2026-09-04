@@ -79,7 +79,7 @@ class MarketSnapshot:
     snapshot_id: str
     observed_at: str
     underlying: str
-    volatility_percentile: float
+    volatility_percentile: float | None
     bid_ask_spread_pct: float
     open_interest: int
     quote_age_seconds: float
