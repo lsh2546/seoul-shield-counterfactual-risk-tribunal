@@ -1,4 +1,4 @@
-# Seoul Shield - Counterfactual Risk Tribunal
+# Seoul Shield - Autonomous Control Layer for AI Trading
 
 ## 2026 Final Verified Safety Result
 
@@ -8,14 +8,17 @@ Using live Alpaca Paper data, Gemini selected AAPL with a schema-verified bullis
 
 The evidence package does not claim a fill, position, profit, loss, or P&L. Historical IV percentile data was unavailable, so the system disclosed `IV_HISTORY_UNAVAILABLE` and used actual current IV, spread, OI, volume, quote age, and measured returns under a stricter deterministic policy.
 
-> Other agents prove they can trade. Seoul Shield proves which safety policy deserves the right to trade.
+> Most AI agents try to predict the market. Seoul Shield controls whether their decisions are still safe enough to reach it.
 
-Seoul Shield is a risk-first autonomous options-agent prototype for the Alpaca AI Trading Agents Hackathon. One SPY debit-spread proposal is evaluated against the same market and account snapshot by four policies: No Guard, Static Guard, Adaptive Guard, and Live Execution. Only the Live path can ever reach Alpaca Paper Trading, and deterministic hard gates always outrank model output.
+Seoul Shield is an autonomous control layer that continuously revalidates AI trading decisions before capital moves. Gemini may propose a trade, but it cannot authorize capital movement. Independent deterministic gates validate direction, liquidity, quote freshness, position size, and maximum loss immediately before the Paper gateway.
 
 ## Links
 
 - **Verified Safety Demo:** https://lsh2546.github.io/seoul-shield-counterfactual-risk-tribunal/
-- **Final Safety Video:** [Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4](submission/assets/Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4)
+- **Main submission video source:** `Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4`
+- **Main video SHA-256:** `4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86`
+- **Public main-video URL:** https://youtu.be/G3IC3uWAbaM
+- **90-second supporting demo:** [Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4](submission/assets/Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4)
 - **One-page PDF:** [Seoul-Shield-Verified-Safety-Evidence-One-Page.pdf](output/pdf/Seoul-Shield-Verified-Safety-Evidence-One-Page.pdf)
 - **Source Repository:** https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal
 
@@ -28,31 +31,33 @@ Seoul Shield is a risk-first autonomous options-agent prototype for the Alpaca A
 | Buying power | $400,000 |
 | Options approval | Level 3 |
 | Positions / open orders | 0 / 0 |
-| Option contracts inspected | 245 SPY calls, expiration 2026-09-04 |
-| Candidate split | 21 opportunity / 80 uncertain / 144 risk blocked |
-| Proposed spread | Buy SPY 765C / sell SPY 770C |
-| Net debit / quantity | $2.74 / 4 contracts |
-| Maximum loss / policy limit | $1,096 / $1,000 |
-| Verdict | Hard gate blocked: $96 over limit |
+| Candidate scan | SPY / QQQ / AAPL / NVDA |
+| Selected proposal | AAPL bullish, confidence 85% |
+| Proposed spread | Buy AAPL 330C / sell AAPL 335C |
+| Limit debit | $2.38 |
+| Original quantity / maximum loss | 4 contracts / $952 |
+| Controlled quantity / maximum loss | 2 contracts / $476 |
+| Conservative policy limit | $500 |
+| Final verdict | Bullish Preview invalidated after bearish 5- and 15-minute reversal; NO TRADE |
 
-The public app is a sanitized, read-only replay. Its visible status is **VERIFIED ALPACA REPLAY · PAPER PREVIEW · NOT SUBMITTED**. The captured quote is stale and the model layer is **FALLBACK / NOT LIVE AI**. No fill, return, or realized P&L is claimed.
+The public app is a sanitized, read-only replay. Its visible status is **VERIFIED ALPACA REPLAY · PAPER PREVIEW · NOT SUBMITTED**. Evidence remains traceable to preserved candidate, preflight, and reversal snapshots. No fill, return, or realized P&L is claimed.
 
 ## Architecture
 
 ```text
-Alpaca account + one fixed, hash-identified snapshot
+Preserved Alpaca candidate snapshot
              |
-Option-chain classification (245 -> 21 / 80 / 144)
+Gemini structured proposal (advisory only)
              |
-Candidate convergence (21 -> 8 -> 4 -> 2 legs)
+Preserved AAPL option preflight snapshot
              |
-Structured AI assessment (advisory; fail-closed fallback)
+Deterministic direction, liquidity, freshness, and loss gates
              |
-Deterministic gates (1% trade / 5% portfolio / 2% daily stop)
+4 contracts / $952 blocked -> 2 contracts / $476 Preview
              |
-Four policies on the identical snapshot
+AAPL signal reversal -> Preview invalidated
              |
-Sanitized MLEG preview + hash-chain audit evidence
+No Trade + SHA-256 audit evidence
 ```
 
 ### Policy authority
@@ -132,10 +137,10 @@ python scripts/build_live_preview.py
 
 - The included market evidence is a timestamped replay, not a live public feed.
 - IV and Greeks appear only when present in sanitized evidence; unavailable fields are not invented.
-- OpenAI was not called in the included replay, so the UI labels the deterministic fallback explicitly.
+- Gemini structured analysis is advisory and has no broker authority.
 - The MLEG payload is a preview. It was not submitted, filled, or canceled.
 - Counterfactual P&L requires later realized outcomes; this snapshot demonstrates decisions and exposure, not performance.
 
 ## License and disclaimer
 
-MIT licensed. Educational hackathon software only. Options involve substantial risk; this project is not investment advice and must not be used with a live-money account.
+MIT licensed. Verifiable Alpaca Paper Trading demonstration. Options involve substantial risk; this project is not investment advice and must not be used with a live-money account.

@@ -12,7 +12,7 @@ No external action below is authorized merely because this checklist exists.
 - [x] Run final secret scan on tracked files and Git history
 - [x] User approval immediately before creating or making GitHub repository public
 - [x] Push the reviewed commit only after approval
-- [x] Replace README pending-link labels with final Live Demo, GitHub, and YouTube URLs
+- [x] Replace the pending main-video label with the URL created by uploading the exact V3 source
 
 ## Read-only app readiness
 
@@ -34,8 +34,14 @@ No external action below is authorized merely because this checklist exists.
 - [x] 4:20 English demo video with subtitles
 - [x] One-page English PDF
 - [x] Narration source and timing document
-- [x] YouTube unlisted upload and copyright check completed
+- [x] Exact V3 source uploaded to YouTube; 260-second metadata, 1080p processing, and non-login playback verified
 - [ ] Final hackathon submission - requires user approval immediately before submission
+
+## Locked main-video identity
+
+- Filename: `Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4`
+- SHA-256: `4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86`
+- V4 through V9 are excluded and must not be uploaded or submitted.
 
 ## Deadline safety evidence package
 

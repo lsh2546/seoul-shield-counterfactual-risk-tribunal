@@ -1,37 +1,43 @@
-# Seoul Shield - Counterfactual Risk Tribunal
+# Seoul Shield - Autonomous Control Layer for AI Trading
 
-**Other agents prove they can trade. Seoul Shield proves which safety policy deserves the right to trade.**
+**Most AI agents try to predict the market. Seoul Shield controls whether their decisions are still safe enough to reach it.**
 
 ## The problem
 
-An AI can produce a persuasive options thesis, but persuasion is not permission to move capital. Most agent demos show one decision and one outcome; they do not reveal whether a safer policy would have prevented excessive exposure or whether the model can bypass its guardrails.
+AI trading can fail after a valid forecast because an oversized or stale decision reaches the market after conditions change. A model proposal is therefore not permission to move capital.
 
 ## The system
 
-Seoul Shield sends one market signal and one fixed, hash-identified snapshot into four simultaneous policy paths. **No Guard** preserves the unprotected proposal as a shadow baseline. **Static Guard** applies fixed limits. **Adaptive Guard** considers regime, liquidity, quote age, exposure, and recent loss. **Live Execution** is the only path capable of reaching Alpaca Paper Trading, and only after deterministic gates, idempotency checks, and explicit human approval.
+Seoul Shield separates proposal from authority. Alpaca market evidence feeds Gemini structured analysis; an independent deterministic engine then revalidates direction, liquidity, quote freshness, position size, and maximum loss. Only a still-valid path can reach the human-controlled Paper gateway.
 
-The AI layer returns structured market-state and risk factors, but never broker authority. Timeout, invalid JSON, or an unavailable model triggers a fail-closed fallback. Hard limits cannot be weakened by model output: maximum loss per trade is 1% of equity, aggregate portfolio risk is 5%, and the daily-loss stop is 2%.
+Gemini never receives broker authority. Invalid model output, stale evidence, direction disagreement, or a hard-limit failure closes the gate. Every transition remains traceable to its preserved source snapshot and SHA-256 evidence.
 
 ## Verified Alpaca replay
 
-Sanitized evidence confirms an active Alpaca Paper account with **$100,000 cash/equity**, **$400,000 buying power**, **Options Level 3**, and no positions or open orders. Seoul Shield inspected **245 SPY calls** expiring September 4, 2026 and classified them as **21 Opportunity, 80 Uncertain, and 144 Risk Blocked**.
+Sanitized evidence confirms an active Alpaca Paper account with **$100,000 cash/equity**, **$400,000 buying power**, **Options Level 3**, and no positions or open orders. A preserved four-symbol scan covered **SPY, QQQ, AAPL, and NVDA**. Gemini returned schema-valid candidate results and selected AAPL with **85% bullish confidence**.
 
-Candidate gates reduced 21 opportunities to a bull call debit spread: **buy SPY 765C at the $5.06 ask and sell SPY 770C at the $2.32 bid**. At a **$2.74 net debit** and **four contracts**, maximum loss is **$1,096**. The deterministic limit is **$1,000**, so the capital gate closes at **$96 over limit**.
+The preserved AAPL option preflight recorded AAPL spot at **$330.30**. The 330 Call showed Bid **$5.63**, Ask **$5.86**, IV **28.03%**, OI **5,994**, and volume **1,576**. The 335 Call showed Bid **$3.48**, Ask **$3.52**, IV **27.67%**, OI **4,223**, and volume **1,601**. The resulting Limit Debit was **$2.38**.
 
-The No Guard shadow path exposes the full $1,096. Static Guard rejects the 1% breach. Adaptive Guard also fails closed because the replay quote is stale and the AI is **FALLBACK / NOT LIVE AI**. Live Execution remains **PAPER PREVIEW - HUMAN APPROVAL REQUIRED - NOT SUBMITTED**. No fill, return, or realized P&L is claimed.
+The proposed four-contract AAPL 330/335 Bull Call carried **$952 maximum loss**, exceeding the conservative **$500** cap by **$452**. The engine generated a two-contract, **$476** Preview alternative. Before execution, measured 5- and 15-minute direction turned bearish, so the bullish Preview was invalidated. The final result is **NO TRADE - NOT SUBMITTED**. No fill, return, or realized P&L is claimed.
 
 ## Alpaca and implementation evidence
 
 - Alpaca Trading and Market Data APIs for Paper account, underlying, option-chain, quote, position, and order-state workflows
-- Alpaca MCP read-only evidence in the sanitized evidence package
-- MLEG Paper payload with `buy_to_open` / `sell_to_open` position intent
-- Unique `client_order_id`, duplicate prevention, order status, and cancellation paths
-- Hash-chain audit linking snapshot, AI/fallback result, policy decisions, gate reasons, and preview
-- Python risk core with 20 passing tests; read-only Three.js tribunal plus 2D fallback
+- Structured Gemini proposal without broker credentials or order authority
+- Deterministic risk calculation and conservative `IV_HISTORY_UNAVAILABLE` policy
+- Paper Preview with `buy_to_open` / `sell_to_open` position intent
+- Hash-chain audit linking candidate input, model response, preflight, reversal, and NO TRADE result
+- Read-only product UI; no public order-submission endpoint
 
 ## Why it is different
 
-The public experience is an evidence room, not an execution console. Sanitized Alpaca replay data flows through the Capital Decision Engine, converges on a spread, and splits into four counterfactual futures. Judges can see exactly why a trade advances, resizes, or stops - and which safety policy has earned the right to trade.
+The public experience demonstrates a reusable safety and audit layer for asset managers, brokers, fintech trading applications, and trading teams. It does not promise perfect predictions. It prevents stale, oversized, or directionally invalid AI decisions from moving capital.
 
 **Evidence:** VERIFIED ALPACA REPLAY · PAPER PREVIEW · NOT SUBMITTED  
 **Safety latch:** `ALPACA_ALLOW_SUBMIT=false`
+
+**Main video:** `Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4`
+
+**SHA-256:** `4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86`
+
+**YouTube:** https://youtu.be/G3IC3uWAbaM

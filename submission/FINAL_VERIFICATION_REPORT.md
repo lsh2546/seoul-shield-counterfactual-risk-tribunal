@@ -8,7 +8,10 @@ NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, capital moved $0. No 
 
 - Public safety demo: https://lsh2546.github.io/seoul-shield-counterfactual-risk-tribunal/
 - Public repository: https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal
-- Final 90-second video: submission/assets/Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4
+- Main video source: outputs/main-presentation-2026-09-04/Seoul-Shield-Autonomous-Control-Layer-4m20s-LUFS16-V3-CONTINUOUS-NARRATION.mp4
+- Main video SHA-256: 4069A074188EE5EE70551C98D02A36D2CF5503E40FE5C11016B669A0D0C7DC86
+- Main video public URL: https://youtu.be/G3IC3uWAbaM
+- Supporting 90-second video: submission/assets/Seoul-Shield-FINAL-SAFETY-EVIDENCE-90s.mp4
 - Final one-page PDF: output/pdf/Seoul-Shield-Verified-Safety-Evidence-One-Page.pdf
 - Submission copy: submission/SUBMISSION_FIELDS_FINAL.md
 
@@ -32,12 +35,13 @@ NOT EXECUTED - SAFETY GATE BLOCKED. Orders 0, positions 0, capital moved $0. No 
 - Public page orders 0, positions 0, capital moved $0 present: yes
 - Secret scan of public files: zero detected credentials
 - ALPACA_ALLOW_SUBMIT=false: verified
-- Video: H.264, 1920x1080, 30 fps, 90 seconds
+- Main video: V3 locked at 260 seconds; V4 through V9 excluded
+- YouTube: unlisted, unauthenticated playability OK, 260-second metadata, 1080p rendition available
 - PDF: one page, rendered and visually inspected
 
 ## Preserved artifact
 
-The earlier approved 4-minute 20-second video remains unchanged under outputs/previews and is not overwritten by the new final safety-evidence video.
+The approved 4-minute 20-second V3 video is the locked main submission source and remains unchanged. The 90-second safety-evidence video is supporting material only.
 
 ## Submission gate
 

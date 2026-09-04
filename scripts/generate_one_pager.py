@@ -19,7 +19,7 @@ TMP = ROOT / "tmp" / "pdfs"
 LINKS = {
     "LIVE DEMO": "https://seoul-shield-risk-tribunal.ljs2546.chatgpt.site",
     "GITHUB": "https://github.com/lsh2546/seoul-shield-counterfactual-risk-tribunal",
-    "YOUTUBE": "https://www.youtube.com/watch?v=nveiZhnRdK8",
+    "YOUTUBE": "https://youtu.be/G3IC3uWAbaM",
 }
 
 
